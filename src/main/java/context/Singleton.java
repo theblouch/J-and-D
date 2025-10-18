@@ -1,4 +1,4 @@
-package model;
+package context;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,9 +8,13 @@ public class Singleton {
 
 
 	private static Singleton instance=null;
-	// La liste de dés bonus qui vont être utilisés pour le lancer (et leur nombre)
-	// ATTENTION : CES DES SONT EN BONUS DU LANCER DE DÉ CLASSIQUE
-	// dans l'ordre [d4, d6, d8, d10, d12]
+
+	/*
+	 * bonusDice représente la liste de dés bonus qui vont être utilisés pour le lancer (et leur nombre)
+	 * ATTENTION : CES DES SONT EN BONUS DU LANCER DE DÉ CLASSIQUE
+	 * dans l'ordre [d4, d6, d8, d10, d12]
+	 */
+
 	public Integer[] bonusDice;
 	private Random rd;
 
@@ -25,8 +29,8 @@ public class Singleton {
 		}
 		return instance;
 	}
-	
-	
+
+
 	public Integer[] getBonusDice() {
 		return bonusDice;
 	}
@@ -35,16 +39,33 @@ public class Singleton {
 		this.bonusDice = bonusDice;
 	}
 
+	/*
+	 * l'entier value représente un dé bonus (donc doit être une valeur paire comprise entre 4 et 12)
+	 * 
+	 */
+	public Integer getSpecificDice(Integer value) {
+		return this.bonusDice[(value - 4) / 2];
+	}
 
-	// Le lancer de dés 20 avec les avantages, prend en compte les dés bonus
-	// et le bonus total
-	//L'integer Advantage permet de savoir si on bénéficie d'un avantage 
-	//pour le lancer de dés (0 si lancer classique, 
-	//1 si avantage, 2 double avantage, -1 si désavantage...)
+	/*
+	 * - l'entier value représente un dé bonus (donc doit être une valeur paire comprise entre 4 et 12)
+	 * - l'entier dice représente le nombre de dé de la valeur [value] qui seront lancés (donc un entier naturel)
+	 * 
+	 */
+	public void setSpecificDice(Integer value, Integer dice) {
+		this.bonusDice[(value - 4) / 2 ] = dice;
+	}
 
-	
 
-	boolean diceThrow(Integer successThreshold, Integer advantage) {
+	/* fonction diceThrow :
+	 * Le lancer de dés 20 avec les avantages, prend en compte les dés bonus
+	 * et le bonus total (proficiency), puis reset les dés bonus
+	 * L'integer Advantage permet de savoir si on bénéficie d'un avantage 
+	 * pour le lancer de dés (0 si lancer classique, 
+	 * 1 si avantage, 2 double avantage, -1 si désavantage...)
+	 */	
+
+	boolean diceThrow(Integer successThreshold, Integer advantage, Integer proficiency) {
 
 		int sum=0;
 		int len = bonusDice.length;
@@ -61,22 +82,21 @@ public class Singleton {
 				sumBonusDice += resultBonusDice;
 			}
 		}
-		sum+= sumBonusDice;
+
+		sum += sumBonusDice;
+		sum += proficiency;
 
 		//Gestion du d20 et des avantages
 		ArrayList<Integer> resD20 = new ArrayList<Integer>();
 		for (int i = 0; i< Math.abs(advantage)+1; i++) {
 			resD20.add(rd.nextInt(20) +1);
 		}
-		
+
 		if (advantage < 0) {
 			sum = Collections.min(resD20);
-		} else if (advantage > 0) {
-			sum = Collections.max(resD20);
 		} else {
-			sum = resD20.getFirst();
+			sum = Collections.max(resD20);
 		}
-
 		return sum>= successThreshold;
 	}
 
