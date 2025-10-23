@@ -19,7 +19,7 @@ public class Singleton {
 	private Random rd;
 
 	private Singleton() {
-		bonusDice = new Integer[6];
+		bonusDice = new Integer[5];
 		rd = new Random();
 	}
 
@@ -39,18 +39,16 @@ public class Singleton {
 		this.bonusDice = bonusDice;
 	}
 
-	/*
-	 * l'entier value représente un dé bonus (donc doit être une valeur paire comprise entre 4 et 12)
-	 * 
+	/* fonction getSpecificDice :
+	 * - l'entier value représente un dé bonus (donc doit être une valeur paire comprise entre 4 et 12)
 	 */
 	public Integer getSpecificDice(Integer value) {
 		return this.bonusDice[(value - 4) / 2];
 	}
 
-	/*
+	/* fonction setSpecificDice :
 	 * - l'entier value représente un dé bonus (donc doit être une valeur paire comprise entre 4 et 12)
 	 * - l'entier dice représente le nombre de dé de la valeur [value] qui seront lancés (donc un entier naturel)
-	 * 
 	 */
 	public void setSpecificDice(Integer value, Integer dice) {
 		this.bonusDice[(value - 4) / 2 ] = dice;
