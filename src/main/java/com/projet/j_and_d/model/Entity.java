@@ -1,4 +1,4 @@
-package model;
+package com.projet.j_and_d.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,7 @@ public abstract class Entity {
 	protected List<Item> itemWorn = new ArrayList();
 	protected List<Item> inventory = new ArrayList();
 	protected Stats stats;
-	
-	
+
 	public Entity(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats) {
 		this.name = name;
 		this.level = level;
@@ -25,7 +24,6 @@ public abstract class Entity {
 		this.initiative = initiative;
 		this.stats = stats;
 	}
-
 
 	public String getName() {
 		return name;
@@ -100,7 +98,7 @@ public abstract class Entity {
 	}
 
 	public void useSpell() {
-		//TODO
+		// TODO
 	}
 
 	@Override
@@ -109,5 +107,5 @@ public abstract class Entity {
 				+ armorClass + ", initiative=" + initiative + ", itemWorn=" + itemWorn + ", inventory=" + inventory
 				+ ", stats=" + stats + "]";
 	}
-	
+
 }

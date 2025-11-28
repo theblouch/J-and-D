@@ -1,49 +1,55 @@
-package model;
+package com.projet.j_and_d.model;
 
 public class Character extends Entity {
 
 	private Role role;
 	private Race race;
 
-
-
-	public Character(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats, Role role, Race race) {
+	public Character(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats,
+			Role role, Race race) {
 		super(name, level, speed, alive, armorClass, initiative, stats);
-		this.role=role;
-		this.race=race;
+		this.role = role;
+		this.race = race;
 	}
 
 	public Role getRole() {
 		return role;
 	}
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 	public Race getRace() {
 		return race;
 	}
+
 	public void setRace(Race race) {
 		this.race = race;
 	}
 
 	public void levelUp() {
-		//TODO
+		// TODO
 	}
+
 	public void useItem() {
-		//TODO
+		// TODO
 	}
+
 	public void equipItem() {
-		//TODO
+		// TODO
 	}
+
 	public void showInventory() {
-		//TODO
+		// TODO
 	}
+
 	public void giveItem(Item item, Character character) {
-		//TODO
+		// TODO
 	}
 
 	public void saveThrowVsDeath() {
-		//TODO
+		// TODO
 	}
 
 	@Override

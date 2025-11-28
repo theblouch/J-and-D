@@ -1,11 +1,12 @@
-package model;
+package com.projet.j_and_d.model;
 
 public class NPC extends Entity {
 
 	private double xP;
 
-	public NPC(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats, double xP) {
-		super(name, level, speed, alive, armorClass, initiative,stats);
+	public NPC(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats,
+			double xP) {
+		super(name, level, speed, alive, armorClass, initiative, stats);
 		this.xP = xP;
 	}
 
@@ -16,13 +17,13 @@ public class NPC extends Entity {
 	public void setXP(double xP) {
 		this.xP = xP;
 	}
-	
+
 	public void display() {
-		//TODO
+		// TODO
 	}
-	
+
 	public void remove() {
-		//TODO
+		// TODO
 	}
 
 	@Override
@@ -31,5 +32,5 @@ public class NPC extends Entity {
 				+ ", armorClass=" + armorClass + ", initiative=" + initiative + ", itemWorn=" + itemWorn
 				+ ", inventory=" + inventory + ", stats=" + stats + "]";
 	}
-	
+
 }
