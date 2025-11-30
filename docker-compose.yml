@@ -10,8 +10,9 @@ services:
     container_name: j-and-d-boot
 
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://quest-mysql/j_and_d
-      SPRING_DATASOURCE_PASSWORD: root
+      #VERIFIER SI CA MARCHE
+      SPRING_DATASOURCE_URL: jdbc:mysql://20.199.40.49:3336/j_and_d
+      #SPRING_DATASOURCE_PASSWORD: root
 
     networks:
       - j-and-d
@@ -30,5 +31,5 @@ services:
       - j-and-d
 
 networks:
-  quest:
+  j-and-d:
     name: j-and-d
