@@ -28,7 +28,7 @@ pipeline {
                     steps {
                         dir('j-and-d-front') {
                             withSonarQubeEnv('SonarQube') {
-                                sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=quest-angular'
+                                sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=j-and-d-angular'
                             }
                         }
                     }
@@ -47,7 +47,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 dir('j-and-d-front') {
-                    sh 'docker build -t ajc/quest:angular .'
+                    sh 'docker build -t ajc/j-and-d:angular .'
                 }
             }
         }
