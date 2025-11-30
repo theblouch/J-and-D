@@ -1,0 +1,34 @@
+name: j-and-d-compose
+
+services:
+  boot:
+    # build:
+    # context: /workspace/SOPRA-250905-GIT/quest-boot
+    # context: ./quest-boot
+
+    image: ajc/j-and-d:boot
+    container_name: j-and-d-boot
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://quest-mysql/j_and_d
+      SPRING_DATASOURCE_PASSWORD: root
+
+    networks:
+      - j-and-d
+
+  angular:
+    image: ajc/j-and-d:angular
+    container_name: j-and-d-angular
+
+    ports:
+      - 80:80
+
+    depends_on:
+      - boot
+
+    networks:
+      - j-and-d
+
+networks:
+  quest:
+    name: j-and-d

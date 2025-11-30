@@ -1,6 +1,6 @@
 HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
+j-and-d-back/target/
+j-and-d-back/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
