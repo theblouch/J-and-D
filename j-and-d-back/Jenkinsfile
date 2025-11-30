@@ -16,9 +16,12 @@ pipeline {
             }
 
             steps {
-                    withSonarQubeEnv('SonarQube') {
-                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=j-and-d-boot -Dsonar.projectName='j-and-d-boot'"
+                dir('j-and-d-back'){
+                        withSonarQubeEnv('SonarQube') {
+                            sh "mvn clean verify sonar:sonar -Dsonar.projectKey=j-and-d-boot -Dsonar.projectName='j-and-d-boot'"
                     }
+                }
+                    
             }
         }
 
