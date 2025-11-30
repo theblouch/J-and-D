@@ -33,3 +33,4 @@ services:
 networks:
   j-and-d:
     name: j-and-d
+    external: true
