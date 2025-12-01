@@ -67,7 +67,7 @@ public class Singleton {
 	 * 1 si avantage, 2 double avantage, -1 si désavantage...)
 	 */
 
-	boolean diceThrow(Integer successThreshold, Integer advantage, Integer proficiency) {
+	public boolean diceThrow(Integer successThreshold, Integer advantage, Integer proficiency) {
 
 		int sum = 0;
 		int len = bonusDice.length;
@@ -103,7 +103,7 @@ public class Singleton {
 		return sum >= successThreshold;
 	}
 
-	void bonusDiceReset() {
+	public void bonusDiceReset() {
 		int len = bonusDice.length;
 		for (int i = 0; i < len; i++) {
 			bonusDice[i] = 0;

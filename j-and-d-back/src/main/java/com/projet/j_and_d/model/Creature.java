@@ -1,6 +1,5 @@
 package com.projet.j_and_d.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -23,13 +22,13 @@ public abstract class Creature {
 	@Column(length = 30, nullable = false)
 	protected String name;
 	@Column(nullable = false)
-	protected Integer level;
+	protected double level;
 	@Column(nullable = false)
 	protected int hp;
 	@Column(nullable = false)
 	protected int mp;
 	@Column(nullable = false)
-	protected int speed;
+	protected double speed;
 	@Column
 	protected boolean alive = true;
 	@Column(nullable = false)
@@ -37,13 +36,13 @@ public abstract class Creature {
 	@Column(nullable = false)
 	protected int initiative;
 	@OneToMany
-	protected List<Item> itemWorn = new ArrayList();
+	protected List<Item> itemWorn;
 	@OneToMany
-	protected List<Item> inventory = new ArrayList();
+	protected List<Item> inventory;
 	@Embedded
 	protected Stats stats;
 
-	public Creature(String name, Integer level, int hp, int mp, int speed, boolean alive, int armorClass,
+	public Creature(String name, double level, int hp, int mp, double speed, boolean alive, int armorClass,
 			int initiative, Stats stats) {
 		this.name = name;
 		this.level = level;
@@ -88,19 +87,19 @@ public abstract class Creature {
 		this.name = name;
 	}
 
-	public Integer getLevel() {
+	public double getLevel() {
 		return level;
 	}
 
-	public void setLevel(Integer level) {
+	public void setLevel(double level) {
 		this.level = level;
 	}
 
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 

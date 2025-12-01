@@ -24,19 +24,12 @@ public class Inscription {
     @Column(nullable = false)
     private Session session;
 
-    @Column(nullable = false)
-    private int posX;
-    @Column(nullable = false)
-    private int posY;
-
     public Inscription() {
     }
 
-    public Inscription(Character character, Session session, int posX, int posY) {
+    public Inscription(Character character, Session session) {
         this.character = character;
         this.session = session;
-        this.posX = posX;
-        this.posY = posY;
     }
 
     public Character getCharacter() {
@@ -55,22 +48,6 @@ public class Inscription {
         this.session = session;
     }
 
-    public int getPosX() {
-        return this.posX;
-    }
-
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    public int getPosY() {
-        return this.posY;
-    }
-
-    public void setPosY(int posY) {
-        this.posY = posY;
-    }
-
     public Inscription character(Character character) {
         setCharacter(character);
         return this;
@@ -81,23 +58,11 @@ public class Inscription {
         return this;
     }
 
-    public Inscription posX(int posX) {
-        setPosX(posX);
-        return this;
-    }
-
-    public Inscription posY(int posY) {
-        setPosY(posY);
-        return this;
-    }
-
     @Override
     public String toString() {
         return "{" +
                 " character='" + getCharacter() + "'" +
                 ", session='" + getSession() + "'" +
-                ", posX='" + getPosX() + "'" +
-                ", posY='" + getPosY() + "'" +
                 "}";
     }
 

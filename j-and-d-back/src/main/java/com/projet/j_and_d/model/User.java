@@ -1,48 +1,37 @@
 package com.projet.j_and_d.model;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Inheritance;
-import jakarta.persistence.Table;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Id;
 
-
 @Entity
-@Table(name="user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type_User",columnDefinition = "ENUM('Player','GM')")
+@DiscriminatorColumn(name = "type_User", columnDefinition = "ENUM('Player','GM')")
 
 public abstract class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Integer id;
-	
-	@Column(length = 25,nullable = false,unique = true)
-	protected String login;
-	
-	@Column(length = 180,nullable = false)
-	protected String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
 
-	
-	public User() {}
-	
-	public User(Integer id, String login, String password) {
-		this.id = id;
-		this.login = login;
-		this.password = password;
-	}
-	
-	public User(String login, String password) {
-		this.login = login;
-		this.password = password;
-	}
+    @Column(length = 25, nullable = false, unique = true)
+    protected String login;
+
+    @Column(length = 180, nullable = false)
+    protected String password;
+
+    public User() {
+    }
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
@@ -68,8 +57,4 @@ public abstract class User {
         this.password = password;
     }
 
-
 }
-
-    
-

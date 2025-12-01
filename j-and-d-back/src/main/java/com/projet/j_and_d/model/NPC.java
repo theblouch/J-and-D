@@ -3,8 +3,10 @@ package com.projet.j_and_d.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "npc")
 public class NPC extends Creature {
 
 	@Column(nullable = false)
@@ -13,7 +15,7 @@ public class NPC extends Creature {
 	@ManyToOne
 	private Session session;
 
-	public NPC(String name, Integer level, int hp, int mp, int speed, boolean alive, int armorClass, int initiative,
+	public NPC(String name, double level, int hp, int mp, int speed, boolean alive, int armorClass, int initiative,
 			Stats stats, double xP) {
 		super(name, level, hp, mp, speed, alive, armorClass, initiative, stats);
 		this.xP = xP;
@@ -33,10 +35,6 @@ public class NPC extends Creature {
 
 	public void setSession(Session session) {
 		this.session = session;
-	}
-
-	public void display() {
-		// TODO
 	}
 
 }

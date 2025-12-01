@@ -1,23 +1,23 @@
 package com.projet.j_and_d.model;
 
+import com.projet.j_and_d.context.Singleton;
+
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Character extends Creature {
 
+	private Singleton singleton;
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Role role;
 	@Column(nullable = false)
 	private Race race;
 
-	public Character(String name, Integer level, int speed, int hp, int mp, boolean alive, int armorClass,
+	public Character(String name, double level, int speed, int hp, int mp, boolean alive, int armorClass,
 			int initiative, Stats stats, Role role, Race race) {
 		super(name, level, hp, mp, speed, alive, armorClass, initiative, stats);
 		this.role = role;
@@ -85,7 +85,7 @@ public class Character extends Creature {
 	public void saveThrowVsDeath() {
 		int success = 0;
 		for (int i = 0; i < 5; i++) {
-			if (diceThrow(10, 0, 0)) { // bien nommé le diceThrow quand on saura où le mettre
+			if (singleton.diceThrow(10, 0, 0)) { // bien nommé le diceThrow quand on saura où le mettre
 				success++;
 			}
 		}

@@ -8,19 +8,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "session")
 public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private String nameMap;
-
-    private String linkMap;
 
     @OneToMany(mappedBy = "session")
     private List<Inscription> inscriptions;
@@ -34,10 +28,7 @@ public class Session {
     public Session() {
     }
 
-    public Session(Integer id, String nameMap, String linkMap, List<Inscription> inscriptions, GM gm, List<NPC> npcs) {
-        this.id = id;
-        this.nameMap = nameMap;
-        this.linkMap = linkMap;
+    public Session(List<Inscription> inscriptions, GM gm, List<NPC> npcs) {
         this.inscriptions = inscriptions;
         this.gm = gm;
         this.npcs = npcs;
@@ -49,22 +40,6 @@ public class Session {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNameMap() {
-        return this.nameMap;
-    }
-
-    public void setNameMap(String nameMap) {
-        this.nameMap = nameMap;
-    }
-
-    public String getLinkMap() {
-        return this.linkMap;
-    }
-
-    public void setLinkMap(String linkMap) {
-        this.linkMap = linkMap;
     }
 
     public List<Inscription> getInscriptions() {
@@ -96,16 +71,6 @@ public class Session {
         return this;
     }
 
-    public Session nameMap(String nameMap) {
-        setNameMap(nameMap);
-        return this;
-    }
-
-    public Session linkMap(String linkMap) {
-        setLinkMap(linkMap);
-        return this;
-    }
-
     public Session inscriptions(List<Inscription> inscriptions) {
         setInscriptions(inscriptions);
         return this;
@@ -125,8 +90,6 @@ public class Session {
     public String toString() {
         return "{" +
                 " id='" + getId() + "'" +
-                ", nameMap='" + getNameMap() + "'" +
-                ", linkMap='" + getLinkMap() + "'" +
                 ", inscriptions='" + getInscriptions() + "'" +
                 ", gm='" + getGm() + "'" +
                 ", npcs='" + getNpcs() + "'" +
