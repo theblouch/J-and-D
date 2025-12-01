@@ -1,6 +1,9 @@
 package com.projet.j_and_d.model;
 
-public class Character extends Entity {
+import jakarta.persistence.Entity;
+
+@Entity
+public class Character extends Creature {
 
 	private Role role;
 	private Race race;
@@ -32,20 +35,48 @@ public class Character extends Entity {
 		// TODO
 	}
 
-	public void useItem() {
-		// TODO
+	public void useItem(Item item) {
+		if (!this.getInventory().contains(item)) {
+			throw new IllegalArgumentException(
+					"Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+		}
+		this.getInventory().remove(item);
 	}
 
-	public void equipItem() {
-		// TODO
+	public void equipItem(Item item) {
+		if (!this.getInventory().contains(item)) {
+			throw new IllegalArgumentException(
+					"Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+		}
+		this.getInventory().remove(item);
+		this.getItemWorn().add(item);
 	}
 
-	public void showInventory() {
-		// TODO
-	}
+	/*
+	 * public void showInventory() {
+	 * // Fonction inutile ici, ce sera le DAO qui fera ça
+	 * }
+	 */
 
-	public void giveItem(Item item, Character character) {
-		// TODO
+	public void giveItem(Item item, Character target) {
+		boolean removed = false;
+
+		if (this.getInventory().contains(item)) {
+			this.getInventory().remove(item);
+			removed = true;
+		}
+
+		else if (!removed && this.getItemWorn().contains(item)) {
+			this.getItemWorn().remove(item);
+			removed = true;
+		}
+
+		if (!removed) {
+			throw new IllegalArgumentException(
+					"Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+		}
+
+		target.getInventory().add(item);
 	}
 
 	public void saveThrowVsDeath() {

@@ -3,21 +3,44 @@ package com.projet.j_and_d.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Entity {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Creature {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Integer id;
+	@Column(length = 30, nullable = false)
 	protected String name;
+	@Column(nullable = false)
 	protected Integer level;
+	@Column(nullable = false)
 	protected int speed;
-	protected boolean alive;
+	@Column
+	protected boolean alive = true;
+	@Column(nullable = false)
 	protected int armorClass;
+	@Column(nullable = false)
 	protected int initiative;
+	@OneToMany
 	protected List<Item> itemWorn = new ArrayList();
+	@OneToMany
 	protected List<Item> inventory = new ArrayList();
+	@Column(nullable = false) //pas sure ici
 	protected Stats stats;
 
-	public Entity(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats) {
+	public Creature(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats) {
 		this.name = name;
-		this.level = level;
+		this.level = level; 
 		this.speed = speed;
 		this.alive = alive;
 		this.armorClass = armorClass;

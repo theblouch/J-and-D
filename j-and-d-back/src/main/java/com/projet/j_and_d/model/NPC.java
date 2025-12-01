@@ -1,6 +1,9 @@
 package com.projet.j_and_d.model;
 
-public class NPC extends Entity {
+import jakarta.persistence.Entity;
+
+@Entity
+public class NPC extends Creature {
 
 	private double xP;
 
@@ -22,9 +25,11 @@ public class NPC extends Entity {
 		// TODO
 	}
 
-	public void remove() {
-		// TODO
-	}
+	/*
+	 * public void remove() {
+	 * // Se sera fait par le delete dans le DAO
+	 * }
+	 */
 
 	@Override
 	public String toString() {
