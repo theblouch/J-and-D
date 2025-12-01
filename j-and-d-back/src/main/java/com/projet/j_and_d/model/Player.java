@@ -12,6 +12,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -28,6 +31,10 @@ public class Player extends User{
 	
 	@Column(length = 30,nullable = false)
 	protected String prenom;
+
+    @OneToOne
+    @JoinColumn(name = "character_id", referencedColumnName = "id")
+    private Character character;
     
     public Player(){}
     
@@ -61,11 +68,19 @@ public class Player extends User{
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+     public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
 	
     // Methodes
     public void createCharacter(){
 
-    }
+    } 
 
     public void joinSession(){
         
