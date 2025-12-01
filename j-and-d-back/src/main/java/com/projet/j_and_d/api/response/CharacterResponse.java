@@ -20,9 +20,9 @@ public class CharacterResponse {
     private int armorClass;
     private int initiative;
 
-    private List<Item> itemWorn;
+    private List<Integer> itemWornIds;
 
-    private List<Item> inventory;
+    private List<Integer> inventoryIds;
 
     private Stats stats;
 
@@ -112,20 +112,20 @@ public class CharacterResponse {
         this.initiative = initiative;
     }
 
-    public List<Item> getItemWorn() {
-        return itemWorn;
+    public List<Integer> getItemWornIds() {
+        return itemWornIds;
     }
 
-    public void setItemWorn(List<Item> itemWorn) {
-        this.itemWorn = itemWorn;
+    public void setItemWornIds(List<Integer> itemWornIds) {
+        this.itemWornIds = itemWornIds;
     }
 
-    public List<Item> getInventory() {
-        return inventory;
+    public List<Integer> getInventoryIds() {
+        return inventoryIds;
     }
 
-    public void setInventory(List<Item> inventory) {
-        this.inventory = inventory;
+    public void setInventoryIds(List<Integer> inventoryIds) {
+        this.inventoryIds = inventoryIds;
     }
 
     public Stats getStats() {
@@ -171,8 +171,18 @@ public class CharacterResponse {
         response.setArmorClass(character.getArmorClass());
         response.setInitiative(character.getInitiative());
 
-        response.setItemWorn(character.getItemWorn());
-        response.setInventory(character.getInventory());
+        response.setItemWornIds(
+                character.getItemWorn()
+                        .stream()
+                        .map(Item::getId)
+                        .toList());
+
+        response.setInventoryIds(
+                character.getInventory()
+                        .stream()
+                        .map(Item::getId)
+                        .toList());
+
         response.setStats(character.getStats());
 
         if (character.getRole() != null) {

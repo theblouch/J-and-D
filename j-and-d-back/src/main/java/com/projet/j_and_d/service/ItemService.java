@@ -9,11 +9,8 @@ import com.projet.j_and_d.exception.ItemNotFoundException;
 import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.repo.ItemRepository;
 
-
-
 @Service
 public class ItemService {
-    
 
     private final ItemRepository repository;
 
@@ -30,7 +27,7 @@ public class ItemService {
     }
 
     public Item save(CreateOrUpdateItemRequest request) {
-        return this.save(new Item("test item 1", "description 1"), request);
+        return this.save(new Item(), request);
     }
 
     public Item save(int id, CreateOrUpdateItemRequest request) {

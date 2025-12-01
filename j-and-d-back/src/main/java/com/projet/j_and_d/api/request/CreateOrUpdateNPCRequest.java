@@ -2,8 +2,6 @@ package com.projet.j_and_d.api.request;
 
 import java.util.List;
 
-import com.projet.j_and_d.model.Item;
-import com.projet.j_and_d.model.Session;
 import com.projet.j_and_d.model.Stats;
 
 import jakarta.validation.constraints.NotBlank;
@@ -19,14 +17,14 @@ public class CreateOrUpdateNPCRequest {
     private int armorClass;
     private int initiative;
 
-    private List<Item> itemWorn;
+    private List<Integer> itemWornIds;
 
-    private List<Item> inventory;
+    private List<Integer> inventoryIds;
 
     private Stats stats;
 
     private double xP;
-    private Session session;
+    private Integer sessionId;
 
     public int getHp() {
         return hp;
@@ -92,20 +90,20 @@ public class CreateOrUpdateNPCRequest {
         this.initiative = initiative;
     }
 
-    public List<Item> getItemWorn() {
-        return itemWorn;
+    public List<Integer> getItemWornIds() {
+        return itemWornIds;
     }
 
-    public void setItemWorn(List<Item> itemWorn) {
-        this.itemWorn = itemWorn;
+    public void setItemWornIds(List<Integer> itemWornIds) {
+        this.itemWornIds = itemWornIds;
     }
 
-    public List<Item> getInventory() {
-        return inventory;
+    public List<Integer> getInventoryIds() {
+        return inventoryIds;
     }
 
-    public void setInventory(List<Item> inventory) {
-        this.inventory = inventory;
+    public void setInventoryIds(List<Integer> inventoryIds) {
+        this.inventoryIds = inventoryIds;
     }
 
     public Stats getStats() {
@@ -124,11 +122,11 @@ public class CreateOrUpdateNPCRequest {
         this.xP = xP;
     }
 
-    public Session getSession() {
-        return session;
+    public Integer getSessionId() {
+        return sessionId;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setSessionId(Integer sessionId) {
+        this.sessionId = sessionId;
     }
 }

@@ -7,17 +7,22 @@ import org.springframework.stereotype.Service;
 import com.projet.j_and_d.api.request.CreateOrUpdateCharacterRequest;
 import com.projet.j_and_d.exception.CharacterNotFoundException;
 import com.projet.j_and_d.model.Character;
+import com.projet.j_and_d.model.Item;
+import com.projet.j_and_d.model.NPC;
 import com.projet.j_and_d.repo.CharacterRepository;
+import com.projet.j_and_d.repo.ItemRepository;
 
 @Service
 public class CharacterService {
 
     private final CharacterRepository repository;
-    private final RoleRepository roleRepository;
+    private final RoleRepository roleRepo;
+    private final ItemRepository itemRepo;
 
-    public CharacterService(CharacterRepository repository, RoleRepository roleRepository) {
+    public CharacterService(CharacterRepository repository, RoleRepository roleRepo, ItemRepository itemRepo) {
         this.repository = repository;
-        this.roleRepository = roleRepository;
+        this.roleRepo = roleRepo;
+        this.itemRepo = itemRepo;
     }
 
     public List<Character> findAll() {
@@ -43,6 +48,9 @@ public class CharacterService {
     }
 
     private Character save(Character character, CreateOrUpdateCharacterRequest request) {
+        List<Item> itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
+        List<Item> inventory = this.itemRepo.findAllById(request.getInventoryIds());
+
         character.setName(request.getName());
         character.setLevel(request.getLevel());
         character.setHp(request.getHp());
@@ -52,11 +60,11 @@ public class CharacterService {
         character.setArmorClass(request.getArmorClass());
         character.setInitiative(request.getInitiative());
 
-        character.setItemWorn(request.getItemWorn());
-        character.setInventory(request.getInventory());
+        character.setItemWorn(itemWorn);
+        character.setInventory(inventory);
         character.setStats(request.getStats());
 
-        character.setRole(this.roleRepository.getReferenceById(request.getRoleId()));
+        character.setRole(this.roleRepo.getReferenceById(request.getRoleId()));
 
         character.setRace(request.getRace());
 

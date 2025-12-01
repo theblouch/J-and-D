@@ -2,7 +2,6 @@ package com.projet.j_and_d.api.request;
 
 import java.util.List;
 
-import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.Race;
 import com.projet.j_and_d.model.Stats;
 
@@ -19,9 +18,9 @@ public class CreateOrUpdateCharacterRequest {
     private int armorClass;
     private int initiative;
 
-    private List<Item> itemWorn;
+    private List<Integer> itemWornIds;
 
-    private List<Item> inventory;
+    private List<Integer> inventoryIds;
 
     private Stats stats;
 
@@ -93,20 +92,20 @@ public class CreateOrUpdateCharacterRequest {
         this.initiative = initiative;
     }
 
-    public List<Item> getItemWorn() {
-        return itemWorn;
+    public List<Integer> getItemWornIds() {
+        return itemWornIds;
     }
 
-    public void setItemWorn(List<Item> itemWorn) {
-        this.itemWorn = itemWorn;
+    public void setItemWornIds(List<Integer> itemWornIds) {
+        this.itemWornIds = itemWornIds;
     }
 
-    public List<Item> getInventory() {
-        return inventory;
+    public List<Integer> getInventoryIds() {
+        return inventoryIds;
     }
 
-    public void setInventory(List<Item> inventory) {
-        this.inventory = inventory;
+    public void setInventoryIds(List<Integer> inventoryIds) {
+        this.inventoryIds = inventoryIds;
     }
 
     public Stats getStats() {

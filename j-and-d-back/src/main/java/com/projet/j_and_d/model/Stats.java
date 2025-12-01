@@ -27,6 +27,9 @@ public class Stats {
 		this.charisma = charisma;
 	}
 
+	public Stats() {
+	}
+
 	public int getWisdom() {
 		return wisdom;
 	}

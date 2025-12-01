@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.NPC;
-import com.projet.j_and_d.model.Session;
 import com.projet.j_and_d.model.Stats;
 
 public class NPCResponse {
@@ -18,14 +17,14 @@ public class NPCResponse {
     private int armorClass;
     private int initiative;
 
-    private List<Item> itemWorn;
+    private List<Integer> itemWornIds;
 
-    private List<Item> inventory;
+    private List<Integer> inventoryIds;
 
     private Stats stats;
 
     private double xP;
-    private Session session;
+    private Integer sessionId;
 
     public Integer getId() {
         return id;
@@ -99,20 +98,20 @@ public class NPCResponse {
         this.initiative = initiative;
     }
 
-    public List<Item> getItemWorn() {
-        return itemWorn;
+    public List<Integer> getItemWornIds() {
+        return itemWornIds;
     }
 
-    public void setItemWorn(List<Item> itemWorn) {
-        this.itemWorn = itemWorn;
+    public void setItemWornIds(List<Integer> itemWornIds) {
+        this.itemWornIds = itemWornIds;
     }
 
-    public List<Item> getInventory() {
-        return inventory;
+    public List<Integer> getInventoryIds() {
+        return inventoryIds;
     }
 
-    public void setInventory(List<Item> inventory) {
-        this.inventory = inventory;
+    public void setInventoryIds(List<Integer> inventoryIds) {
+        this.inventoryIds = inventoryIds;
     }
 
     public Stats getStats() {
@@ -131,12 +130,12 @@ public class NPCResponse {
         this.xP = xP;
     }
 
-    public Session getSession() {
-        return session;
+    public Integer getSessionId() {
+        return sessionId;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setSessionId(Integer sessionId) {
+        this.sessionId = sessionId;
     }
 
     public static NPCResponse convert(NPC npc) {
@@ -150,11 +149,21 @@ public class NPCResponse {
         response.setArmorClass(npc.getArmorClass());
         response.setInitiative(npc.getInitiative());
 
-        response.setItemWorn(npc.getItemWorn());
-        response.setInventory(npc.getInventory());
+        response.setItemWornIds(
+                npc.getItemWorn()
+                        .stream()
+                        .map(Item::getId)
+                        .toList());
+
+        response.setInventoryIds(
+                npc.getInventory()
+                        .stream()
+                        .map(Item::getId)
+                        .toList());
+
         response.setStats(npc.getStats());
         response.setXP(npc.getXP());
-        response.setSession(npc.getSession());
+        response.setSessionId(npc.getSession().getId());
 
         return response;
     }
