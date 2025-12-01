@@ -75,14 +75,6 @@ public class Stats {
 		this.charisma = charisma;
 	}
 
-	/*
-	 * public int computationModifier(int nb) {
-	 * // DANS LE CRUD
-	 * int statModif = 0;// à changer, mis pour enlever l'erreur
-	 * return statModif;
-	 * }
-	 */
-
 	@Override
 	public String toString() {
 		return "Stats [wisdom=" + wisdom + ", strength=" + strength + ", constitution=" + constitution

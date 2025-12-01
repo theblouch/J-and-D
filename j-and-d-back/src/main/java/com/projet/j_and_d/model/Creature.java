@@ -43,14 +43,41 @@ public abstract class Creature {
 	@Embedded
 	protected Stats stats;
 
-	public Creature(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats) {
+	public Creature(String name, Integer level, int hp, int mp, int speed, boolean alive, int armorClass,
+			int initiative, Stats stats) {
 		this.name = name;
 		this.level = level;
+		this.hp = hp;
+		this.mp = mp;
 		this.speed = speed;
 		this.alive = alive;
 		this.armorClass = armorClass;
 		this.initiative = initiative;
 		this.stats = stats;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public int getMp() {
+		return mp;
+	}
+
+	public void setMp(int mp) {
+		this.mp = mp;
 	}
 
 	public String getName() {
@@ -127,13 +154,6 @@ public abstract class Creature {
 
 	public void useSpell() {
 		// TODO
-	}
-
-	@Override
-	public String toString() {
-		return "Entity [name=" + name + ", level=" + level + ", speed=" + speed + ", alive=" + alive + ", armorClass="
-				+ armorClass + ", initiative=" + initiative + ", itemWorn=" + itemWorn + ", inventory=" + inventory
-				+ ", stats=" + stats + "]";
 	}
 
 }

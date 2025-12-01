@@ -13,9 +13,9 @@ public class NPC extends Creature {
 	@ManyToOne
 	private Session session;
 
-	public NPC(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats,
-			double xP) {
-		super(name, level, speed, alive, armorClass, initiative, stats);
+	public NPC(String name, Integer level, int hp, int mp, int speed, boolean alive, int armorClass, int initiative,
+			Stats stats, double xP) {
+		super(name, level, hp, mp, speed, alive, armorClass, initiative, stats);
 		this.xP = xP;
 	}
 
@@ -27,21 +27,16 @@ public class NPC extends Creature {
 		this.xP = xP;
 	}
 
-	public void display() {
-		// TODO
+	public Session getSession() {
+		return session;
 	}
 
-	/*
-	 * public void remove() {
-	 * // Se sera fait par le delete dans le DAO
-	 * }
-	 */
+	public void setSession(Session session) {
+		this.session = session;
+	}
 
-	@Override
-	public String toString() {
-		return "NPC [xP=" + xP + ", name=" + name + ", level=" + level + ", speed=" + speed + ", alive=" + alive
-				+ ", armorClass=" + armorClass + ", initiative=" + initiative + ", itemWorn=" + itemWorn
-				+ ", inventory=" + inventory + ", stats=" + stats + "]";
+	public void display() {
+		// TODO
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.projet.j_and_d.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -13,12 +14,12 @@ public class Character extends Creature {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Role role;
-	@Embedded
+	@Column(nullable = false)
 	private Race race;
 
-	public Character(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats,
-			Role role, Race race) {
-		super(name, level, speed, alive, armorClass, initiative, stats);
+	public Character(String name, Integer level, int speed, int hp, int mp, boolean alive, int armorClass,
+			int initiative, Stats stats, Role role, Race race) {
+		super(name, level, hp, mp, speed, alive, armorClass, initiative, stats);
 		this.role = role;
 		this.race = race;
 	}
@@ -60,12 +61,6 @@ public class Character extends Creature {
 		this.getItemWorn().add(item);
 	}
 
-	/*
-	 * public void showInventory() {
-	 * // Fonction inutile ici, ce sera le DAO qui fera ça
-	 * }
-	 */
-
 	public void giveItem(Item item, Character target) {
 		boolean removed = false;
 
@@ -98,13 +93,6 @@ public class Character extends Creature {
 		if (success < 3) {
 			this.alive = false; // perso mort (sinon, si success >=3, il reste vivant: alive reste true)
 		}
-	}
-
-	@Override
-	public String toString() {
-		return "Character [name=" + name + ", level=" + level + ", speed=" + speed + ", alive=" + alive
-				+ ", armorClass=" + armorClass + ", initiative=" + initiative + ", itemWorn=" + itemWorn
-				+ ", inventory=" + inventory + ", stats=" + stats + "]";
 	}
 
 }
