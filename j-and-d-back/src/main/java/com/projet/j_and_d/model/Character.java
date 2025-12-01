@@ -88,7 +88,16 @@ public class Character extends Creature {
 	}
 
 	public void saveThrowVsDeath() {
-		// TODO
+		int success = 0;
+		for (int i = 0; i < 5; i++) {
+			if (diceThrow(10, 0, 0)) { // bien nommé le diceThrow quand on saura où le mettre
+				success++;
+			}
+		}
+
+		if (success < 3) {
+			this.alive = false; // perso mort (sinon, si success >=3, il reste vivant: alive reste true)
+		}
 	}
 
 	@Override

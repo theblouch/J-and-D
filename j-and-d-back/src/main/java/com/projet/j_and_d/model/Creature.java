@@ -25,6 +25,10 @@ public abstract class Creature {
 	@Column(nullable = false)
 	protected Integer level;
 	@Column(nullable = false)
+	protected int hp;
+	@Column(nullable = false)
+	protected int mp;
+	@Column(nullable = false)
 	protected int speed;
 	@Column
 	protected boolean alive = true;
@@ -41,7 +45,7 @@ public abstract class Creature {
 
 	public Creature(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats) {
 		this.name = name;
-		this.level = level; 
+		this.level = level;
 		this.speed = speed;
 		this.alive = alive;
 		this.armorClass = armorClass;
