@@ -1,17 +1,16 @@
 package com.projet.j_and_d.model;
 
+import java.util.Random;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Spell {
 
     @Id
@@ -27,6 +26,8 @@ public class Spell {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    private int[] baseDamage;
 
     public Spell(String name, String description, int spellLevel, Role role) {
         this.name = name;
@@ -63,4 +64,16 @@ public class Spell {
         this.role = role;
     }
 
+    public int calculDamages() {
+        Random rd = new Random();
+        int sum = 0;
+        for (int i = 0; i < this.baseDamage.length; i++) {
+            for (int j = 0; j < this.baseDamage[i]; j++) {
+
+                int intermValue = rd.nextInt((2 * i) + 4) + 1;
+                sum += intermValue;
+            }
+        }
+        return sum;
+    }
 }

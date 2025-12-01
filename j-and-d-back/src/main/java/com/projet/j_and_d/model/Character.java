@@ -1,26 +1,30 @@
 package com.projet.j_and_d.model;
 
+import java.util.List;
+
 import com.projet.j_and_d.context.Singleton;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Character extends Creature {
 
 	private Singleton singleton;
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	private Role role;
+
 	@Column(nullable = false)
 	private Race race;
 
-	public Character(String name, double level, int speed, int hp, int mp, boolean alive, int armorClass,
-			int initiative, Stats stats, Role role, Race race) {
-		super(name, level, hp, mp, speed, alive, armorClass, initiative, stats);
-		this.role = role;
+	public Character() {
+
+	}
+
+	public Character(String name, double level, int hp, int mp, double speed, boolean alive, int armorClass,
+			int initiative, Item armor, Item weapon, List<Item> itemWorn, List<Item> inventory, Stats stats,
+			Role role, Race race, List<State> state) {
+		super(name, level, hp, mp, speed, alive, armorClass,
+				initiative, armor, weapon, itemWorn, inventory, stats, role, state);
+
 		this.race = race;
 	}
 

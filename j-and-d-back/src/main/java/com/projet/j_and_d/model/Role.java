@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Role {
+public abstract class Role implements IDamage, IControl, IHeal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

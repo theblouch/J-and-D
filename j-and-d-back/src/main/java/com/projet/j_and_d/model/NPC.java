@@ -1,5 +1,7 @@
 package com.projet.j_and_d.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -15,10 +17,18 @@ public class NPC extends Creature {
 	@ManyToOne
 	private Session session;
 
-	public NPC(String name, double level, int hp, int mp, int speed, boolean alive, int armorClass, int initiative,
-			Stats stats, double xP) {
-		super(name, level, hp, mp, speed, alive, armorClass, initiative, stats);
+	public NPC() {
+	}
+
+	public NPC(String name, double level, int hp, int mp, double speed, boolean alive, int armorClass,
+			int initiative, Item armor, Item weapon, List<Item> itemWorn, List<Item> inventory, Stats stats,
+			Session session, double xP, Role role, List<State> state) {
+
+		super(name, level, hp, mp, speed, alive, armorClass,
+				initiative, armor, weapon, itemWorn, inventory, stats, role, state);
+
 		this.xP = xP;
+		this.session = session;
 	}
 
 	public double getXP() {
