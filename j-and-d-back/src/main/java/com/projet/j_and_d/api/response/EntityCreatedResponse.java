@@ -1,4 +1,4 @@
-package fr.bibliotek.api.response;
+package com.projet.j_and_d.api.response;
 
 public record EntityCreatedResponse(String id) {
 
