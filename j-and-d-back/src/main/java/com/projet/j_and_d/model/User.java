@@ -1,6 +1,6 @@
 package com.projet.j_and_d.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
