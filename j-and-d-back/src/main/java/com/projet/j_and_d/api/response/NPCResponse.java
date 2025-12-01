@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.NPC;
+import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.model.Stats;
 
 public class NPCResponse {
@@ -17,11 +18,17 @@ public class NPCResponse {
     private int armorClass;
     private int initiative;
 
-    private List<Integer> itemWornIds;
+    private Integer armorId;
+    private Integer weaponId;
 
+    private List<Integer> itemWornIds;
     private List<Integer> inventoryIds;
 
     private Stats stats;
+
+    private Integer roleId;
+
+    private List<String> states;
 
     private double xP;
     private Integer sessionId;
@@ -98,6 +105,22 @@ public class NPCResponse {
         this.initiative = initiative;
     }
 
+    public Integer getArmorId() {
+        return armorId;
+    }
+
+    public void setArmorId(Integer armorId) {
+        this.armorId = armorId;
+    }
+
+    public Integer getWeaponId() {
+        return weaponId;
+    }
+
+    public void setWeaponId(Integer weaponId) {
+        this.weaponId = weaponId;
+    }
+
     public List<Integer> getItemWornIds() {
         return itemWornIds;
     }
@@ -114,12 +137,28 @@ public class NPCResponse {
         this.inventoryIds = inventoryIds;
     }
 
+    public List<String> getStates() {
+        return states;
+    }
+
+    public void setStates(List<String> states) {
+        this.states = states;
+    }
+
     public Stats getStats() {
         return stats;
     }
 
     public void setStats(Stats stats) {
         this.stats = stats;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public double getXP() {
@@ -149,6 +188,9 @@ public class NPCResponse {
         response.setArmorClass(npc.getArmorClass());
         response.setInitiative(npc.getInitiative());
 
+        response.setArmorId(npc.getArmor().getId());
+        response.setWeaponId(npc.getWeapon().getId());
+
         response.setItemWornIds(
                 npc.getItemWorn()
                         .stream()
@@ -161,7 +203,15 @@ public class NPCResponse {
                         .map(Item::getId)
                         .toList());
 
+        response.setStates(
+                npc.getState()
+                        .stream()
+                        .map(State::name)
+                        .toList());
+
         response.setStats(npc.getStats());
+        response.setRoleId(npc.getRole().getId());
+
         response.setXP(npc.getXP());
         response.setSessionId(npc.getSession().getId());
 

@@ -4,13 +4,12 @@ import java.util.List;
 
 import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.Race;
-import com.projet.j_and_d.model.Spell;
+import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.model.Stats;
 
 import com.projet.j_and_d.model.Character;
 
 public class CharacterResponse {
-    private Integer id;
     private String name;
     private double level;
     private int hp;
@@ -20,33 +19,19 @@ public class CharacterResponse {
     private int armorClass;
     private int initiative;
 
-    private List<Integer> itemWornIds;
+    private Integer armorId;
+    private Integer weaponId;
 
+    private List<Integer> itemWornIds;
     private List<Integer> inventoryIds;
 
     private Stats stats;
 
     private Integer roleId;
-    private String roleName;
-    private List<Spell> roleSpells;
+
+    private List<String> states;
 
     private Race race;
-
-    public List<Spell> getRoleSpells() {
-        return roleSpells;
-    }
-
-    public void setRoleSpells(List<Spell> roleSpells) {
-        this.roleSpells = roleSpells;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public int getHp() {
         return hp;
@@ -112,6 +97,22 @@ public class CharacterResponse {
         this.initiative = initiative;
     }
 
+    public Integer getArmorId() {
+        return armorId;
+    }
+
+    public void setArmorId(Integer armorId) {
+        this.armorId = armorId;
+    }
+
+    public Integer getWeaponId() {
+        return weaponId;
+    }
+
+    public void setWeaponId(Integer weaponId) {
+        this.weaponId = weaponId;
+    }
+
     public List<Integer> getItemWornIds() {
         return itemWornIds;
     }
@@ -128,20 +129,20 @@ public class CharacterResponse {
         this.inventoryIds = inventoryIds;
     }
 
+    public List<String> getStates() {
+        return states;
+    }
+
+    public void setStates(List<String> states) {
+        this.states = states;
+    }
+
     public Stats getStats() {
         return stats;
     }
 
     public void setStats(Stats stats) {
         this.stats = stats;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
     }
 
     public Integer getRoleId() {
@@ -171,6 +172,9 @@ public class CharacterResponse {
         response.setArmorClass(character.getArmorClass());
         response.setInitiative(character.getInitiative());
 
+        response.setArmorId(character.getArmor().getId());
+        response.setWeaponId(character.getWeapon().getId());
+
         response.setItemWornIds(
                 character.getItemWorn()
                         .stream()
@@ -183,13 +187,15 @@ public class CharacterResponse {
                         .map(Item::getId)
                         .toList());
 
+        response.setStates(
+                character.getState()
+                        .stream()
+                        .map(State::name)
+                        .toList());
+
         response.setStats(character.getStats());
 
-        if (character.getRole() != null) {
-            response.setRoleId(character.getRole().getId());
-            response.setRoleName(character.getRole().getName());
-            response.setRoleSpells(character.getRole().getSpells());
-        }
+        response.setRoleId(character.getRole().getId());
 
         response.setRace(character.getRace());
 

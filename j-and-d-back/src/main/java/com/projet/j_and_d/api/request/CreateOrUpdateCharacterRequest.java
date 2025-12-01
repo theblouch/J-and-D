@@ -18,13 +18,17 @@ public class CreateOrUpdateCharacterRequest {
     private int armorClass;
     private int initiative;
 
-    private List<Integer> itemWornIds;
+    private Integer armorId;
+    private Integer weaponId;
 
+    private List<Integer> itemWornIds;
     private List<Integer> inventoryIds;
 
     private Stats stats;
 
     private Integer roleId;
+
+    private List<String> states;
 
     private Race race;
 
@@ -92,6 +96,22 @@ public class CreateOrUpdateCharacterRequest {
         this.initiative = initiative;
     }
 
+    public Integer getArmorId() {
+        return armorId;
+    }
+
+    public void setArmorId(Integer armorId) {
+        this.armorId = armorId;
+    }
+
+    public Integer getWeaponId() {
+        return weaponId;
+    }
+
+    public void setWeaponId(Integer weaponId) {
+        this.weaponId = weaponId;
+    }
+
     public List<Integer> getItemWornIds() {
         return itemWornIds;
     }
@@ -106,6 +126,14 @@ public class CreateOrUpdateCharacterRequest {
 
     public void setInventoryIds(List<Integer> inventoryIds) {
         this.inventoryIds = inventoryIds;
+    }
+
+    public List<String> getStates() {
+        return states;
+    }
+
+    public void setStateIds(List<String> states) {
+        this.states = states;
     }
 
     public Stats getStats() {

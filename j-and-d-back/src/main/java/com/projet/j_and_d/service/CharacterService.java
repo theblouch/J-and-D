@@ -9,6 +9,7 @@ import com.projet.j_and_d.exception.CharacterNotFoundException;
 import com.projet.j_and_d.model.Character;
 import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.NPC;
+import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.repo.CharacterRepository;
 import com.projet.j_and_d.repo.ItemRepository;
 
@@ -60,6 +61,9 @@ public class CharacterService {
         character.setArmorClass(request.getArmorClass());
         character.setInitiative(request.getInitiative());
 
+        character.setArmor(this.itemRepo.getReferenceById(request.getArmorId()));
+        character.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
+
         character.setItemWorn(itemWorn);
         character.setInventory(inventory);
         character.setStats(request.getStats());
@@ -67,6 +71,13 @@ public class CharacterService {
         character.setRole(this.roleRepo.getReferenceById(request.getRoleId()));
 
         character.setRace(request.getRace());
+
+        List<State> states = request.getStates()
+                .stream()
+                .map(State::valueOf)
+                .toList();
+
+        character.setState(states);
 
         return this.repository.save(character);
     }

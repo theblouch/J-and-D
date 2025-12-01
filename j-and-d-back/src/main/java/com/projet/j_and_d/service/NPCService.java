@@ -8,6 +8,7 @@ import com.projet.j_and_d.api.request.CreateOrUpdateNPCRequest;
 import com.projet.j_and_d.exception.NPCNotFoundException;
 import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.NPC;
+import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.repo.ItemRepository;
 import com.projet.j_and_d.repo.NPCRepository;
 import com.projet.j_and_d.repo.SessionRepository;
@@ -17,11 +18,14 @@ public class NPCService {
     private final NPCRepository repository;
     private final ItemRepository itemRepo;
     private final SessionRepository sessionRepo;
+    private final RoleRepository roleRepo;
 
-    public NPCService(NPCRepository repository, ItemRepository itemRepo, SessionRepository sessionRepo) {
+    public NPCService(NPCRepository repository, ItemRepository itemRepo, SessionRepository sessionRepo,
+            RoleRepository roleRepo) {
         this.repository = repository;
         this.itemRepo = itemRepo;
         this.sessionRepo = sessionRepo;
+        this.roleRepo = roleRepo;
     }
 
     public List<NPC> findAll() {
@@ -59,12 +63,24 @@ public class NPCService {
         npc.setArmorClass(request.getArmorClass());
         npc.setInitiative(request.getInitiative());
 
+        npc.setArmor(this.itemRepo.getReferenceById(request.getArmorId()));
+        npc.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
+
         npc.setItemWorn(itemWorn);
         npc.setInventory(inventory);
         npc.setStats(request.getStats());
 
         npc.setXP(request.getXP());
         npc.setSession(this.sessionRepo.getReferenceById(request.getSessionId()));
+
+        npc.setRole(this.roleRepo.getReferenceById(request.getRoleId()));
+
+        List<State> states = request.getStates()
+                .stream()
+                .map(State::valueOf)
+                .toList();
+
+        npc.setState(states);
 
         return this.repository.save(npc);
     }
