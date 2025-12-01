@@ -2,6 +2,9 @@ package com.projet.j_and_d.model;
 
 import jakarta.persistence.Inheritance;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -10,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -27,9 +31,9 @@ public class Player extends User {
     @Column(length = 30, nullable = false)
     protected String prenom;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "character_id", referencedColumnName = "id")
-    private Character character;
+    private List<Character> characters;
 
     public Player() {
     }
@@ -64,17 +68,20 @@ public class Player extends User {
         this.prenom = prenom;
     }
 
-    public Character getCharacter() {
-        return character;
+    public List<Character> getCharacters() {
+        return characters;
     }
 
-    public void setCharacter(Character character) {
-        this.character = character;
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
     }
 
     // Methodes
-    public void createCharacter() {
-        // TODO
+    public void createCharacter(String name, Role role, Race race) {
+        Character myCharacter = new Character(name, 1, role.getBaseHp(), role.getBaseMp(), role.getBaseMs(), true,
+                role.getBaseArmor(), role.getBaseIni(), role.getArmor(), role.getWeapon(), new ArrayList<Item>(),
+                new ArrayList<Item>(), role.getBaseStats(), role, race, new ArrayList<State>());
+        this.getCharacters().add(myCharacter);
     }
 
     public void joinSession() {
