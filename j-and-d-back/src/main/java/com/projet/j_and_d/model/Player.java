@@ -1,36 +1,46 @@
 package com.projet.j_and_d.model;
 
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
-import j_and_d.view.Views;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.InheritanceType;
+import j_and_d.view.Views;
 
 @Entity
-@DiscriminatorValue("GM")
-public class GM extends User {
-    
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("Player")
+public class Player extends User{
+   
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonView(Views.Common.class)
 	protected Integer id;
-
-    @Column(nullable = false,columnDefinition = "VARCHAR(30) default 'Doe'")
+	
+	@Column(nullable = false)
 	@JsonView(Views.Common.class)
 	protected String nom;
+	
+	@Column(length = 30,nullable = false)
+	@JsonView(Views.Common.class)
+	protected String prenom;
+    
+    public Player(){}
+    
 
-    public GM() {}
-
-    public GM(String login, String password, String nom) {
+    public Player(String login, String password,String nom, String prenom) {
         super(login, password);
         this.nom = nom;
+        this.prenom = prenom;
     }
-
 
     public Integer getId() {
         return id;
@@ -48,30 +58,21 @@ public class GM extends User {
         this.nom = nom;
     }
 
-    public void editHP  (Character character){
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+	
+    // Methodes
+    public void createCharacter(){
 
     }
 
-    public void editHP (NPC NPC){
+    public void joinSession(){
         
     }
-    public void createSession (){
-        
-    }
-    public void grantXp  (){
-        
-    }
-    public void displayNPC  (NPC npc){
-        
-    }
-    public void allowAttack  (){
-        
-    }
-    public void reduceSpeed  (){
-        
-    }
-    public void endTurn  (){
-        
-    }
-   
+
 }
