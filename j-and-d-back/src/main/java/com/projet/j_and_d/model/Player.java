@@ -13,7 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.InheritanceType;
-import j_and_d.view.Views;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -22,15 +22,12 @@ public class Player extends User{
    
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(Views.Common.class)
 	protected Integer id;
 	
 	@Column(nullable = false)
-	@JsonView(Views.Common.class)
 	protected String nom;
 	
 	@Column(length = 30,nullable = false)
-	@JsonView(Views.Common.class)
 	protected String prenom;
     
     public Player(){}

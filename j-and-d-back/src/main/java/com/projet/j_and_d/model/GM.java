@@ -2,7 +2,6 @@ package com.projet.j_and_d.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import j_and_d.view.Views;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -17,11 +16,9 @@ public class GM extends User {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(Views.Common.class)
 	protected Integer id;
 
     @Column(nullable = false,columnDefinition = "VARCHAR(30) default 'Doe'")
-	@JsonView(Views.Common.class)
 	protected String nom;
 
     public GM() {}

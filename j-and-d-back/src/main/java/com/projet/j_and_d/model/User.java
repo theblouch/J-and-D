@@ -11,7 +11,6 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.Table;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Id;
-import j_and_d.view.Views;
 
 
 @Entity
@@ -23,15 +22,12 @@ public abstract class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(Views.Common.class)
 	protected Integer id;
 	
 	@Column(length = 25,nullable = false,unique = true)
-	@JsonView(Views.Common.class)
 	protected String login;
 	
 	@Column(length = 180,nullable = false)
-	@JsonView(Views.Common.class)
 	protected String password;
 
 	
