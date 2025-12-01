@@ -7,11 +7,11 @@ public class Warrior extends Role implements Damage, Control{
     }
 
     @Override
-    public void applyDamageIfTouch(Entity sender, Entity receiver) {}
+    public void applyDamageIfTouch(Creature sender, Creature receiver) {}
 
     @Override
-    public void applyDamageIfTestFailed(Entity sender, Entity receiver) {}
+    public void applyDamageIfTestFailed(Creature sender, Creature receiver) {}
 
     @Override
-    public void applyControlIfTestFailed(Entity sender, Entity receiver) {}
+    public void applyControlIfTestFailed(Creature sender, Creature receiver) {}
 }

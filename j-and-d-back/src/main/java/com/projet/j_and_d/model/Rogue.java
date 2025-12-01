@@ -5,8 +5,8 @@ public class Rogue extends Role implements Damage {
         super("Rogue");
     }
     @Override
-    public void applyDamageIfTouch(Entity sender, Entity receiver) {}
+    public void applyDamageIfTouch(Creature sender, Creature receiver) {}
 
     @Override
-    public void applyDamageIfTestFailed(Entity sender, Entity receiver) {}
+    public void applyDamageIfTestFailed(Creature sender, Creature receiver) {}
 }
