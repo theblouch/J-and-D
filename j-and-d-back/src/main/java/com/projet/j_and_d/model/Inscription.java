@@ -1,9 +1,12 @@
 package com.projet.j_and_d.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,10 +17,16 @@ public class Inscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @OneToOne
+    @Column(nullable = false)
     private Character character;
+    @ManyToOne
+    @Column(nullable = false)
     private Session session;
 
+    @Column(nullable = false)
     private int posX;
+    @Column(nullable = false)
     private int posY;
 
     public Inscription() {

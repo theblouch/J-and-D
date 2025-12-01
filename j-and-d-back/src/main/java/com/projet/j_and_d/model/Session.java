@@ -2,10 +2,12 @@ package com.projet.j_and_d.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,13 +19,16 @@ public class Session {
     private Integer id;
 
     private String nameMap;
+
     private String linkMap;
 
+    @OneToMany(mappedBy = "session")
     private List<Inscription> inscriptions;
 
-    private List<Player> players;
+    @Column(nullable = false)
     private GM gm;
 
+    @OneToMany(mappedBy = "session")
     private List<NPC> npcs;
 
     public Session() {
