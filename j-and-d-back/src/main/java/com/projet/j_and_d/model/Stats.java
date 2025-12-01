@@ -1,12 +1,21 @@
 package com.projet.j_and_d.model;
 
-public class Stats {
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
+@Embeddable
+public class Stats {
+	@Column(nullable = false)
 	private int wisdom;
+	@Column(nullable = false)
 	private int strength;
+	@Column(nullable = false)
 	private int constitution;
+	@Column(nullable = false)
 	private int intelligence;
+	@Column(nullable = false)
 	private int dexterity;
+	@Column(nullable = false)
 	private int charisma;
 
 	public Stats(int wisdom, int strength, int constitution, int intelligence, int dexterity, int charisma) {
@@ -66,11 +75,13 @@ public class Stats {
 		this.charisma = charisma;
 	}
 
-	public int computationModifier(int nb) {
-		// TODO
-		int statModif = 0;// à changer, mis pour enlever l'erreur
-		return statModif;
-	}
+	/*
+	 * public int computationModifier(int nb) {
+	 * // DANS LE CRUD
+	 * int statModif = 0;// à changer, mis pour enlever l'erreur
+	 * return statModif;
+	 * }
+	 */
 
 	@Override
 	public String toString() {
