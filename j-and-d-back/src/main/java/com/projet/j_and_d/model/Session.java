@@ -34,14 +34,21 @@ public class Session {
     public Session() {
     }
 
-    public Session(String nameMap, String linkMap, List<Inscription> inscriptions, List<Player> players, GM gm,
-            List<NPC> npcs) {
+    public Session(Integer id, String nameMap, String linkMap, List<Inscription> inscriptions, GM gm, List<NPC> npcs) {
+        this.id = id;
         this.nameMap = nameMap;
         this.linkMap = linkMap;
         this.inscriptions = inscriptions;
-        this.players = players;
         this.gm = gm;
         this.npcs = npcs;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNameMap() {
@@ -68,14 +75,6 @@ public class Session {
         this.inscriptions = inscriptions;
     }
 
-    public List<Player> getPlayers() {
-        return this.players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
-
     public GM getGm() {
         return this.gm;
     }
@@ -90,6 +89,11 @@ public class Session {
 
     public void setNpcs(List<NPC> npcs) {
         this.npcs = npcs;
+    }
+
+    public Session id(Integer id) {
+        setId(id);
+        return this;
     }
 
     public Session nameMap(String nameMap) {
@@ -107,11 +111,6 @@ public class Session {
         return this;
     }
 
-    public Session players(List<Player> players) {
-        setPlayers(players);
-        return this;
-    }
-
     public Session gm(GM gm) {
         setGm(gm);
         return this;
@@ -125,10 +124,10 @@ public class Session {
     @Override
     public String toString() {
         return "{" +
-                " nameMap='" + getNameMap() + "'" +
+                " id='" + getId() + "'" +
+                ", nameMap='" + getNameMap() + "'" +
                 ", linkMap='" + getLinkMap() + "'" +
                 ", inscriptions='" + getInscriptions() + "'" +
-                ", players='" + getPlayers() + "'" +
                 ", gm='" + getGm() + "'" +
                 ", npcs='" + getNpcs() + "'" +
                 "}";
