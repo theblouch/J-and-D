@@ -1,11 +1,15 @@
 package com.projet.j_and_d.model;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Character extends Creature {
 
+	@OneToMany
 	private Role role;
+	@Embedded
 	private Race race;
 
 	public Character(String name, Integer level, int speed, boolean alive, int armorClass, int initiative, Stats stats,
