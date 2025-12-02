@@ -9,8 +9,11 @@ public class SubscriptionRequest {
     @NotBlank
     private String password;
 
+    @NotBlank
+    private boolean GM;
+
     public String getLogin() {
-        return login;
+        return this.login;
     }
 
     public void setLogin(String login) {
@@ -18,10 +21,19 @@ public class SubscriptionRequest {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isGM() {
+        return this.GM;
+    }
+
+    public void setGM(boolean GM) {
+        this.GM = GM;
+    }
+
 }
