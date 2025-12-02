@@ -11,6 +11,7 @@ import com.projet.j_and_d.model.NPC;
 import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.repo.ItemRepository;
 import com.projet.j_and_d.repo.NPCRepository;
+import com.projet.j_and_d.repo.RoleRepository;
 import com.projet.j_and_d.repo.SessionRepository;
 
 @Service
