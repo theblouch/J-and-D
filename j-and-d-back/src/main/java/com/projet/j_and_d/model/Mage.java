@@ -1,7 +1,27 @@
 package com.projet.j_and_d.model;
 
 public class Mage extends Role {
+
     public Mage() {
-        super("Mage");
+        super();
+
+        this.name = "Mage";
+        this.baseHp = 6;
+        this.baseMp = 12;
+        this.baseMs = 5.0;
+        this.baseArmor = 8;
+        this.baseIni = 12;
+
+        // this.armor = ItemFactory.createArmor("Cloth Robe", 0);
+        // this.weapon = ItemFactory.createWeapon("Apprentice Wand", 2);
+
+        this.baseStats = new Stats(
+                14, // Wisdom
+                8, // Strength
+                10, // Constitution
+                16, // Intelligence
+                12, // Dexterity
+                10 // Charisma
+        );
     }
 }

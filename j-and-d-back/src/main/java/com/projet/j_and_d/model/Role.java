@@ -15,18 +15,18 @@ public abstract class Role implements IDamage, IControl, IHeal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name; // Warrior, Druid, Rgoue, Mage
+    protected Integer id;
+    protected String name; // Warrior, Druid, Rgoue, Mage
 
-    private int baseHp;
-    private int baseMp;
-    private double baseMs;
-    private int baseArmor;
-    private int baseIni;
-    private Item armor;
-    private Item weapon;
+    protected int baseHp;
+    protected int baseMp;
+    protected double baseMs;
+    protected int baseArmor;
+    protected int baseIni;
+    protected Item armor;
+    protected Item weapon;
     @Embedded
-    private Stats baseStats;
+    protected Stats baseStats;
 
     public Role() {
     }
