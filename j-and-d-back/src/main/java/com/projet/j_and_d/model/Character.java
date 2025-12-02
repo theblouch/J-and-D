@@ -7,8 +7,10 @@ import com.projet.j_and_d.context.Singleton;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "`character`")
 public class Character extends Creature {
 
 	@Column(nullable = false)
@@ -52,7 +54,6 @@ public class Character extends Creature {
 		}
 		this.level = this.level + xpGain;
 	}
-	
 
 	public void useItem(Item item) {
 		if (!this.getInventory().contains(item)) {
