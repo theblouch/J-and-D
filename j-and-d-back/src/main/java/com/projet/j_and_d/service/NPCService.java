@@ -1,5 +1,6 @@
 package com.projet.j_and_d.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -52,8 +53,6 @@ public class NPCService {
     }
 
     private NPC save(NPC npc, CreateOrUpdateNPCRequest request) {
-        List<Item> itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
-        List<Item> inventory = this.itemRepo.findAllById(request.getInventoryIds());
 
         npc.setName(request.getName());
         npc.setLevel(request.getLevel());
@@ -64,11 +63,26 @@ public class NPCService {
         npc.setArmorClass(request.getArmorClass());
         npc.setInitiative(request.getInitiative());
 
-        npc.setArmor(this.itemRepo.getReferenceById(request.getArmorId()));
+        Item armor = null;
+        if (request.getArmorId() != null) {
+            armor = this.itemRepo.getReferenceById(request.getArmorId());
+        }
+        npc.setArmor(armor);
         npc.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
 
+        List<Item> itemWorn = Collections.emptyList();
+        if (request.getItemWornIds() != null) {
+            itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
+        }
         npc.setItemWorn(itemWorn);
+
+        List<Item> inventory = Collections.emptyList();
+        if (request.getInventoryIds() != null) {
+            inventory = this.itemRepo.findAllById(request.getInventoryIds());
+        }
         npc.setInventory(inventory);
+        npc.setStats(request.getStats());
+
         npc.setStats(request.getStats());
 
         npc.setXP(request.getXP());
@@ -76,11 +90,13 @@ public class NPCService {
 
         npc.setRole(this.roleRepo.getReferenceById(request.getRoleId()));
 
-        List<State> states = request.getStates()
-                .stream()
-                .map(State::valueOf)
-                .toList();
-
+        List<State> states = Collections.emptyList();
+        if (request.getStates() != null) {
+            states = request.getStates()
+                    .stream()
+                    .map(State::valueOf)
+                    .toList();
+        }
         npc.setState(states);
 
         return this.repository.save(npc);

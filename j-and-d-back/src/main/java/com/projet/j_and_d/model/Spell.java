@@ -18,11 +18,11 @@ public class Spell {
     protected Integer id;
 
     @Column(length = 180, nullable = false)
-    private  String name;
-    @Column(length = 180, nullable = false)
-    private  String description;
+    private String name;
+    @Column(length = 180)
+    private String description;
     @Column(nullable = false)
-    private  int spellLevel;
+    private int spellLevel;
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -35,8 +35,10 @@ public class Spell {
         this.spellLevel = spellLevel;
         this.role = role;
     }
-    public Spell (){}
-    
+
+    public Spell() {
+    }
+
     public Integer getId() {
         return id;
     }

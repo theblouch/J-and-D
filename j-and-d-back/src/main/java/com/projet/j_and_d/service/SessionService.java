@@ -1,5 +1,6 @@
 package com.projet.j_and_d.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -55,10 +56,16 @@ public class SessionService {
     private Session save(Session session, CreateOrUpdateSessionRequest request) {
         List<Inscription> inscriptions = inscriptionRepo.findAllById(request.getInscriptionIds());
         GM gm = (GM) gmRepo.findById(request.getGmId()).orElseThrow();
-        List<NPC> npcs = npcRepo.findAllById(request.getNpcIds());
+        // List<NPC> npcs = npcRepo.findAllById(request.getNpcIds());
 
         session.setInscriptions(inscriptions);
         session.setGm(gm);
+
+        List<NPC> npcs = Collections.emptyList();
+        if (request.getNpcIds() != null) {
+            npcs = npcRepo.findAllById(request.getNpcIds());
+        }
+
         session.setNpcs(npcs);
 
         return this.repository.save(session);
