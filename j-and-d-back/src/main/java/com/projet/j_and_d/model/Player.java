@@ -83,8 +83,11 @@ public class Player extends User {
         this.getCharacters().add(myCharacter);
     }
 
-    public void joinSession() {
-        // TODO
+    public void joinSession(Session session, Character character) {
+        Inscription inscription = new Inscription();
+        inscription.setSession(session);
+        inscription.setCharacter(character);
+        session.getInscriptions().add(inscription);
     }
 
 }
