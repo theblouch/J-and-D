@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class Singleton {
+import org.springframework.stereotype.Component;
 
-	private static Singleton instance = null;
+@Component
+public class Singleton {
 
 	/*
 	 * bonusDice représente la liste de dés bonus qui vont être utilisés pour le
@@ -18,16 +19,9 @@ public class Singleton {
 	public Integer[] bonusDice;
 	private Random rd;
 
-	private Singleton() {
+	public Singleton() {
 		bonusDice = new Integer[5];
 		rd = new Random();
-	}
-
-	public static Singleton getInstance() {
-		if (instance == null) {
-			instance = new Singleton();
-		}
-		return instance;
 	}
 
 	public Integer[] getBonusDice() {
@@ -100,6 +94,7 @@ public class Singleton {
 		} else {
 			sum = Collections.max(resD20);
 		}
+		bonusDiceReset();
 		return sum >= successThreshold;
 	}
 

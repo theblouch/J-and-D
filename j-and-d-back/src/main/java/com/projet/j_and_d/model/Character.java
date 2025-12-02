@@ -6,6 +6,7 @@ import com.projet.j_and_d.context.Singleton;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Character extends Creature {
@@ -14,6 +15,9 @@ public class Character extends Creature {
 
 	@Column(nullable = false)
 	private Race race;
+
+	@OneToMany(mappedBy = "character")
+	private List<Inscription> inscriptions;
 
 	public Character() {
 
@@ -45,7 +49,9 @@ public class Character extends Creature {
 	}
 
 	public void levelUp(double xpGain) {
-		if (xpGain <=0){return;}
+		if (xpGain <= 0) {
+			return;
+		}
 		this.level = this.level + xpGain;
 	}
 

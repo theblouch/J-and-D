@@ -45,19 +45,23 @@ public abstract class Creature {
 	protected int armorClass;
 	@Column(nullable = false)
 	protected int initiative;
-	@OneToMany
+	@OneToOne
+	@JoinColumn(nullable = true)
 	protected Item armor;
 	@OneToOne
+	@JoinColumn(nullable = false)
 	protected Item weapon;
 	@OneToMany
+	@JoinColumn(nullable = true)
 	protected List<Item> itemWorn;
 	@OneToMany
+	@JoinColumn(nullable = true)
 	protected List<Item> inventory;
 	@Embedded
 	@Column(nullable = false)
 	protected Stats stats;
 
-	private Singleton singleton = Singleton.getInstance();
+	private Singleton singleton;
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
