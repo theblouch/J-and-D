@@ -1,8 +1,11 @@
 package com.projet.j_and_d.service;
 
+import org.springframework.stereotype.Service;
+
 import com.projet.j_and_d.model.Creature;
 import com.projet.j_and_d.model.State;
 
+@Service
 public class StateService {
 
     public boolean canAttack(Creature creature) {

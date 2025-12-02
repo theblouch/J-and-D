@@ -52,6 +52,7 @@ public class Character extends Creature {
 		}
 		this.level = this.level + xpGain;
 	}
+	
 
 	public void useItem(Item item) {
 		if (!this.getInventory().contains(item)) {
@@ -103,6 +104,14 @@ public class Character extends Creature {
 		if (success < 3) {
 			this.alive = false; // perso mort (sinon, si success >=3, il reste vivant: alive reste true)
 		}
+	}
+
+	public List<Inscription> getInscriptions() {
+		return inscriptions;
+	}
+
+	public void setInscriptions(List<Inscription> inscriptions) {
+		this.inscriptions = inscriptions;
 	}
 
 }
