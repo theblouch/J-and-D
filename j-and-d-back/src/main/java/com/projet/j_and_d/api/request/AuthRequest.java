@@ -9,11 +9,11 @@ public class AuthRequest {
     @NotBlank
     private String password;
 
-    public String getUsername() {
+    public String getLogin() {
         return login;
     }
 
-    public void setUsername(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 

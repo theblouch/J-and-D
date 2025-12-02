@@ -13,8 +13,6 @@ import com.projet.j_and_d.api.request.AuthRequest;
 import com.projet.j_and_d.api.response.AuthResponse;
 import com.projet.j_and_d.security.jwt.JwtUtil;
 
-
-
 @Service
 public class SecurityService {
     private final static Logger log = LoggerFactory.getLogger(SecurityService.class);
@@ -28,7 +26,8 @@ public class SecurityService {
         try {
             log.debug("Trying to authenticate ...");
 
-            Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+            Authentication authentication = this.authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             log.debug("Successfuly authenticated!");

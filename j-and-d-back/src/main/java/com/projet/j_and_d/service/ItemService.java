@@ -43,8 +43,8 @@ public class ItemService {
     private Item save(Item item, CreateOrUpdateItemRequest request) {
         item.setName(request.getName());
         item.setDescription(request.getDescription());
-        item.setBasedOnStrength(item.isBasedOnStrength());
-        item.setBaseDamage(item.getBaseDamage());
+        item.setBasedOnStrength(request.isBasedOnStrength());
+        item.setBaseDamage(request.getBaseDamage());
 
         return this.repository.save(item);
     }
