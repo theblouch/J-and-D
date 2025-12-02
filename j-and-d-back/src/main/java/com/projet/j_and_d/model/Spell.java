@@ -35,7 +35,7 @@ public class Spell {
         this.spellLevel = spellLevel;
         this.role = role;
     }
-
+    public Spell (){}
     
     public Integer getId() {
         return id;

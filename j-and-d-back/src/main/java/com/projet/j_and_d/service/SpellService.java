@@ -9,10 +9,12 @@ import com.projet.j_and_d.exception.SpellNotFoundException;
 import com.projet.j_and_d.model.Spell;
 import com.projet.j_and_d.repo.SpellRepository;
 
+
 @Service
 public class SpellService {
 
     private final SpellRepository repository;
+
 
     public SpellService(SpellRepository repository) {
         this.repository = repository;
