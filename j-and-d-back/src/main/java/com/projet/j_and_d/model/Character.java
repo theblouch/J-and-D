@@ -44,8 +44,9 @@ public class Character extends Creature {
 		this.race = race;
 	}
 
-	public void levelUp() {
-		// TODO
+	public void levelUp(double xpGain) {
+		if (xpGain <=0){return;}
+		this.level = this.level + xpGain;
 	}
 
 	public void useItem(Item item) {
