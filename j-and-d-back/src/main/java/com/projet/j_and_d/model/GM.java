@@ -18,7 +18,7 @@ public class GM extends User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "gm")
     private List<Session> sessions;
 
     public GM() {

@@ -36,7 +36,7 @@ public class SessionService {
     }
 
     public Session findById(Integer id) {
-        return this.repository.findById(id).orElseThrow(SessionNotFoundException::new);
+        return this.repository.findByIdWithGm(id).orElseThrow(SessionNotFoundException::new);
     }
 
     public Session save(CreateOrUpdateSessionRequest request) {
@@ -54,12 +54,18 @@ public class SessionService {
     }
 
     private Session save(Session session, CreateOrUpdateSessionRequest request) {
-        List<Inscription> inscriptions = inscriptionRepo.findAllById(request.getInscriptionIds());
+
         GM gm = (GM) gmRepo.findById(request.getGmId()).orElseThrow();
         // List<NPC> npcs = npcRepo.findAllById(request.getNpcIds());
 
-        session.setInscriptions(inscriptions);
         session.setGm(gm);
+
+        List<Inscription> inscriptions = Collections.emptyList();
+        if (request.getInscriptionIds() != null) {
+            inscriptions = inscriptionRepo.findAllById(request.getInscriptionIds());
+        }
+
+        session.setInscriptions(inscriptions);
 
         List<NPC> npcs = Collections.emptyList();
         if (request.getNpcIds() != null) {

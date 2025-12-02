@@ -39,6 +39,8 @@ public class SessionResponse {
 
     public static SessionResponse convert(Session session) {
         SessionResponse response = new SessionResponse();
+        System.out.println("---------------------------\n\n\n\n\n objet GM " + session.getGm().getLogin()
+                + "\n\n" + session.getGm().getPassword() + "\n\n" + session.getGm().getId() + "\n\n");
         response.setGmId(session.getGm().getId());
         response.setInscriptionIds(
                 session.getInscriptions()

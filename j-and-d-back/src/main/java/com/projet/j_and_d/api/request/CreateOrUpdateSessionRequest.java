@@ -2,9 +2,12 @@ package com.projet.j_and_d.api.request;
 
 import java.util.List;
 
+import jakarta.validation.constraints.NotNull;
+
 public class CreateOrUpdateSessionRequest {
     private List<Integer> inscriptionIds;
 
+    @NotNull
     private Integer gmId;
 
     private List<Integer> npcIds;
