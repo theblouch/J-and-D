@@ -13,7 +13,6 @@ import com.projet.j_and_d.model.GM;
 import com.projet.j_and_d.model.NPC;
 import com.projet.j_and_d.model.Race;
 import com.projet.j_and_d.model.Role;
-import com.projet.j_and_d.model.Session;
 import com.projet.j_and_d.model.Stats;
 
 public class GMTest {
@@ -26,7 +25,7 @@ public class GMTest {
     public void setup() {
         gm = new GM("gm1", "password", "Master");
         gm.setSessions(new ArrayList<>());
-        
+
         // Création d'un rôle concret
         Role druid = new Druid();
 
@@ -47,8 +46,7 @@ public class GMTest {
                 new Stats(),
                 druid,
                 Race.ELF,
-                new ArrayList<>()
-        );
+                new ArrayList<>());
 
         // Création d'un NPC donnant de l'XP
         npc = new NPC(
@@ -68,8 +66,7 @@ public class GMTest {
                 null,
                 0.25,
                 druid,
-                new ArrayList<>()
-        );
+                new ArrayList<>());
     }
 
     // ───────────────────────────────
@@ -81,7 +78,7 @@ public class GMTest {
         assertEquals(7, hero.getHp());
 
         gm.editHP(hero, 20);
-        assertEquals(-13, hero.getHp());  // pas géré ici (normal, c’est dans IDamage qu'on clamp à 0)
+        assertEquals(-13, hero.getHp()); // pas géré ici (normal, c’est dans IDamage qu'on clamp à 0)
     }
 
     // ───────────────────────────────
@@ -120,4 +117,3 @@ public class GMTest {
         assertEquals(3.5, hero.getSpeed());
     }
 }
-

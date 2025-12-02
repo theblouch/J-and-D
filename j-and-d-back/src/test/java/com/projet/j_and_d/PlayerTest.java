@@ -14,7 +14,6 @@ import com.projet.j_and_d.model.Player;
 import com.projet.j_and_d.model.Race;
 import com.projet.j_and_d.model.Role;
 import com.projet.j_and_d.model.Session;
-import com.projet.j_and_d.model.Stats;
 
 public class PlayerTest {
 
@@ -35,8 +34,8 @@ public class PlayerTest {
 
     @Test
     public void testCreateCharacter() {
-        Role druid = new Druid();          // Rôle concret
-        Race race = Race.HUMAN;            // Enum direct
+        Role druid = new Druid(); // Rôle concret
+        Race race = Race.HUMAN; // Enum direct
 
         player.createCharacter("Hero", druid, race);
 
@@ -44,8 +43,8 @@ public class PlayerTest {
         Character c = player.getCharacters().get(0);
 
         assertEquals("Hero", c.getName());
-        assertEquals(10, c.getHp());       // baseHp du Druid
-        assertEquals(6, c.getMp());        // baseMp du Druid
+        assertEquals(10, c.getHp()); // baseHp du Druid
+        assertEquals(6, c.getMp()); // baseMp du Druid
         assertEquals(druid, c.getRole());
         assertEquals(race, c.getRace());
     }

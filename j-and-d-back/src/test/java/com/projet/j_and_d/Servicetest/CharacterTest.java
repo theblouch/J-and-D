@@ -8,7 +8,6 @@ import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 
 import com.projet.j_and_d.api.request.CreateOrUpdateCharacterRequest;
 import com.projet.j_and_d.exception.CharacterNotFoundException;
@@ -156,4 +155,3 @@ public class CharacterTest {
         return req;
     }
 }
-
