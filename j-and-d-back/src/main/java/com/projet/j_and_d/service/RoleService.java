@@ -71,13 +71,9 @@ public class RoleService {
 
     private Role save(Role role, CreateOrUpdateRoleRequest request) {
         List<Spell> spells = this.spellRepo.findAllById(request.getSpellIds());
+        role.setSpells(spells);
 
         role.setName(request.getName());
-        role.setBaseHp(request.getBaseHp());
-        role.setBaseMp(request.getBaseMp());
-        role.setBaseMs(request.getBaseMs());
-        role.setBaseArmor(request.getBaseArmor());
-        role.setBaseIni(request.getBaseIni());
 
         Item armor = null;
         if (request.getArmorId() != null) {
@@ -86,10 +82,6 @@ public class RoleService {
         role.setArmor(armor);
 
         role.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
-
-        role.setBaseStats(request.getBaseStats());
-
-        role.setSpells(spells);
 
         return this.repository.save(role);
     }

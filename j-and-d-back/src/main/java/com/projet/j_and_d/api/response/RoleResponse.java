@@ -9,25 +9,18 @@ import com.projet.j_and_d.model.Stats;
 public class RoleResponse {
     private String name;
 
+    private Integer armorId;
+    private Integer weaponId;
+
+    private List<Integer> spellIds;
+
+    private Stats baseStats;
+
     private int baseHp;
     private int baseMp;
     private double baseMs;
     private int baseArmor;
     private int baseIni;
-    private Integer armorId;
-    private Integer weaponId;
-
-    private Stats baseStats;
-
-    private List<Integer> spellIds;
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getBaseHp() {
         return this.baseHp;
@@ -69,6 +62,22 @@ public class RoleResponse {
         this.baseIni = baseIni;
     }
 
+    public Stats getBaseStats() {
+        return this.baseStats;
+    }
+
+    public void setBaseStats(Stats baseStats) {
+        this.baseStats = baseStats;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getArmorId() {
         return armorId;
     }
@@ -85,14 +94,6 @@ public class RoleResponse {
         this.weaponId = weaponId;
     }
 
-    public Stats getBaseStats() {
-        return this.baseStats;
-    }
-
-    public void setBaseStats(Stats baseStats) {
-        this.baseStats = baseStats;
-    }
-
     public List<Integer> getSpellIds() {
         return spellIds;
     }
@@ -104,22 +105,23 @@ public class RoleResponse {
     public static RoleResponse convert(Role role) {
         RoleResponse response = new RoleResponse();
         response.setName(role.getName());
+
+        response.setArmorId(role.getArmor() != null ? role.getArmor().getId() : null);
+        response.setWeaponId(role.getWeapon().getId());
+
+        response.setSpellIds(role.getSpells() != null
+                ? role.getSpells().stream()
+                        .map(Spell::getId)
+                        .toList()
+                : List.of());
+
+        response.setBaseStats(role.getBaseStats());
+
         response.setBaseHp(role.getBaseHp());
         response.setBaseMp(role.getBaseMp());
         response.setBaseMs(role.getBaseMs());
         response.setBaseArmor(role.getBaseArmor());
         response.setBaseIni(role.getBaseIni());
-
-        response.setArmorId(role.getArmor().getId());
-        response.setWeaponId(role.getWeapon().getId());
-
-        response.setBaseStats(role.getBaseStats());
-
-        response.setSpellIds(
-                role.getSpells()
-                        .stream()
-                        .map(Spell::getId)
-                        .toList());
 
         return response;
     }

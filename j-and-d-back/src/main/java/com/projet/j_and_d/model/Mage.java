@@ -1,5 +1,10 @@
 package com.projet.j_and_d.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Mage")
 public class Mage extends Role {
 
     public Mage() {
