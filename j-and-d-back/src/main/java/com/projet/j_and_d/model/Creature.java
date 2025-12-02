@@ -20,7 +20,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 import com.projet.j_and_d.context.Singleton;
-import com.projet.j_and_d.service.StateService;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -52,13 +51,10 @@ public abstract class Creature {
 	@JoinColumn(nullable = false)
 	protected Item weapon;
 	@OneToMany
-	@JoinColumn(nullable = true)
 	protected List<Item> itemWorn;
 	@OneToMany
-	@JoinColumn(nullable = true)
 	protected List<Item> inventory;
 	@Embedded
-	@Column(nullable = false)
 	protected Stats stats;
 
 	@ManyToOne
@@ -69,10 +65,8 @@ public abstract class Creature {
 	@Enumerated(EnumType.STRING)
 	protected List<State> state;
 
-	@Column(nullable = true)
+	@OneToOne
 	protected Creature tauntedBy = null;
-
-	private StateService stateService = new StateService();
 
 	public Creature() {
 	}
@@ -267,7 +261,7 @@ public abstract class Creature {
 					+ target.name + ".");
 			return;
 		}
-		if (!stateService.canAttack(this) || !stateService.targetable(target)) {
+		if (!this.canAttack(this) || !this.targetable(target)) {
 			return;
 		}
 		// choix de la caractérisitique pour l'attaque (force ou dextérité)
@@ -326,6 +320,36 @@ public abstract class Creature {
 			this.getRole().applyDamageIfTouch(this, target, baseDamage);
 		}
 
+	}
+
+	public boolean canAttack(Creature creature) {
+
+		if (creature.getState().contains(State.Stunned)) {
+			System.out.println("Personnage Stunned");
+			return false;
+		}
+
+		if (creature.getState().contains(State.Asleep)) {
+			System.out.println("Personnage Asleep");
+			return false;
+		}
+
+		return true;
+	}
+
+	public boolean targetable(Creature creature) {
+		if (creature.getState().contains(State.Invisible)) {
+			System.out.println("Target is invisible");
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public Creature getTauntedByCreature(Creature creature) {
+		if (!creature.getState().contains(State.Taunted))
+			return null;
+		return creature.getTauntedBy(); // attribut à créer
 	}
 
 }

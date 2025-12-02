@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public abstract class Role implements IDamage, IControl, IHeal {
@@ -23,7 +24,9 @@ public abstract class Role implements IDamage, IControl, IHeal {
     protected double baseMs;
     protected int baseArmor;
     protected int baseIni;
+    @OneToOne
     protected Item armor;
+    @OneToOne
     protected Item weapon;
     @Embedded
     protected Stats baseStats;
