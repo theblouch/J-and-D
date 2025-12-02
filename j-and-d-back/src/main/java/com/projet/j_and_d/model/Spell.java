@@ -18,11 +18,11 @@ public class Spell {
     protected Integer id;
 
     @Column(length = 180, nullable = false)
-    private final String name;
+    private  String name;
     @Column(length = 180, nullable = false)
-    private final String description;
+    private  String description;
     @Column(nullable = false)
-    private final int spellLevel;
+    private  int spellLevel;
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -36,6 +36,7 @@ public class Spell {
         this.role = role;
     }
 
+    
     public Integer getId() {
         return id;
     }
@@ -48,12 +49,24 @@ public class Spell {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getSpellLevel() {
         return spellLevel;
+    }
+
+    public void setSpellLevel(int spellLevel) {
+        this.spellLevel = spellLevel;
     }
 
     public Role getRole() {
@@ -62,6 +75,14 @@ public class Spell {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public int[] getBaseDamage() {
+        return baseDamage;
+    }
+
+    public void setBaseDamage(int[] baseDamage) {
+        this.baseDamage = baseDamage;
     }
 
     public int calculDamages() {
