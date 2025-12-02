@@ -10,6 +10,7 @@ import com.projet.j_and_d.model.GM;
 import com.projet.j_and_d.model.Inscription;
 import com.projet.j_and_d.model.NPC;
 import com.projet.j_and_d.model.Session;
+import com.projet.j_and_d.repo.InscriptionRepository;
 import com.projet.j_and_d.repo.NPCRepository;
 import com.projet.j_and_d.repo.SessionRepository;
 import com.projet.j_and_d.repo.UserRepository;
