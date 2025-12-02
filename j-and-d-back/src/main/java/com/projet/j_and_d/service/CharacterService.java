@@ -8,7 +8,6 @@ import com.projet.j_and_d.api.request.CreateOrUpdateCharacterRequest;
 import com.projet.j_and_d.exception.CharacterNotFoundException;
 import com.projet.j_and_d.model.Character;
 import com.projet.j_and_d.model.Item;
-import com.projet.j_and_d.model.NPC;
 import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.repo.CharacterRepository;
 import com.projet.j_and_d.repo.ItemRepository;
