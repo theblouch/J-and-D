@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Singleton {
-
+	private static Singleton instance;
 	/*
 	 * bonusDice représente la liste de dés bonus qui vont être utilisés pour le
 	 * lancer (et leur nombre)
@@ -19,9 +19,16 @@ public class Singleton {
 	public Integer[] bonusDice;
 	private Random rd;
 
-	public Singleton() {
+	private Singleton() {
 		bonusDice = new Integer[5];
 		rd = new Random();
+	}
+
+	public static Singleton getInstance() {
+		if (instance == null) {
+			instance = new Singleton();
+		}
+		return instance;
 	}
 
 	public Integer[] getBonusDice() {

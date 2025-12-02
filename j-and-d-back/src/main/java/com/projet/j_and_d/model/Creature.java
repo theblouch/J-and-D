@@ -61,8 +61,6 @@ public abstract class Creature {
 	@Column(nullable = false)
 	protected Stats stats;
 
-	private Singleton singleton;
-
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	protected Role role;
@@ -263,6 +261,7 @@ public abstract class Creature {
 	}
 
 	public void attack(Creature target) {
+		Singleton singleton = Singleton.getInstance();
 		if (!this.getTauntedBy().equals(target)) {
 			System.out.println("L'attaquand est provoqué par" + this.getTauntedBy().name + ", il ne peut pas attaquer "
 					+ target.name + ".");
@@ -296,6 +295,7 @@ public abstract class Creature {
 	}
 
 	public void useSpell(Creature target, Spell spell) {
+		Singleton singleton = Singleton.getInstance();
 		int caracteristic;
 		switch (spell.getRole().getName()) {
 			case "rogue":

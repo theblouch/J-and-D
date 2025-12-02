@@ -11,8 +11,6 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Character extends Creature {
 
-	private Singleton singleton;
-
 	@Column(nullable = false)
 	private Race race;
 
@@ -94,6 +92,7 @@ public class Character extends Creature {
 	}
 
 	public void saveThrowVsDeath() {
+		Singleton singleton = Singleton.getInstance();
 		int success = 0;
 		for (int i = 0; i < 5; i++) {
 			if (singleton.diceThrow(10, 0, 0)) { // bien nommé le diceThrow quand on saura où le mettre
