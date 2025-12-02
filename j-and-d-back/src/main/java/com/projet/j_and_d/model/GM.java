@@ -3,7 +3,6 @@ package com.projet.j_and_d.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,9 +18,6 @@ public class GM extends User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
-    @Column(nullable = false)
-    protected String nom;
-
     @OneToMany
     private List<Session> sessions;
 
@@ -30,7 +26,6 @@ public class GM extends User {
 
     public GM(String login, String password, String nom) {
         super(login, password);
-        this.nom = nom;
     }
 
     public Integer getId() {
@@ -39,14 +34,6 @@ public class GM extends User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
     }
 
     public List<Session> getSessions() {
@@ -66,7 +53,7 @@ public class GM extends User {
 
     public void createSession() {
         Session session = new Session(new ArrayList<>(), this, new ArrayList<>());
-        System.out.println("Nouvelle session créée par le GM : " + this.nom);
+        System.out.println("Nouvelle session créée par le GM : " + this.login);
         this.sessions.add(session);
     }
 

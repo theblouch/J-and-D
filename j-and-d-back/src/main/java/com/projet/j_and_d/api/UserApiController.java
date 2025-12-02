@@ -29,8 +29,10 @@ public class UserApiController {
     @PostMapping("/inscription")
     public EntityCreatedResponse subscribe(@Valid @RequestBody SubscriptionRequest request) {
         User user;
-
-        if (request.isGM()) {
+        System.out.println("---------------------------------------------------------------\n\n\n\n");
+        System.out.println(" VALEUR DE GM " + request.isGm());
+        System.out.println("---------------------------------------------------------------\n\n\n\n");
+        if (request.isGm()) {
             user = new GM();
         } else {
             user = new Player();

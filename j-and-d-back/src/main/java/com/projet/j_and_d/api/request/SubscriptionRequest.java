@@ -1,6 +1,7 @@
 package com.projet.j_and_d.api.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class SubscriptionRequest {
     @NotBlank
@@ -9,8 +10,8 @@ public class SubscriptionRequest {
     @NotBlank
     private String password;
 
-    @NotBlank
-    private boolean GM;
+    @NotNull
+    private boolean gm;
 
     public String getLogin() {
         return this.login;
@@ -28,12 +29,12 @@ public class SubscriptionRequest {
         this.password = password;
     }
 
-    public boolean isGM() {
-        return this.GM;
+    public boolean isGm() {
+        return this.gm;
     }
 
-    public void setGM(boolean GM) {
-        this.GM = GM;
+    public void setGm(boolean gm) {
+        this.gm = gm;
     }
 
 }
