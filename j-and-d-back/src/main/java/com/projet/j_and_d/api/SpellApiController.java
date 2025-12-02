@@ -20,8 +20,6 @@ import com.projet.j_and_d.api.response.SpellResponse;
 import com.projet.j_and_d.service.SpellService;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("/spell")
@@ -46,7 +44,6 @@ public class SpellApiController {
     public SpellResponse findByName(@PathVariable String name) {
         return SpellResponse.convert(this.service.findByName(name));
     }
-    
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
