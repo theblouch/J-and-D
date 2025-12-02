@@ -15,6 +15,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("Player")
