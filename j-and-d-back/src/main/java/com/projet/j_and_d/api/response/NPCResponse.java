@@ -8,7 +8,6 @@ import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.model.Stats;
 
 public class NPCResponse {
-    private Integer id;
     private String name;
     private double level;
     private int hp;
@@ -32,14 +31,6 @@ public class NPCResponse {
 
     private double xP;
     private Integer sessionId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public int getHp() {
         return hp;
