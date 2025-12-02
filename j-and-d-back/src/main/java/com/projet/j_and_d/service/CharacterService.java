@@ -1,6 +1,5 @@
 package com.projet.j_and_d.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.projet.j_and_d.api.request.CreateOrUpdateCharacterRequest;
 import com.projet.j_and_d.exception.CharacterNotFoundException;
 import com.projet.j_and_d.model.Character;
-import com.projet.j_and_d.model.Item;
+import com.projet.j_and_d.model.Role;
 import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.repo.CharacterRepository;
 import com.projet.j_and_d.repo.ItemRepository;
@@ -50,51 +49,46 @@ public class CharacterService {
     }
 
     private Character save(Character character, CreateOrUpdateCharacterRequest request) {
-        // List<Item> itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
-        // List<Item> inventory = this.itemRepo.findAllById(request.getInventoryIds());
+        Role role = this.roleRepo.getReferenceById(request.getRoleId());
+        character.setRole(role);
 
         character.setName(request.getName());
-        character.setLevel(request.getLevel());
-        character.setHp(request.getHp());
-        character.setMp(request.getMp());
-        character.setSpeed(request.getSpeed());
-        character.setAlive(request.isAlive());
-        character.setArmorClass(request.getArmorClass());
-        character.setInitiative(request.getInitiative());
-
-        Item armor = null;
-        if (request.getArmorId() != null) {
-            armor = this.itemRepo.getReferenceById(request.getArmorId());
-        }
-        character.setArmor(armor);
-
-        character.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
-
-        List<Item> itemWorn = Collections.emptyList();
-        if (request.getItemWornIds() != null) {
-            itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
-        }
-        character.setItemWorn(itemWorn);
-
-        List<Item> inventory = Collections.emptyList();
-        if (request.getInventoryIds() != null) {
-            inventory = this.itemRepo.findAllById(request.getInventoryIds());
-        }
-        character.setInventory(inventory);
-        character.setStats(request.getStats());
-
-        character.setRole(this.roleRepo.getReferenceById(request.getRoleId()));
-
         character.setRace(request.getRace());
+        character.setAlive(request.isAlive());
 
-        List<State> states = Collections.emptyList();
-        if (request.getStates() != null) {
-            states = request.getStates()
-                    .stream()
-                    .map(State::valueOf)
-                    .toList();
+        // Si création, initialisation avec rôle
+        if (character.getId() == null) {
+            character.setLevel(1);
+            character.setHp(role.getBaseHp());
+            character.setMp(role.getBaseMp());
+            character.setSpeed(role.getBaseMs());
+            character.setArmorClass(role.getBaseArmor());
+            character.setInitiative(role.getBaseIni());
+            character.setArmor(role.getArmor());
+            character.setWeapon(role.getWeapon());
+            character.setStats(role.getBaseStats());
+
+        } else {
+            // Pour les updates
+            character.setLevel(request.getLevel());
+            character.setHp(request.getHp());
+            character.setMp(request.getMp());
+            character.setSpeed(request.getSpeed());
+            character.setArmorClass(request.getArmorClass());
+            character.setInitiative(request.getInitiative());
         }
-        character.setState(states);
+
+        if (request.getItemWornIds() != null) {
+            character.setItemWorn(this.itemRepo.findAllById(request.getItemWornIds()));
+        }
+
+        if (request.getInventoryIds() != null) {
+            character.setInventory(this.itemRepo.findAllById(request.getInventoryIds()));
+        }
+
+        if (request.getStates() != null) {
+            character.setState(request.getStates().stream().map(State::valueOf).toList());
+        }
 
         return this.repository.save(character);
     }

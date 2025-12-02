@@ -8,7 +8,7 @@ public class SpellResponse {
     private String name;
     private String description;
     private int spellLevel;
-    private Role role;
+    private Integer roleId;
     private int[] baseDamage;
 
     public String getName() {
@@ -35,12 +35,12 @@ public class SpellResponse {
         this.spellLevel = spellLevel;
     }
 
-    public Role getRole() {
-        return role;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public int[] getBaseDamage() {
@@ -57,7 +57,10 @@ public class SpellResponse {
         response.setName(spell.getName());
         response.setDescription(spell.getDescription());
         response.setSpellLevel(spell.getSpellLevel());
-        response.setRole(spell.getRole());
+
+        Role role = spell.getRole();
+        response.setRoleId(role != null ? role.getId() : null);
+
         response.setBaseDamage(spell.getBaseDamage());
 
         return response;

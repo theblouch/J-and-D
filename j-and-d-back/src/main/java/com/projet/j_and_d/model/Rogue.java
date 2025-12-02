@@ -1,5 +1,10 @@
 package com.projet.j_and_d.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Rogue")
 public class Rogue extends Role {
 
     public Rogue() {

@@ -1,10 +1,6 @@
 package com.projet.j_and_d.api.request;
 
-
-import com.projet.j_and_d.model.Role;
-
 import jakarta.validation.constraints.NotBlank;
-
 
 public class CreateOrUpdateSpellRequest {
     @NotBlank
@@ -13,14 +9,9 @@ public class CreateOrUpdateSpellRequest {
     @NotBlank
     private String description;
 
-    @NotBlank
     private int spellLevel;
-
-    @NotBlank
-    private Role role;
-
-    @NotBlank
-    private int[] BaseDamage;
+    private Integer roleId;
+    private int[] baseDamage;
 
     public String getName() {
         return name;
@@ -46,23 +37,20 @@ public class CreateOrUpdateSpellRequest {
         this.spellLevel = spellLevel;
     }
 
-    public Role getRole() {
-        return role;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public int[] getBaseDamage() {
-        return BaseDamage;
+        return baseDamage;
     }
 
     public void setBaseDamage(int[] baseDamage) {
-        BaseDamage = baseDamage;
+        this.baseDamage = baseDamage;
     }
 
-    
-    
-   
 }
