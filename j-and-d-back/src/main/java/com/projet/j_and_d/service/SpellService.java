@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 import com.projet.j_and_d.api.request.CreateOrUpdateSpellRequest;
 import com.projet.j_and_d.exception.SpellNotFoundException;
 import com.projet.j_and_d.model.Spell;
+import com.projet.j_and_d.repo.RoleRepository;
 import com.projet.j_and_d.repo.SpellRepository;
-
 
 @Service
 public class SpellService {
 
     private final SpellRepository repository;
+    private final RoleRepository roleRepo;
 
-
-    public SpellService(SpellRepository repository) {
+    public SpellService(SpellRepository repository, RoleRepository roleRepo) {
         this.repository = repository;
+        this.roleRepo = roleRepo;
     }
 
     public List<Spell> findAll() {
@@ -28,7 +29,7 @@ public class SpellService {
         return this.repository.findById(id).orElseThrow(SpellNotFoundException::new);
     }
 
-     public Spell findByName(String name) {
+    public Spell findByName(String name) {
         return this.repository.findByName(name).orElseThrow(SpellNotFoundException::new);
     }
 
@@ -49,25 +50,28 @@ public class SpellService {
     private Spell save(Spell spell, CreateOrUpdateSpellRequest request) {
         spell.setName(request.getName());
         spell.setDescription(request.getDescription());
-        spell.setRole(request.getRole());
+        if (request.getRoleId() != null) {
+            spell.setRole(roleRepo.getReferenceById(request.getRoleId()));
+        } else {
+            spell.setRole(null);
+        }
         spell.setSpellLevel(request.getSpellLevel());
         spell.setBaseDamage(request.getBaseDamage());
 
         return this.repository.save(spell);
     }
 
-    //methode specifique
-
+    // methode specifique
 
     public int[] getBaseDamage(String spellName) {
         Spell spell = repository.findByName(spellName)
-                               .orElseThrow(SpellNotFoundException::new);
+                .orElseThrow(SpellNotFoundException::new);
         return spell.getBaseDamage();
     }
 
     public Spell updateBaseDamage(String spellName, CreateOrUpdateSpellRequest request) {
         Spell spell = repository.findByName(spellName)
-                                .orElseThrow(SpellNotFoundException::new);
+                .orElseThrow(SpellNotFoundException::new);
         spell.setBaseDamage(request.getBaseDamage());
         return repository.save(spell);
     }
