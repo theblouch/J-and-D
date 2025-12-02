@@ -61,10 +61,6 @@ public class Item {
 		return this.basedOnStrength;
 	}
 
-	public boolean getBasedOnStrength() {
-		return this.basedOnStrength;
-	}
-
 	public void setBasedOnStrength(boolean basedOnStrength) {
 		this.basedOnStrength = basedOnStrength;
 	}

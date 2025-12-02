@@ -25,4 +25,30 @@ public class ControlTests {
         assertEquals(1, receiver.getState().size());
         assertTrue(receiver.getState().contains(State.Stunned));
     }
+
+    @Test
+void applyControlAddsState() {
+    Character hero = new Character();
+    Character target = new Character();
+    target.setState(new ArrayList<>());
+
+    new IControl(){}.applyControlIfTestFailed(hero, target, State.Stunned);
+
+    assertEquals(1, target.getState().size());
+    assertTrue(target.getState().contains(State.Stunned));
+}
+
+@Test
+void multipleStatesAccumulate() {
+    Character target = new Character();
+    target.setState(new ArrayList<>());
+
+    new IControl(){}.applyControlIfTestFailed(null, target, State.Stunned);
+    new IControl(){}.applyControlIfTestFailed(null, target, State.Poisonned);
+
+    assertEquals(2, target.getState().size());
+    assertTrue(target.getState().contains(State.Stunned));
+    assertTrue(target.getState().contains(State.Poisonned));
+}
+
 }

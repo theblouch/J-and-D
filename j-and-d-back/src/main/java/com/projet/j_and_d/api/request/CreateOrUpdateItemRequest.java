@@ -1,8 +1,6 @@
 package com.projet.j_and_d.api.request;
 
-
 import jakarta.validation.constraints.NotBlank;
-
 
 public class CreateOrUpdateItemRequest {
     @NotBlank
@@ -10,6 +8,8 @@ public class CreateOrUpdateItemRequest {
 
     @NotBlank
     private String description;
+    private boolean basedOnStrength;
+    private int[] baseDamage;
 
     public String getName() {
         return name;
@@ -27,5 +27,20 @@ public class CreateOrUpdateItemRequest {
         this.description = description;
     }
 
-   
+    public boolean isBasedOnStrength() {
+        return this.basedOnStrength;
+    }
+
+    public void setBasedOnStrength(boolean basedOnStrength) {
+        this.basedOnStrength = basedOnStrength;
+    }
+
+    public int[] getBaseDamage() {
+        return this.baseDamage;
+    }
+
+    public void setBaseDamage(int[] baseDamage) {
+        this.baseDamage = baseDamage;
+    }
+
 }

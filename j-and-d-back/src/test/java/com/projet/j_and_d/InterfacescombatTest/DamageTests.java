@@ -74,5 +74,49 @@ public class DamageTests {
         assertFalse(wolf.getAlive(), "Alive should be false when HP reaches 0");
         assertEquals(1.25, hero.getLevel(), "Hero should gain XP when NPC dies");
 }
+        @Test
+    void damageZeroDoesNothing() {
+        Character hero = new Character();
+        hero.setHp(10);
+        hero.setAlive(true);
 
-}
+        NPC wolf = new NPC();
+        wolf.setHp(5);
+        wolf.setAlive(true);
+
+        new IDamage(){}.applyDamageIfTouch(hero, wolf, 0);
+
+        assertEquals(5, wolf.getHp());
+        assertTrue(wolf.getAlive());
+    }
+
+    @Test
+    void negativeDamageDoesNotHeal() {
+        Character hero = new Character();
+        NPC wolf = new NPC();
+        wolf.setHp(5);
+        wolf.setAlive(true);
+
+        new IDamage(){}.applyDamageIfTouch(hero, wolf, -3);
+
+        // HP ne doit pas augmenter
+        assertTrue(wolf.getHp() <= 5);
+    }
+
+    @Test
+        void exactLethalSetsAliveFalse() {
+        Character hero = new Character();
+        NPC wolf = new NPC();
+        wolf.setHp(5);
+        wolf.setAlive(true);
+        wolf.setXP(0.25);
+
+        hero.setLevel(1.0);
+
+        new IDamage(){}.applyDamageIfTouch(hero, wolf, 5);
+
+        assertEquals(0, wolf.getHp());
+        assertFalse(wolf.getAlive()); 
+        assertEquals(1.25, hero.getLevel()); 
+    }
+    }

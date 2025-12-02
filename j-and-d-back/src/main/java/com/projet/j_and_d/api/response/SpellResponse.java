@@ -5,21 +5,11 @@ import com.projet.j_and_d.model.Spell;
 
 public class SpellResponse {
 
-    private int id;
     private String name;
     private String description;
     private int spellLevel;
     private Role role;
     private int[] baseDamage;
-
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -52,7 +42,7 @@ public class SpellResponse {
     public void setRole(Role role) {
         this.role = role;
     }
-    
+
     public int[] getBaseDamage() {
         return baseDamage;
     }
@@ -64,7 +54,6 @@ public class SpellResponse {
     public static SpellResponse convert(Spell spell) {
         SpellResponse response = new SpellResponse();
 
-        response.setId(spell.getId());
         response.setName(spell.getName());
         response.setDescription(spell.getDescription());
         response.setSpellLevel(spell.getSpellLevel());
@@ -74,5 +63,4 @@ public class SpellResponse {
         return response;
     }
 
-    
 }

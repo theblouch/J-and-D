@@ -3,18 +3,11 @@ package com.projet.j_and_d.api.response;
 import com.projet.j_and_d.model.Item;
 
 public class ItemResponse {
-    private Integer id;
     private String name;
     private String description;
+    private boolean basedOnStrength;
+    private int[] baseDamage;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
     public String getName() {
         return name;
     }
@@ -31,12 +24,29 @@ public class ItemResponse {
         this.description = description;
     }
 
+    public boolean isBasedOnStrength() {
+        return this.basedOnStrength;
+    }
+
+    public void setBasedOnStrength(boolean basedOnStrength) {
+        this.basedOnStrength = basedOnStrength;
+    }
+
+    public int[] getBaseDamage() {
+        return this.baseDamage;
+    }
+
+    public void setBaseDamage(int[] baseDamage) {
+        this.baseDamage = baseDamage;
+    }
+
     public static ItemResponse convert(Item item) {
         ItemResponse response = new ItemResponse();
 
-        response.setId(item.getId());
         response.setName(item.getName());
         response.setDescription(item.getDescription());
+        response.setBasedOnStrength(item.isBasedOnStrength());
+        response.setBaseDamage(item.getBaseDamage());
 
         return response;
     }
