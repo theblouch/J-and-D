@@ -1,5 +1,6 @@
 package com.projet.j_and_d.api.response;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.projet.j_and_d.model.Item;
@@ -172,31 +173,27 @@ public class CharacterResponse {
         response.setArmorClass(character.getArmorClass());
         response.setInitiative(character.getInitiative());
 
-        response.setArmorId(character.getArmor().getId());
+        // Sécurisation pour éviter NullPointerException
+        response.setArmorId(character.getArmor() != null ? character.getArmor().getId() : null);
         response.setWeaponId(character.getWeapon().getId());
 
         response.setItemWornIds(
-                character.getItemWorn()
-                        .stream()
-                        .map(Item::getId)
-                        .toList());
+                character.getItemWorn() != null
+                        ? character.getItemWorn().stream().map(Item::getId).toList()
+                        : Collections.emptyList());
 
         response.setInventoryIds(
-                character.getInventory()
-                        .stream()
-                        .map(Item::getId)
-                        .toList());
+                character.getInventory() != null
+                        ? character.getInventory().stream().map(Item::getId).toList()
+                        : Collections.emptyList());
 
         response.setStates(
-                character.getState()
-                        .stream()
-                        .map(State::name)
-                        .toList());
+                character.getState() != null
+                        ? character.getState().stream().map(State::name).toList()
+                        : Collections.emptyList());
 
         response.setStats(character.getStats());
-
         response.setRoleId(character.getRole().getId());
-
         response.setRace(character.getRace());
 
         return response;
