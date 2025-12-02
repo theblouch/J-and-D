@@ -24,7 +24,7 @@ public class GM extends User {
     public GM() {
     }
 
-    public GM(String login, String password, String nom) {
+    public GM(String login, String password) {
         super(login, password);
     }
 

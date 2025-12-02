@@ -30,7 +30,7 @@ public class Player extends User {
     public Player() {
     }
 
-    public Player(String login, String password, String nom, String prenom) {
+    public Player(String login, String password) {
         super(login, password);
     }
 
