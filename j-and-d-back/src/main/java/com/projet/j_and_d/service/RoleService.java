@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.projet.j_and_d.api.request.CreateOrUpdateRoleRequest;
 import com.projet.j_and_d.exception.RoleNotFoundException;
 import com.projet.j_and_d.model.Druid;
+import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.Mage;
 import com.projet.j_and_d.model.Rogue;
 import com.projet.j_and_d.model.Role;
@@ -72,15 +73,18 @@ public class RoleService {
         List<Spell> spells = this.spellRepo.findAllById(request.getSpellIds());
 
         role.setName(request.getName());
-
-        role.setName(request.getName());
         role.setBaseHp(request.getBaseHp());
         role.setBaseMp(request.getBaseMp());
         role.setBaseMs(request.getBaseMs());
         role.setBaseArmor(request.getBaseArmor());
         role.setBaseIni(request.getBaseIni());
 
-        role.setArmor(this.itemRepo.getReferenceById(request.getArmorId()));
+        Item armor = null;
+        if (request.getArmorId() != null) {
+            armor = this.itemRepo.getReferenceById(request.getArmorId());
+        }
+        role.setArmor(armor);
+
         role.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
 
         role.setBaseStats(request.getBaseStats());

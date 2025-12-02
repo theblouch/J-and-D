@@ -16,7 +16,7 @@ public class Item {
 	private Integer id;
 	@Column(length = 180, nullable = false)
 	private String name;
-	@Column(length = 180, nullable = false)
+	@Column(length = 180)
 	private String description;
 
 	private boolean basedOnStrength;

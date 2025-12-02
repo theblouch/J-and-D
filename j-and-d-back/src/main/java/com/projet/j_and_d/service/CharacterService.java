@@ -1,5 +1,6 @@
 package com.projet.j_and_d.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -49,8 +50,8 @@ public class CharacterService {
     }
 
     private Character save(Character character, CreateOrUpdateCharacterRequest request) {
-        List<Item> itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
-        List<Item> inventory = this.itemRepo.findAllById(request.getInventoryIds());
+        // List<Item> itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
+        // List<Item> inventory = this.itemRepo.findAllById(request.getInventoryIds());
 
         character.setName(request.getName());
         character.setLevel(request.getLevel());
@@ -61,10 +62,24 @@ public class CharacterService {
         character.setArmorClass(request.getArmorClass());
         character.setInitiative(request.getInitiative());
 
-        character.setArmor(this.itemRepo.getReferenceById(request.getArmorId()));
+        Item armor = null;
+        if (request.getArmorId() != null) {
+            armor = this.itemRepo.getReferenceById(request.getArmorId());
+        }
+        character.setArmor(armor);
+
         character.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
 
+        List<Item> itemWorn = Collections.emptyList();
+        if (request.getItemWornIds() != null) {
+            itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
+        }
         character.setItemWorn(itemWorn);
+
+        List<Item> inventory = Collections.emptyList();
+        if (request.getInventoryIds() != null) {
+            inventory = this.itemRepo.findAllById(request.getInventoryIds());
+        }
         character.setInventory(inventory);
         character.setStats(request.getStats());
 
@@ -72,11 +87,13 @@ public class CharacterService {
 
         character.setRace(request.getRace());
 
-        List<State> states = request.getStates()
-                .stream()
-                .map(State::valueOf)
-                .toList();
-
+        List<State> states = Collections.emptyList();
+        if (request.getStates() != null) {
+            states = request.getStates()
+                    .stream()
+                    .map(State::valueOf)
+                    .toList();
+        }
         character.setState(states);
 
         return this.repository.save(character);
