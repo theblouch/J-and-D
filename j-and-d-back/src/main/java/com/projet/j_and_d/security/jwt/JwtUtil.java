@@ -13,7 +13,8 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtil {
     private static final String KEY = "19D6IjLAudjoZMxFHnp/Owq2SKapi7JRqGhUo82TrAMF9JBz7ATG4SnDLulvQqI2";
 
-    private JwtUtil() { }
+    private JwtUtil() {
+    }
 
     public static String generate(Authentication authentication) {
         // Création de la clé de signature
@@ -21,12 +22,11 @@ public class JwtUtil {
         Date now = new Date();
 
         return Jwts.builder()
-            .subject(authentication.getName())
-            .issuedAt(now)
-            .expiration(new Date(now.getTime() + 36_000_000))
-            .signWith(key)
-            .compact()
-        ;
+                .subject(authentication.getName())
+                .issuedAt(now)
+                .expiration(new Date(now.getTime() + 36_000_000))
+                .signWith(key)
+                .compact();
     }
 
     public static Optional<String> getUsername(String token) {
@@ -34,13 +34,12 @@ public class JwtUtil {
             SecretKey key = Keys.hmacShaKeyFor(KEY.getBytes());
 
             return Optional.ofNullable(
-                Jwts.parser()
-                    .verifyWith(key)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload()
-                    .getSubject()
-            );
+                    Jwts.parser()
+                            .verifyWith(key)
+                            .build()
+                            .parseSignedClaims(token)
+                            .getPayload()
+                            .getSubject());
         }
 
         catch (Exception ex) {
