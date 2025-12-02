@@ -1,15 +1,11 @@
 package com.projet.j_and_d.security.service;
 
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.projet.j_and_d.repo.UserRepository;
-
-
-
 
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
@@ -21,13 +17,14 @@ public class JpaUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = this.repository
-            .findByLogin(login)
-            .orElseThrow(() -> new LoginNotFoundException("Utilisateur non trouvé"));
+        com.projet.j_and_d.model.User user = this.repository
+                .findByLogin(login)
+                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
-        return User.withLogin(login)
-            .password(user.getPassword())
-            .roles("USER")
-            .build();
+        return org.springframework.security.core.userdetails.User
+                .withUsername(login)
+                .password(user.getPassword())
+                .roles("USER")
+                .build();
     }
 }
