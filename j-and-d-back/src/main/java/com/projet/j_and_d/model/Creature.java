@@ -20,6 +20,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 import com.projet.j_and_d.context.Singleton;
+import com.projet.j_and_d.service.StateService;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -65,6 +66,11 @@ public abstract class Creature {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
 	protected List<State> state;
+
+	@Column(nullable = true)
+	protected Creature tauntedBy = null;
+
+	private StateService stateService = new StateService();
 
 	public Creature() {
 	}
@@ -221,6 +227,14 @@ public abstract class Creature {
 		this.state = state;
 	}
 
+	public void setTauntedBy(Creature creature) {
+		this.tauntedBy = creature;
+	}
+
+	public Creature getTauntedBy() {
+		return this.tauntedBy;
+	}
+
 	@Override
 	public String toString() {
 		return "{" +
@@ -240,10 +254,19 @@ public abstract class Creature {
 				", stats='" + getStats() + "'" +
 				", role='" + getRole() + "'" +
 				", state='" + getState() + "'" +
+				", tauntedBy='" + getTauntedBy() + "'" +
 				"}";
 	}
 
 	public void attack(Creature target) {
+		if (!this.getTauntedBy().equals(target)) {
+			System.out.println("L'attaquand est provoqué par" + this.getTauntedBy().name + ", il ne peut pas attaquer "
+					+ target.name + ".");
+			return;
+		}
+		if (!stateService.canAttack(this) || !stateService.targetable(target)) {
+			return;
+		}
 		// choix de la caractérisitique pour l'attaque (force ou dextérité)
 		int caracteristic = (this.weapon.isBasedOnStrength()) ? this.stats.getStrength() : this.stats.getDexterity();
 

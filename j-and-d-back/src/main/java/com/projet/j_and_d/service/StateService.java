@@ -30,7 +30,7 @@ public class StateService {
     }
 
     public Creature getTauntedByCreature(Creature creature) {
-        if (!creature.getState(State.Taunted))
+        if (!creature.getState().contains(State.Taunted))
             return null;
         return creature.getTauntedBy(); // attribut à créer
     }
