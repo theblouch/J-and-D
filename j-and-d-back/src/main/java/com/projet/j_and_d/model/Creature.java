@@ -1,5 +1,6 @@
 package com.projet.j_and_d.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -50,9 +51,9 @@ public abstract class Creature {
 	@JoinColumn(nullable = false)
 	protected Item weapon;
 	@OneToMany
-	protected List<Item> itemWorn;
+	protected List<Item> itemWorn = new ArrayList<>();
 	@OneToMany
-	protected List<Item> inventory;
+	protected List<Item> inventory = new ArrayList<>();
 	@Embedded
 	protected Stats stats;
 
@@ -62,7 +63,7 @@ public abstract class Creature {
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
-	protected List<State> state;
+	protected List<State> state = new ArrayList<>();
 
 	@ManyToOne
 	protected Creature tauntedBy = null;
