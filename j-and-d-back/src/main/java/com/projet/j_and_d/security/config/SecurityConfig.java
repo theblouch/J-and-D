@@ -25,10 +25,11 @@ import com.projet.j_and_d.security.jwt.JwtHeaderFilter;
 public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtHeaderFilter) throws Exception {
-        http.authorizeHttpRequests(authorization -> {
-            authorization.requestMatchers("/auth", "/user/inscription").permitAll();
-            authorization.requestMatchers("/**").authenticated();
-        });
+        http.securityMatcher("/api/**")
+                .authorizeHttpRequests(authorization -> {
+                    authorization.requestMatchers("/auth", "/user/inscription").permitAll();
+                    authorization.requestMatchers("/**").authenticated();
+                });
 
         http.csrf(c -> c.disable());
 
