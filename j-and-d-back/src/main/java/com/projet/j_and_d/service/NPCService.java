@@ -1,6 +1,5 @@
 package com.projet.j_and_d.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,6 +8,7 @@ import com.projet.j_and_d.api.request.CreateOrUpdateNPCRequest;
 import com.projet.j_and_d.exception.NPCNotFoundException;
 import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.NPC;
+import com.projet.j_and_d.model.Role;
 import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.repo.ItemRepository;
 import com.projet.j_and_d.repo.NPCRepository;
@@ -54,50 +54,57 @@ public class NPCService {
 
     private NPC save(NPC npc, CreateOrUpdateNPCRequest request) {
 
-        npc.setName(request.getName());
-        npc.setLevel(request.getLevel());
-        npc.setHp(request.getHp());
-        npc.setMp(request.getMp());
-        npc.setSpeed(request.getSpeed());
-        npc.setAlive(request.isAlive());
-        npc.setArmorClass(request.getArmorClass());
-        npc.setInitiative(request.getInitiative());
-
-        Item armor = null;
-        if (request.getArmorId() != null) {
-            armor = this.itemRepo.getReferenceById(request.getArmorId());
-        }
-        npc.setArmor(armor);
-        npc.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
-
-        List<Item> itemWorn = Collections.emptyList();
-        if (request.getItemWornIds() != null) {
-            itemWorn = this.itemRepo.findAllById(request.getItemWornIds());
-        }
-        npc.setItemWorn(itemWorn);
-
-        List<Item> inventory = Collections.emptyList();
-        if (request.getInventoryIds() != null) {
-            inventory = this.itemRepo.findAllById(request.getInventoryIds());
-        }
-        npc.setInventory(inventory);
-        npc.setStats(request.getStats());
-
-        npc.setStats(request.getStats());
+        Role role = this.roleRepo.getReferenceById(request.getRoleId());
+        npc.setRole(role);
 
         npc.setXP(request.getXP());
         npc.setSession(this.sessionRepo.getReferenceById(request.getSessionId()));
 
-        npc.setRole(this.roleRepo.getReferenceById(request.getRoleId()));
+        // si création, récupéraion des données du rôle
+        if (npc.getId() == null) {
+            npc.setLevel(1);
+            npc.setHp(role.getBaseHp());
+            npc.setMp(role.getBaseMp());
+            npc.setSpeed(role.getBaseMs());
+            npc.setArmorClass(role.getBaseArmor());
+            npc.setInitiative(role.getBaseIni());
+            npc.setArmor(role.getArmor());
+            npc.setWeapon(role.getWeapon());
+            npc.setStats(role.getBaseStats());
+        } else {
+            // Pour les updates
+            npc.setLevel(request.getLevel());
+            npc.setHp(request.getHp());
+            npc.setMp(request.getMp());
+            npc.setSpeed(request.getSpeed());
+            npc.setArmorClass(request.getArmorClass());
+            npc.setInitiative(request.getInitiative());
+            npc.setStats(request.getStats());
 
-        List<State> states = Collections.emptyList();
+            // arme obligatoire
+            npc.setWeapon(this.itemRepo.getReferenceById(request.getWeaponId()));
+
+            Item armor = null;
+            if (request.getArmorId() != null) {
+                armor = this.itemRepo.getReferenceById(request.getArmorId());
+            }
+            npc.setArmor(armor);
+        }
+
+        if (request.getItemWornIds() != null) {
+            npc.setItemWorn(this.itemRepo.findAllById(request.getItemWornIds()));
+        }
+
+        if (request.getInventoryIds() != null) {
+            npc.setInventory(this.itemRepo.findAllById(request.getInventoryIds()));
+        }
+
         if (request.getStates() != null) {
-            states = request.getStates()
+            npc.setState(request.getStates()
                     .stream()
                     .map(State::valueOf)
-                    .toList();
+                    .toList());
         }
-        npc.setState(states);
 
         return this.repository.save(npc);
     }

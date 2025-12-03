@@ -74,16 +74,9 @@ class RoleServiceTest {
     void testSave_NewRole_Warrior() {
         CreateOrUpdateRoleRequest request = new CreateOrUpdateRoleRequest();
         request.setName("WARRIOR");
-        request.setBaseHp(100);
-        request.setBaseMp(50);
-        request.setBaseMs(5);
-        request.setBaseArmor(10);
-        request.setBaseIni(1);
         request.setSpellIds(Collections.emptyList());
         request.setWeaponId(1);
         request.setArmorId(null);
-        Stats stats = new Stats(5, 10, 8, 4, 6, 3);
-        request.setBaseStats(stats);
 
         Item weapon = new Item();
         when(itemRepo.getReferenceById(1)).thenReturn(weapon);
@@ -104,16 +97,9 @@ class RoleServiceTest {
     void testSave_NewRole_Mage() {
         CreateOrUpdateRoleRequest request = new CreateOrUpdateRoleRequest();
         request.setName("MAGE");
-        request.setBaseHp(80);
-        request.setBaseMp(120);
-        request.setBaseMs(5);
-        request.setBaseArmor(5);
-        request.setBaseIni(2);
         request.setSpellIds(Collections.emptyList());
         request.setWeaponId(2);
         request.setArmorId(3);
-        Stats stats = new Stats(5, 10, 8, 4, 6, 3);
-        request.setBaseStats(stats);
 
         Item weapon = new Item();
         Item armor = new Item();
@@ -144,16 +130,9 @@ class RoleServiceTest {
     void testSave_UpdateExistingRole() {
         CreateOrUpdateRoleRequest request = new CreateOrUpdateRoleRequest();
         request.setName("ROGUE");
-        request.setBaseHp(70);
-        request.setBaseMp(40);
-        request.setBaseMs(6);
-        request.setBaseArmor(5);
-        request.setBaseIni(3);
         request.setSpellIds(Collections.emptyList());
         request.setWeaponId(1);
         request.setArmorId(null);
-        Stats stats = new Stats(5, 10, 8, 4, 6, 3);
-        request.setBaseStats(stats);
 
         Role existingRole = new Rogue();
         Item weapon = new Item();

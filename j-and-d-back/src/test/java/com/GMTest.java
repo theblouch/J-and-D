@@ -23,7 +23,7 @@ public class GMTest {
 
     @BeforeEach
     public void setup() {
-        gm = new GM("gm1", "password", "Master");
+        gm = new GM("gm1", "password");
         gm.setSessions(new ArrayList<>());
 
         // Création d'un rôle concret
