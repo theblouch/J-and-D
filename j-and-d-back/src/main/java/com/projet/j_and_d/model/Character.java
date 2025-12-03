@@ -48,31 +48,51 @@ public class Character extends Creature {
 		this.race = race;
 	}
 
-	public void levelUp(double xpGain) {
+	public ChatMessage levelUp(double xpGain) {
+		ChatMessage log = new ChatMessage();
 		if (xpGain <= 0) {
-			return;
+			return log;
 		}
+		log.add(this.name + " a gagné " + xpGain + "d'XP !");
+
+		double oldLvl = Math.floor(this.level);
 		this.level = this.level + xpGain;
+
+		if (this.level - oldLvl >= 1) {
+			log.add(this.name + " a gagné un niveau ! Il est maintenant niveau " + Math.floor(this.level));
+		}
+
+		// On pourra rajouter ici l'amélioration de stats
+
+		return log;
 	}
 
-	public void useItem(Item item) {
+	public ChatMessage useItem(Item item) {
+		ChatMessage log = new ChatMessage();
+
 		if (!this.getInventory().contains(item)) {
-			throw new IllegalArgumentException(
-					"Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+			log.add("Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+			return log;
 		}
 		this.getInventory().remove(item);
+		log.add(this.getName() + "a utilisé l'item " + item.getName());
+		return log;
 	}
 
-	public void equipItem(Item item) {
+	public ChatMessage equipItem(Item item) {
+		ChatMessage log = new ChatMessage();
 		if (!this.getInventory().contains(item)) {
-			throw new IllegalArgumentException(
-					"Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+			log.add("Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+			return log;
 		}
 		this.getInventory().remove(item);
 		this.getItemWorn().add(item);
+		log.add(this.getName() + "a utilisé l'item " + item.getName());
+		return log;
 	}
 
-	public void giveItem(Item item, Character target) {
+	public ChatMessage giveItem(Item item, Character target) {
+		ChatMessage log = new ChatMessage();
 		boolean removed = false;
 
 		if (this.getInventory().contains(item)) {
@@ -86,14 +106,17 @@ public class Character extends Creature {
 		}
 
 		if (!removed) {
-			throw new IllegalArgumentException(
-					"Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+			log.add("Le personnage " + this.getName() + " n'a pas l'item " + item + " dans son inventaire");
+			return log;
 		}
 
 		target.getInventory().add(item);
+		log.add(this.getName() + " a donné l'item " + item + " à " + target.getName());
+		return log;
 	}
 
-	public void saveThrowVsDeath() {
+	public ChatMessage saveThrowVsDeath() {
+		ChatMessage log = new ChatMessage();
 		Singleton singleton = Singleton.getInstance();
 		int success = 0;
 		for (int i = 0; i < 5; i++) {
@@ -104,6 +127,12 @@ public class Character extends Creature {
 
 		if (success < 3) {
 			this.alive = false; // perso mort (sinon, si success >=3, il reste vivant: alive reste true)
+			log.add("Le personnage " + this.getName() + " n'a pas survévu...");
+			return log;
+		} else {
+			this.setHp(1);
+			log.add("Le personnage " + this.getName() + " a survécu à ses blessures");
+			return log;
 		}
 	}
 

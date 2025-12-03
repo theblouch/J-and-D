@@ -36,6 +36,10 @@ public class NPCService {
         return this.repository.findAll();
     }
 
+    public boolean exists(Integer id) {
+        return this.repository.existsById(id);
+    }
+
     public NPC findById(Integer id) {
         return this.repository.findById(id).orElseThrow(NPCNotFoundException::new);
     }

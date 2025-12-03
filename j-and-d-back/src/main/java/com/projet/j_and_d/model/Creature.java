@@ -254,22 +254,29 @@ public abstract class Creature {
 				"}";
 	}
 
-	public void attack(Creature target) {
+	public ChatMessage attack(Creature target, int advantage, int additionnalModifier) {
+		ChatMessage log = new ChatMessage();
 		Singleton singleton = Singleton.getInstance();
 		if (!this.getTauntedBy().equals(target)) {
-			System.out.println("L'attaquand est provoqué par" + this.getTauntedBy().name + ", il ne peut pas attaquer "
+			log.add(this.name + " est provoqué par" + this.getTauntedBy().name + ", il ne peut pas attaquer "
 					+ target.name + ".");
-			return;
+			return log;
 		}
-		if (!this.canAttack(this) || !this.targetable(target)) {
-			return;
+		if (!this.canAttack(this)) {
+			log.add(this.name + " ne peut pas attaquer " + target.name + ".");
+			return log;
+		}
+		if (!this.targetable(target)) {
+			log.add(target.name + "ne peut pas être visé !");
+			return log;
 		}
 		// choix de la caractérisitique pour l'attaque (force ou dextérité)
 		int caracteristic = (this.weapon.isBasedOnStrength()) ? this.stats.getStrength() : this.stats.getDexterity();
 
 		int modifier = convertToModifier(caracteristic);
 
-		boolean touch = singleton.diceThrow(target.armorClass, 0, modifier);
+		boolean touch = singleton.diceThrow(target.armorClass + target.getArmor().getArmorValue(), advantage,
+				modifier + additionnalModifier);
 
 		if (touch) {
 
@@ -278,7 +285,14 @@ public abstract class Creature {
 
 			int damage = baseDamage + modifier;
 
+			log.add(this.name + " a touché " + target.name + " avec son arme " + this.weapon.getName() + " ! ");
+			log.add("L' attaque a fait" + damage + "dégâts !");
+
 			this.getRole().applyDamageIfTouch(this, target, damage);
+			return log;
+		} else {
+			log.add(this.name + "a manqué son attaque sur " + target.name);
+			return log;
 		}
 
 	}
@@ -288,12 +302,27 @@ public abstract class Creature {
 		return (int) Math.floor((intermValue / 2) - 5);
 	}
 
-	public void useSpell(Creature target, Spell spell) {
+	public ChatMessage useSpell(Creature target, Spell spell, int advantage, int additionalModifier) {
+		ChatMessage log = new ChatMessage();
 		Singleton singleton = Singleton.getInstance();
 
+		if (!this.getTauntedBy().equals(target)) {
+			log.add(this.name + " est provoqué par" + this.getTauntedBy().name + ", il ne peut pas attaquer "
+					+ target.name + ".");
+			return log;
+		}
+		if (!this.canAttack(this)) {
+			log.add(this.name + " ne peut pas attaquer " + target.name + ".");
+			return log;
+		}
+		if (!this.targetable(target)) {
+			log.add(target.name + "ne peut pas être visé !");
+			return log;
+		}
+
 		if (spell.getSpellLevel() > this.getMp()) {
-			System.out.println("Votre personnage n'a pas assez de points de magie");
-			return;
+			log.add(this.name + " n'a pas assez de points de magie");
+			return log;
 		} else {
 			this.setMp(this.getMp() - spell.getSpellLevel());
 
@@ -317,14 +346,23 @@ public abstract class Creature {
 
 			int modifier = convertToModifier(caracteristic);
 
-			boolean touch = singleton.diceThrow(target.armorClass, 0, modifier);
+			boolean touch = singleton.diceThrow(target.armorClass + target.getArmor().getArmorValue(), advantage,
+					modifier + additionalModifier);
 
 			if (touch) {
 
 				// calcul des damages
 				int baseDamage = spell.calculDamages();
 
+				log.add(this.name + " a touché " + target.name + " avec son sort " + spell.getName() + " ! ");
+				log.add("Le sort a fait" + baseDamage + "dégâts !");
+
 				this.getRole().applyDamageIfTouch(this, target, baseDamage);
+
+				return log;
+			} else {
+				log.add(this.name + "a manqué son attaque sur " + target.name);
+				return log;
 			}
 		}
 
