@@ -35,7 +35,7 @@ export class InscriptionPage implements OnInit {
     this.loginCtrl = this.formBuilder.control('', Validators.required);
     this.passwordCtrl = this.formBuilder.control('', [
       Validators.required,
-      Validators.minLength(6),
+      Validators.minLength(2),
     ]);
     this.passwordConfirmCtrl = this.formBuilder.control('', [
       Validators.required,
