@@ -44,6 +44,7 @@ public class SpellService {
     }
 
     public void deleteById(int id) {
+        this.roleRepo.deleteRoleSpellsBySpellId(id);
         this.repository.deleteById(id);
     }
 
