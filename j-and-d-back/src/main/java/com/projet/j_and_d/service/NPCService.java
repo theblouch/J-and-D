@@ -1,6 +1,8 @@
 package com.projet.j_and_d.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -54,9 +56,9 @@ public class NPCService {
 
     private NPC save(NPC npc, CreateOrUpdateNPCRequest request) {
 
-        Role role = this.roleRepo.getReferenceById(request.getRoleId());
-
         npc.setName(request.getName());
+
+        Role role = this.roleRepo.getReferenceById(request.getRoleId());
         npc.setRole(role);
 
         npc.setXP(request.getXP());
@@ -94,18 +96,20 @@ public class NPCService {
         }
 
         if (request.getItemWornIds() != null) {
-            npc.setItemWorn(this.itemRepo.findAllById(request.getItemWornIds()));
+            npc.setItemWorn(
+                    new ArrayList<>(this.itemRepo.findAllById(request.getItemWornIds())));
         }
 
         if (request.getInventoryIds() != null) {
-            npc.setInventory(this.itemRepo.findAllById(request.getInventoryIds()));
+            npc.setInventory(
+                    new ArrayList<>(this.itemRepo.findAllById(request.getInventoryIds())));
         }
 
         if (request.getStates() != null) {
             npc.setState(request.getStates()
                     .stream()
                     .map(State::valueOf)
-                    .toList());
+                    .collect(Collectors.toCollection(ArrayList::new)));
         }
 
         return this.repository.save(npc);
