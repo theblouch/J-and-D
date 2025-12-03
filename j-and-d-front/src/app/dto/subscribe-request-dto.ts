@@ -1,5 +1,5 @@
 export class SubscribeRequestDto {
-  constructor(private _login: string, private _password: string) {}
+  constructor(private _login: string, private _password: string, private _role: string) {}
 
   public get login(): string {
     return this._login;
@@ -17,10 +17,19 @@ export class SubscribeRequestDto {
     this._password = value;
   }
 
+  public get role(): string {
+    return this._role;
+  }
+
+  public set role(value: string) {
+    this._role = value;
+  }
+
   public toJson(): any {
     return {
       login: this.login,
       password: this.password,
+      role: this.role,
     };
   }
 }
