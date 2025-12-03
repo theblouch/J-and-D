@@ -1,6 +1,7 @@
 package com.projet.j_and_d.api;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.projet.j_and_d.repo.UserRepository;
 import jakarta.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/user")
 public class UserApiController {
     private final UserRepository repository;
