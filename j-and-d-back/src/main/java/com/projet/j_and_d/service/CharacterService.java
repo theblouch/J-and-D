@@ -1,6 +1,8 @@
 package com.projet.j_and_d.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import com.projet.j_and_d.model.Character;
 import com.projet.j_and_d.model.Role;
 import com.projet.j_and_d.model.State;
 import com.projet.j_and_d.repo.CharacterRepository;
+import com.projet.j_and_d.repo.InscriptionRepository;
 import com.projet.j_and_d.repo.ItemRepository;
 import com.projet.j_and_d.repo.RoleRepository;
 
@@ -19,11 +22,14 @@ public class CharacterService {
     private final CharacterRepository repository;
     private final RoleRepository roleRepo;
     private final ItemRepository itemRepo;
+    private final InscriptionRepository inscriptionRepository;
 
-    public CharacterService(CharacterRepository repository, RoleRepository roleRepo, ItemRepository itemRepo) {
+    public CharacterService(CharacterRepository repository, RoleRepository roleRepo, ItemRepository itemRepo,
+            InscriptionRepository inscriptionRepository) {
         this.repository = repository;
         this.roleRepo = roleRepo;
         this.itemRepo = itemRepo;
+        this.inscriptionRepository = inscriptionRepository;
     }
 
     public List<Character> findAll() {
@@ -45,6 +51,8 @@ public class CharacterService {
     }
 
     public void deleteById(Integer id) {
+        // suppression du personnage des campagnes dans lesquelles il était inscrit
+        inscriptionRepository.deleteAllByCharacterId(id);
         this.repository.deleteById(id);
     }
 
@@ -79,15 +87,20 @@ public class CharacterService {
         }
 
         if (request.getItemWornIds() != null) {
-            character.setItemWorn(this.itemRepo.findAllById(request.getItemWornIds()));
+            character.setItemWorn(
+                    new ArrayList<>(this.itemRepo.findAllById(request.getItemWornIds())));
         }
 
         if (request.getInventoryIds() != null) {
-            character.setInventory(this.itemRepo.findAllById(request.getInventoryIds()));
+            character.setInventory(
+                    new ArrayList<>(this.itemRepo.findAllById(request.getInventoryIds())));
         }
 
         if (request.getStates() != null) {
-            character.setState(request.getStates().stream().map(State::valueOf).toList());
+            character.setState(request.getStates()
+                    .stream()
+                    .map(State::valueOf)
+                    .collect(Collectors.toCollection(ArrayList::new)));
         }
 
         return this.repository.save(character);
