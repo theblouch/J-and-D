@@ -35,12 +35,12 @@ public class SpellApiController {
         return this.service.findAll().stream().map(SpellResponse::convert).toList();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:[0-9]+}")
     public SpellResponse findById(@PathVariable int id) {
         return SpellResponse.convert(this.service.findById(id));
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/{name:[a-zA-Z]+}")
     public SpellResponse findByName(@PathVariable String name) {
         return SpellResponse.convert(this.service.findByName(name));
     }

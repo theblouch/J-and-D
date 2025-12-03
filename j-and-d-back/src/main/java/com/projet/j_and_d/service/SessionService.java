@@ -51,6 +51,7 @@ public class SessionService {
 
     public void deleteById(Integer id) {
         inscriptionRepo.deleteAllBySessionId(id);
+        npcRepo.deleteAllBySessionId(id);
         this.repository.deleteById(id);
     }
 
