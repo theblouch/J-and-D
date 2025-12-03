@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn: 'root' })
 export class RoleService {
-    private api = 'http://localhost:8080/roles';
+    private api = '/role';
 
     constructor(private http: HttpClient) { }
 

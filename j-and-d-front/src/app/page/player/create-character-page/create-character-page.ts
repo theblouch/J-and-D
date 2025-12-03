@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CharacterService } from '../../../service/character-service';
 import { RoleService } from '../../../service/role-service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-character-page',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './create-character-page.html',
   styleUrl: './create-character-page.css',
 })
