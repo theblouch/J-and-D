@@ -5,7 +5,7 @@ export class GMDto {
         private _login: string,
         private _password: string,
         private _sessions: any[] = []
-    ) {}
+    ) { }
 
     // ----- GETTERS & SETTERS -----
 

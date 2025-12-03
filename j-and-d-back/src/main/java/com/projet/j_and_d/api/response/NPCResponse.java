@@ -31,6 +31,15 @@ public class NPCResponse {
 
     private double xP;
     private Integer sessionId;
+    private Integer id;
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public int getHp() {
         return hp;
@@ -170,6 +179,7 @@ public class NPCResponse {
 
     public static NPCResponse convert(NPC npc) {
         NPCResponse response = new NPCResponse();
+        response.setId(npc.getId());
         response.setName(npc.getName());
         response.setLevel(npc.getLevel());
         response.setHp(npc.getHp());

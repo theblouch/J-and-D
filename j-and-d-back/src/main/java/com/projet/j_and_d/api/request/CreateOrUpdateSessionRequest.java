@@ -8,7 +8,7 @@ public class CreateOrUpdateSessionRequest {
     private List<Integer> inscriptionIds;
 
     @NotNull
-    private Integer gmId;
+    private String gmLogin;
 
     private List<Integer> npcIds;
 
@@ -20,12 +20,12 @@ public class CreateOrUpdateSessionRequest {
         this.inscriptionIds = inscriptionIds;
     }
 
-    public Integer getGmId() {
-        return this.gmId;
+    public String getGmLogin() {
+        return this.gmLogin;
     }
 
-    public void setGmId(Integer gmId) {
-        this.gmId = gmId;
+    public void setGmLogin(String gmLogin) {
+        this.gmLogin = gmLogin;
     }
 
     public List<Integer> getNpcIds() {

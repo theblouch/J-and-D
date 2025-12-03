@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { SessionDto } from '../../dto/session-dto';
 import { GMDto } from '../../dto/gm-dto';
 import { InscriptionDto } from '../../dto/inscription-dto';
@@ -38,7 +38,10 @@ export class CreateSession implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.sessions$ = this.sessionService.findAll();
+    const gmLogin = this.authService.getUserLogin();
+    this.sessions$ = this.sessionService.findAll().pipe(
+      map(sessions => sessions.filter(session => session.gmLogin === gmLogin))
+    );
     this.inscriptions$ = this.inscriptionService.findAll();
     this.npcs$ = this.npcService.findAll();
 
@@ -56,15 +59,15 @@ export class CreateSession implements OnInit {
   }
 
   public creer() {
-    const gmId = this.authService.getUserId();
-    if (!gmId) {
+    const gmLogin = this.authService.getUserLogin();
+    if (!gmLogin) {
       console.error("Utilisateur non connecté !");
       return;
     }
 
     const newSession = new SessionDto(
       0,
-      gmId,
+      gmLogin,
       Array.isArray(this.npcsCtrl.value) ? this.npcsCtrl.value : [],       // assure tableau
       Array.isArray(this.inscriptionsCtrl.value) ? this.inscriptionsCtrl.value : [] // assure tableau
     );

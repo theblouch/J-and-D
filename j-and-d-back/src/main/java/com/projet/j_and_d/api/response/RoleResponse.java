@@ -21,6 +21,15 @@ public class RoleResponse {
     private double baseMs;
     private int baseArmor;
     private int baseIni;
+    private Integer id;
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public int getBaseHp() {
         return this.baseHp;
@@ -104,6 +113,7 @@ public class RoleResponse {
 
     public static RoleResponse convert(Role role) {
         RoleResponse response = new RoleResponse();
+        response.setId(role.getId());
         response.setName(role.getName());
 
         response.setArmorId(role.getArmor() != null ? role.getArmor().getId() : null);

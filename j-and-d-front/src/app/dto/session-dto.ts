@@ -2,7 +2,7 @@ export class SessionDto {
 
     constructor(
         private _id: number,
-        public _gmId: number,
+        public _gmLogin: String,
         public _npcIds?: number[],
         public _inscriptionIds?: number[],            // NPCDto[]
     ) { }
@@ -23,11 +23,11 @@ export class SessionDto {
         this._inscriptionIds = value;
     }
 
-    public get gmId(): number {
-        return this._gmId;
+    public get gmLogin(): String {
+        return this._gmLogin;
     }
-    public set gmId(value: number) {
-        this._gmId = value;
+    public set gmLogin(value: String) {
+        this._gmLogin = value;
     }
 
     public get npcIds(): number[] | undefined {
@@ -43,7 +43,7 @@ export class SessionDto {
         return {
             id: this.id,
             inscriptionIds: this.inscriptionIds,
-            gmId: this.gmId,
+            gmLogin: this.gmLogin,
             npcIds: this.npcIds
         };
     }

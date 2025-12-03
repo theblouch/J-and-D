@@ -21,7 +21,7 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">GM</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" [value]="authService.getUserId()" readonly>
+            <input type="text" class="form-control" [value]="authService.getUserLogin()" readonly>
         </div>
     </div>
 
@@ -65,7 +65,7 @@
     <tbody>
         <tr *ngFor="let session of sessions$ | async; trackBy: trackSession">
             <td>{{ session.id }}</td>
-            <td>{{ session.gmId }}</td>
+            <td>{{ session.gmLogin }}</td>
             <td>{{ session.inscriptionIds?.length || 0 }}</td>
             <td>{{ session.npcIds?.length || 0 }}</td>
             <td>
