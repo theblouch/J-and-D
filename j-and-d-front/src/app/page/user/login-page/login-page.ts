@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     this.loginCtrl = this.formBuilder.control('', Validators.required);
     this.passwordCtrl = this.formBuilder.control('', [
       Validators.required,
-      Validators.minLength(6),
+      Validators.minLength(2),
     ]);
 
     this.userForm = this.formBuilder.group({
