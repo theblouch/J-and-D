@@ -10,23 +10,24 @@ import { ToolsPage } from './page/gm/tools-page/tools-page';
 
 import { CreateCharacterPage } from './page/player/create-character-page/create-character-page';
 import { MyCharactersPage } from './page/player/my-characters-page/my-characters-page';
+import { InProgress } from './page/in-progress/in-progress'
 
 export const routes: Routes = [
   // HOME
   { path: '', component: HomePage, canActivate: [authGuard] },
-  { path: 'home', component: HomePage, canActivate: [authGuard] },
+  { path: 'home', title: 'Java & Dragons', component: HomePage, canActivate: [authGuard] },
 
   // PAGES PLAYER
-  { path: 'createcharacter', component: CreateCharacterPage },
-  { path: 'mycharacters', component: MyCharactersPage },
+  { path: 'createcharacter', title: 'Création de personnages', component: CreateCharacterPage },
+  { path: 'mycharacters', title: 'Mes personnages', component: MyCharactersPage },
 
   // PAGES GM
-  { path: 'createsession', component: CreateSession },
-  { path: 'tools', component: ToolsPage },
+  { path: 'createsession', title: 'Création de session', component: CreateSession },
+  { path: 'tools', title: 'Outils', component: ToolsPage },
 
   // COMMON
-  { path: 'login', component: LoginPage },
-  { path: 'register', component: InscriptionPage },
-  { path: 'marketplace', component: HomePage },
-  { path: 'community', component: HomePage },
+  { path: 'login', title: 'Se Connecter', component: LoginPage },
+  { path: 'register', title: 'Créer un compte', component: InscriptionPage },
+  { path: 'marketplace', title: 'Boutique', component: InProgress },
+  { path: 'community', title: 'Bienvenue', component: InProgress },
 ];
