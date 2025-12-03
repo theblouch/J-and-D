@@ -5,19 +5,19 @@ import java.util.List;
 import jakarta.validation.constraints.NotNull;
 
 public class CreateOrUpdateSessionRequest {
-    private List<Integer> inscriptionIds;
+    private List<String> inscriptionCharacters;
 
     @NotNull
     private String gmLogin;
 
-    private List<Integer> npcIds;
+    private List<String> npcNames;
 
-    public List<Integer> getInscriptionIds() {
-        return this.inscriptionIds;
+    public List<String> getInscriptionCharacters() {
+        return this.inscriptionCharacters;
     }
 
-    public void setInscriptionIds(List<Integer> inscriptionIds) {
-        this.inscriptionIds = inscriptionIds;
+    public void setInscriptionCharacters(List<String> inscriptionCharacters) {
+        this.inscriptionCharacters = inscriptionCharacters;
     }
 
     public String getGmLogin() {
@@ -28,11 +28,11 @@ public class CreateOrUpdateSessionRequest {
         this.gmLogin = gmLogin;
     }
 
-    public List<Integer> getNpcIds() {
-        return this.npcIds;
+    public List<String> getNpcNames() {
+        return this.npcNames;
     }
 
-    public void setNpcIds(List<Integer> npcIds) {
-        this.npcIds = npcIds;
+    public void setNpcNames(List<String> npcNames) {
+        this.npcNames = npcNames;
     }
 }

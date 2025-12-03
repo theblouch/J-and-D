@@ -83,8 +83,8 @@ export class CreateSession implements OnInit {
     this.editingSession = session;
     this.showForm = true;
 
-    this.inscriptionsCtrl.setValue(session.inscriptionIds);
-    this.npcsCtrl.setValue(session.npcIds);
+    this.inscriptionsCtrl.setValue(session.inscriptionCharacters);
+    this.npcsCtrl.setValue(session.npcNames);
   }
 
   public annulerEditer() {
@@ -95,5 +95,12 @@ export class CreateSession implements OnInit {
 
   public delete(id: number) {
     this.sessionService.deleteById(id);
+  }
+
+  public displayList(list?: String[]): String {
+    if (!list || list.length === 0) {
+      return 'vide :(';
+    }
+    return list.join(', ');
   }
 }

@@ -3,8 +3,8 @@ export class SessionDto {
     constructor(
         private _id: number,
         public _gmLogin: String,
-        public _npcIds?: number[],
-        public _inscriptionIds?: number[],            // NPCDto[]
+        public _npcNames?: String[],
+        public _inscriptionCharacters?: String[],
     ) { }
 
     // ----- GETTERS & SETTERS -----
@@ -16,11 +16,11 @@ export class SessionDto {
         this._id = value;
     }
 
-    public get inscriptionIds(): number[] | undefined {
-        return this._inscriptionIds;
+    public get inscriptionCharacters(): String[] | undefined {
+        return this._inscriptionCharacters;
     }
-    public set inscriptionIds(value: number[]) {
-        this._inscriptionIds = value;
+    public set inscriptionCharacters(value: String[]) {
+        this._inscriptionCharacters = value;
     }
 
     public get gmLogin(): String {
@@ -30,11 +30,11 @@ export class SessionDto {
         this._gmLogin = value;
     }
 
-    public get npcIds(): number[] | undefined {
-        return this._npcIds;
+    public get npcNames(): String[] | undefined {
+        return this._npcNames;
     }
-    public set npcIds(value: number[]) {
-        this._npcIds = value;
+    public set npcNames(value: String[]) {
+        this._npcNames = value;
     }
 
     // ----- JSON SERIALIZATION -----
@@ -42,9 +42,9 @@ export class SessionDto {
     public toJson(): any {
         return {
             id: this.id,
-            inscriptionIds: this.inscriptionIds,
+            inscriptionCharacters: this.inscriptionCharacters,
             gmLogin: this.gmLogin,
-            npcIds: this.npcIds
+            npcNames: this.npcNames
         };
     }
 }

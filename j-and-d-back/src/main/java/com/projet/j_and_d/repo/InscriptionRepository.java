@@ -1,5 +1,7 @@
 package com.projet.j_and_d.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +21,6 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Intege
     @Transactional
     @Query("DELETE FROM Inscription i WHERE i.session.id = :sessionId")
     void deleteAllBySessionId(int sessionId);
+
+    List<Inscription> findAllByCharacter_NameIn(List<String> names);
 }

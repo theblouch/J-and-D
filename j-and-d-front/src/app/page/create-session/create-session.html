@@ -1,37 +1,38 @@
 <h1>Liste des sessions</h1>
 
 <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light">
-    Ajouter une session
+    Créer une session
 </button>
 
 <form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="sessionForm">
-    <!-- INSCRIPTIONS -->
-    <div class="mb-3 row">
-        <label for="inscriptions" class="col-sm-2 col-form-label">Inscriptions</label>
-        <div class="col-sm-10">
-            <select id="inscriptions" class="form-select" formControlName="inscriptions" multiple>
-                <option *ngFor="let ins of inscriptions$ | async" [value]="ins.id">
-                    {{ ins.id }}
-                </option>
-            </select>
-        </div>
-    </div>
-
     <!-- GM connecté (lecture seule) -->
     <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">GM</label>
+        <label class="col-sm-2 col-form-label">Maître du jeu</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" [value]="authService.getUserLogin()" readonly>
         </div>
     </div>
 
+    <!-- INSCRIPTIONS -->
+    <div class="mb-3 row">
+        <label for="inscriptions" class="col-sm-2 col-form-label">Personnages</label>
+        <div class="col-sm-10">
+            <select id="inscriptions" class="form-select" formControlName="inscriptions" multiple>
+                <option *ngFor="let ins of inscriptions$ | async" [value]="ins.character">
+                    {{ ins.character }}
+                </option>
+            </select>
+        </div>
+    </div>
+
+
     <!-- NPCs -->
     <div class="mb-3 row">
-        <label for="npcs" class="col-sm-2 col-form-label">NPCs</label>
+        <label for="npcs" class="col-sm-2 col-form-label">Monstres</label>
         <div class="col-sm-10">
             <select id="npcs" class="form-select" formControlName="npcs" multiple>
-                <option *ngFor="let npc of npcs$ | async" [value]="npc.id">
-                    {{ npc.id }}
+                <option *ngFor="let npc of npcs$ | async" [value]="npc.name">
+                    {{ npc.name }}
                 </option>
             </select>
         </div>
@@ -54,25 +55,20 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>GM</th>
-            <th>Inscriptions</th>
-            <th>NPCs</th>
+            <th>Maître du jeu</th>
+            <th>Personnages</th>
+            <th>Monstres</th>
             <th></th>
         </tr>
     </thead>
 
     <tbody>
         <tr *ngFor="let session of sessions$ | async; trackBy: trackSession">
-            <td>{{ session.id }}</td>
             <td>{{ session.gmLogin }}</td>
-            <td>{{ session.inscriptionIds?.length || 0 }}</td>
-            <td>{{ session.npcIds?.length || 0 }}</td>
+            <td>{{ displayList(session.inscriptionCharacters) }}</td>
+            <td>{{ displayList(session.npcNames) }}</td>
             <td>
                 <div class="btn-group">
-                    <button class="btn btn-warning" (click)="editer(session)">
-                        Modifier
-                    </button>
                     <button class="btn btn-danger" (click)="delete(session.id)">
                         Supprimer
                     </button>
