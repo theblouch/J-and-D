@@ -97,7 +97,7 @@ public class Character extends Creature {
 		Singleton singleton = Singleton.getInstance();
 		int success = 0;
 		for (int i = 0; i < 5; i++) {
-			if (singleton.diceThrow(10, 0, 0)) { // bien nommé le diceThrow quand on saura où le mettre
+			if (singleton.diceThrow(10, 0, 0)) {
 				success++;
 			}
 		}

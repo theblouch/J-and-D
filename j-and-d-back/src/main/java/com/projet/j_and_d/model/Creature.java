@@ -290,34 +290,42 @@ public abstract class Creature {
 
 	public void useSpell(Creature target, Spell spell) {
 		Singleton singleton = Singleton.getInstance();
-		int caracteristic;
-		switch (spell.getRole().getName()) {
-			case "rogue":
-				caracteristic = this.getStats().getDexterity();
-				break;
-			case "mage":
-				caracteristic = this.getStats().getIntelligence();
-				break;
-			case "warrior":
-				caracteristic = this.getStats().getStrength();
-				break;
-			case "druid":
-				caracteristic = this.getStats().getWisdom();
-				break;
-			default:
-				caracteristic = 10;
-		}
 
-		int modifier = convertToModifier(caracteristic);
+		if (spell.getSpellLevel() > this.getMp()) {
+			System.out.println("Votre personnage n'a pas assez de points de magie");
+			return;
+		} else {
+			this.setMp(this.getMp() - spell.getSpellLevel());
 
-		boolean touch = singleton.diceThrow(target.armorClass, 0, modifier);
+			int caracteristic;
+			switch (spell.getRole().getName()) {
+				case "rogue":
+					caracteristic = this.getStats().getDexterity();
+					break;
+				case "mage":
+					caracteristic = this.getStats().getIntelligence();
+					break;
+				case "warrior":
+					caracteristic = this.getStats().getStrength();
+					break;
+				case "druid":
+					caracteristic = this.getStats().getWisdom();
+					break;
+				default:
+					caracteristic = 10;
+			}
 
-		if (touch) {
+			int modifier = convertToModifier(caracteristic);
 
-			// calcul des damages
-			int baseDamage = spell.calculDamages();
+			boolean touch = singleton.diceThrow(target.armorClass, 0, modifier);
 
-			this.getRole().applyDamageIfTouch(this, target, baseDamage);
+			if (touch) {
+
+				// calcul des damages
+				int baseDamage = spell.calculDamages();
+
+				this.getRole().applyDamageIfTouch(this, target, baseDamage);
+			}
 		}
 
 	}
