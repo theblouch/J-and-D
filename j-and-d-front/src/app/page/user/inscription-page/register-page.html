@@ -64,11 +64,10 @@
     </div>
   </div>
 
-  <label for="role">Rôle :</label>
-  <select id="role" formControlName="role">
-    <option value="PLAYER">Player</option>
-    <option value="GM">Game Master</option>
-  </select>
+  <label>
+    <input type="checkbox" formControlName="gm" />
+    Je suis Game Master
+  </label>
 
   <div class="btn-group">
     <input type="submit" class="btn btn-success" [disabled]="userForm.invalid" value="S'inscrire" />

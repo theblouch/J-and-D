@@ -1,5 +1,4 @@
 <div class="login-container">
-
   <!-- Logo + Titre -->
   <div class="logo-section">
     <img src="assets/couronne.png" alt="Java & Dragon" />
@@ -10,12 +9,11 @@
 
   <!-- Message d'erreur -->
   @if (loginError) {
-    <div class="error-box">Login ou mot de passe incorrect</div>
+  <div class="error-box">Login ou mot de passe incorrect</div>
   }
 
   <!-- Carte de connexion -->
   <form class="login-card" [formGroup]="userForm" (ngSubmit)="connecter()">
-
     <!-- LOGIN -->
     <label for="login">Adresse e-mail ou nom d'utilisateur</label>
     <input
@@ -26,7 +24,7 @@
     />
 
     @if (loginCtrl.hasError('required')) {
-      <div class="input-error">Le login est obligatoire</div>
+    <div class="input-error">Le login est obligatoire</div>
     }
 
     <!-- PASSWORD -->
@@ -39,16 +37,13 @@
     />
 
     @if (passwordCtrl.hasError('required')) {
-      <div class="input-error">Le mot de passe est obligatoire</div>
-    }
-    @else if (passwordCtrl.hasError('minlength')) {
-      <div class="input-error">Le mot de passe doit faire 6 caractères minimum</div>
+    <div class="input-error">Le mot de passe est obligatoire</div>
+    } @else if (passwordCtrl.hasError('minlength')) {
+    <div class="input-error">Le mot de passe doit faire 6 caractères minimum</div>
     }
 
     <!-- CONNEXION -->
-    <button type="submit" class="btn-orange" [disabled]="userForm.invalid">
-      Connexion
-    </button>
+    <button type="submit" class="btn-orange" [disabled]="userForm.invalid">Connexion</button>
 
     <!-- DISCORD -->
     <button type="button" class="btn-discord">
@@ -59,9 +54,6 @@
     <div class="separator">ou</div>
 
     <!-- CRÉER COMPTE -->
-    <a routerLink="/inscription" class="btn-create">
-      Créer un compte
-    </a>
-
+    <a routerLink="/register" class="btn-create"> Créer un compte </a>
   </form>
 </div>

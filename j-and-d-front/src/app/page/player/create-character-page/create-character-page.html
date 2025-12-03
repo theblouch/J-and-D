@@ -1,13 +1,13 @@
 <div class="container">
-    <h2>Créer un personnage</h2>
+  <h2>Créer un personnage</h2>
 
-    <!-- NOM -->
+  <!-- NOM 
     <div class="form-group">
         <label for="name">Nom du personnage :</label>
         <input id="name" type="text" [(ngModel)]="character.name" class="form-control" placeholder="Entrez un nom" />
     </div>
-
-    <!-- ROLE -->
+-->
+  <!-- ROLE 
     <div class="form-group mt-3">
         <label for="role">Choisir un rôle :</label>
         <select id="role" class="form-control" [(ngModel)]="selectedRoleId" (change)="onRoleChange()">
@@ -16,26 +16,24 @@
             </option>
         </select>
     </div>
+-->
+  <!-- STATS AFFICHÉES -->
+  <div *ngIf="selectedRole" class="stats-container mt-4">
+    <h3>Stats de base du {{ selectedRole.name }}</h3>
 
-    <!-- STATS AFFICHÉES -->
-    <div *ngIf="selectedRole" class="stats-container mt-4">
-        <h3>Stats de base du {{ selectedRole.name }}</h3>
-
-        <div class="stats">
-            <div><strong>Force :</strong> {{ selectedRole.stats.strength }}</div>
-            <div><strong>Dextérité :</strong> {{ selectedRole.stats.dexterity }}</div>
-            <div><strong>Intelligence :</strong> {{ selectedRole.stats.intelligence }}</div>
-            <div><strong>Sagesse :</strong> {{ selectedRole.stats.wisdom }}</div>
-            <div><strong>Constitution :</strong> {{ selectedRole.stats.constitution }}</div>
-            <div><strong>Charisme :</strong> {{ selectedRole.stats.charisma }}</div>
-        </div>
+    <div class="stats">
+      <div><strong>Force :</strong> {{ selectedRole.stats.strength }}</div>
+      <div><strong>Dextérité :</strong> {{ selectedRole.stats.dexterity }}</div>
+      <div><strong>Intelligence :</strong> {{ selectedRole.stats.intelligence }}</div>
+      <div><strong>Sagesse :</strong> {{ selectedRole.stats.wisdom }}</div>
+      <div><strong>Constitution :</strong> {{ selectedRole.stats.constitution }}</div>
+      <div><strong>Charisme :</strong> {{ selectedRole.stats.charisma }}</div>
     </div>
+  </div>
 
-    <!-- BOUTON CREATION -->
-    <button class="btn btn-primary mt-4" (click)="createCharacter()">
-        Créer le personnage
-    </button>
+  <!-- BOUTON CREATION -->
+  <button class="btn btn-primary mt-4" (click)="createCharacter()">Créer le personnage</button>
 
-    <!-- MESSAGE -->
-    <p class="text-success mt-3" *ngIf="successMessage">{{ successMessage }}</p>
+  <!-- MESSAGE -->
+  <p class="text-success mt-3" *ngIf="successMessage">{{ successMessage }}</p>
 </div>

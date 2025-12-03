@@ -24,7 +24,7 @@ export class InscriptionPage implements OnInit {
   protected loginCtrl!: FormControl;
   protected passwordCtrl!: FormControl;
   protected passwordConfirmCtrl!: FormControl;
-  protected roleCtrl!: FormControl;
+  protected gmCtrl!: FormControl;
 
   constructor(
     private userService: UserService,
@@ -43,14 +43,14 @@ export class InscriptionPage implements OnInit {
       Validators.minLength(6),
     ]);
 
-    this.roleCtrl = this.formBuilder.control('player', Validators.required);
+    this.gmCtrl = this.formBuilder.control(false, Validators.required);
 
     this.userForm = this.formBuilder.group(
       {
         login: this.loginCtrl,
         password: this.passwordCtrl,
         passwordConfirm: this.passwordConfirmCtrl,
-        role: this.roleCtrl,
+        gm: this.gmCtrl,
       },
       {
         validators: passwordMatchValidator('password', 'passwordConfirm'),
@@ -61,7 +61,7 @@ export class InscriptionPage implements OnInit {
   public async connecter() {
     try {
       await this.userService.subscribe(
-        new SubscribeRequestDto(this.loginCtrl.value, this.passwordCtrl.value, this.roleCtrl.value)
+        new SubscribeRequestDto(this.loginCtrl.value, this.passwordCtrl.value, this.gmCtrl.value)
       );
 
       this.router.navigate(['/login']);
