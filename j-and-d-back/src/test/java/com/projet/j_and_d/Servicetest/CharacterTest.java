@@ -14,6 +14,7 @@ import com.projet.j_and_d.exception.CharacterNotFoundException;
 import com.projet.j_and_d.model.*;
 import com.projet.j_and_d.model.Character;
 import com.projet.j_and_d.repo.CharacterRepository;
+import com.projet.j_and_d.repo.InscriptionRepository;
 import com.projet.j_and_d.repo.ItemRepository;
 import com.projet.j_and_d.repo.RoleRepository;
 import com.projet.j_and_d.service.CharacterService;
@@ -24,6 +25,7 @@ public class CharacterTest {
     private CharacterRepository characterRepo;
     private RoleRepository roleRepo;
     private ItemRepository itemRepo;
+    private InscriptionRepository inscriptionRepo;
 
     @BeforeEach
     public void setup() {
@@ -31,7 +33,7 @@ public class CharacterTest {
         roleRepo = mock(RoleRepository.class);
         itemRepo = mock(ItemRepository.class);
 
-        service = new CharacterService(characterRepo, roleRepo, itemRepo);
+        service = new CharacterService(characterRepo, roleRepo, itemRepo, inscriptionRepo);
     }
 
     // -------------------------------------------------------
