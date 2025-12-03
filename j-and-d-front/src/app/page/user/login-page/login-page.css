@@ -1,0 +1,155 @@
+/* --- Fond pleine page --- */
+.login-container {
+ /* background-image: url('/assets/arbres.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;*/
+
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  color: #4a2e1b;
+}
+
+/* --- Logo + Titre --- */
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-section img {
+  width: 85px;
+  margin-bottom: 10px;
+}
+
+.logo-section h1 {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.subtitle {
+  margin-top: 5px;
+  margin-bottom: 25px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* --- Message d'erreur --- */
+.error-box {
+  background: #f8d7da;
+  border-left: 4px solid #c43b47;
+  padding: 10px 14px;
+  width: 340px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  color: #7a1a20;
+}
+
+/* --- Carte de connexion --- */
+.login-card {
+  background: rgba(255, 245, 230, 0.94);
+  padding: 30px 40px;
+  width: 340px;
+  border-radius: 18px;
+  box-shadow: 0px 6px 14px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Champs --- */
+label {
+  font-weight: 600;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #d8a67b;
+  background: #fffdfb;
+  font-size: 1rem;
+}
+
+input.invalid {
+  border: 2px solid #e04646;
+}
+
+.input-error {
+  color: #b13636;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* --- Bouton Connexion --- */
+.btn-orange {
+  background-color: #e68a3f;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-orange:disabled {
+  background: #b9a08a;
+  cursor: not-allowed;
+}
+
+.btn-orange:hover:not(:disabled) {
+  background-color: #c96c23;
+}
+
+/* --- Bouton Discord --- */
+.btn-discord {
+  background-color: #5865f2;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 14px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.discord-icon {
+  margin-right: 8px;
+  font-size: 1.3rem;
+}
+
+/* --- Séparateur --- */
+.separator {
+  margin: 18px 0;
+  text-align: center;
+  font-weight: bold;
+  color: #6f4d3a;
+}
+
+/* --- Bouton créer un compte --- */
+.btn-create {
+  text-align: center;
+  border: 2px solid #e68a3f;
+  color: #e68a3f;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+
+.btn-create:hover {
+  background: #e68a3f;
+  color: white;
+}

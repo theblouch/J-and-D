@@ -1,53 +1,67 @@
-<h1>Se connecter</h1>
+<div class="login-container">
 
-@if (loginError) {
-<div class="alert alert-danger">Login ou mot de passe incorrect</div>
-}
-
-<form (ngSubmit)="connecter()" [formGroup]="userForm">
-  <div class="mb-3 row">
-    <label for="login" class="col-sm-2 col-form-label">login</label>
-    <div class="col-sm-10">
-      <input
-        type="text"
-        class="form-control"
-        id="login"
-        formControlName="login"
-        [class.is-invalid]="loginCtrl.invalid && (loginCtrl.dirty || loginCtrl.touched)"
-      />
-
-      @if (loginCtrl.hasError('required')) {
-      <div class="invalid-feedback">Le login est obligatoire</div>
-      }
-    </div>
+  <!-- Logo + Titre -->
+  <div class="logo-section">
+    <img src="assets/couronne.png" alt="Java & Dragon" />
+    <h1>Java & Dragon</h1>
   </div>
 
-  <div class="mb-3 row">
-    <label for="password" class="col-sm-2 col-form-label">Mot de passe</label>
-    <div class="col-sm-10">
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        formControlName="password"
-        [class.is-invalid]="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)"
-      />
+  <h2 class="subtitle">Se connecter à Java & Dragon</h2>
 
-      @if (passwordCtrl.hasError('required')) {
-      <div class="invalid-feedback">Le mot de passe est obligatoire</div>
-      } @else if (passwordCtrl.hasError('minlength')) {
-      <div class="invalid-feedback">Le mot de passe doit faire 6 caractères minimum</div>
-      }
-    </div>
-  </div>
+  <!-- Message d'erreur -->
+  @if (loginError) {
+    <div class="error-box">Login ou mot de passe incorrect</div>
+  }
 
-  <div class="btn-group">
+  <!-- Carte de connexion -->
+  <form class="login-card" [formGroup]="userForm" (ngSubmit)="connecter()">
+
+    <!-- LOGIN -->
+    <label for="login">Adresse e-mail ou nom d'utilisateur</label>
     <input
-      type="submit"
-      class="btn btn-success"
-      [disabled]="userForm.invalid"
-      value="Se connecter"
+      id="login"
+      type="text"
+      formControlName="login"
+      [class.invalid]="loginCtrl.invalid && (loginCtrl.dirty || loginCtrl.touched)"
     />
-    <a type="button" class="btn btn-primary" routerLink="/inscription">S'inscrire</a>
-  </div>
-</form>
+
+    @if (loginCtrl.hasError('required')) {
+      <div class="input-error">Le login est obligatoire</div>
+    }
+
+    <!-- PASSWORD -->
+    <label for="password">Mot de passe</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      [class.invalid]="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)"
+    />
+
+    @if (passwordCtrl.hasError('required')) {
+      <div class="input-error">Le mot de passe est obligatoire</div>
+    }
+    @else if (passwordCtrl.hasError('minlength')) {
+      <div class="input-error">Le mot de passe doit faire 6 caractères minimum</div>
+    }
+
+    <!-- CONNEXION -->
+    <button type="submit" class="btn-orange" [disabled]="userForm.invalid">
+      Connexion
+    </button>
+
+    <!-- DISCORD -->
+    <button type="button" class="btn-discord">
+      <span class="discord-icon">💬</span> Login with Discord
+    </button>
+
+    <!-- SEPARATEUR -->
+    <div class="separator">ou</div>
+
+    <!-- CRÉER COMPTE -->
+    <a routerLink="/inscription" class="btn-create">
+      Créer un compte
+    </a>
+
+  </form>
+</div>
