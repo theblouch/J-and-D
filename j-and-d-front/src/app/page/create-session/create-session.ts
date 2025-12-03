@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { SessionDto } from '../../dto/session-dto';
 import { GMDto } from '../../dto/gm-dto';
 import { InscriptionDto } from '../../dto/inscription-dto';
@@ -42,7 +42,10 @@ export class CreateSession implements OnInit {
     this.sessions$ = this.sessionService.findAll().pipe(
       map(sessions => sessions.filter(session => session.gmLogin === gmLogin))
     );
-    this.inscriptions$ = this.inscriptionService.findAll();
+    this.inscriptionService.findAll().subscribe(data => {
+      console.log('inscriptions$', data);
+      this.inscriptions$ = of(data);
+    });
     this.npcs$ = this.npcService.findAll();
 
     this.inscriptionsCtrl = this.formBuilder.control('');
