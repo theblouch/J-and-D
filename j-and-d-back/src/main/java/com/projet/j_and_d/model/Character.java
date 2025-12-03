@@ -144,4 +144,9 @@ public class Character extends Creature {
 		this.inscriptions = inscriptions;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 }

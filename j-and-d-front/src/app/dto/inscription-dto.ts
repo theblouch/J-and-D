@@ -2,9 +2,10 @@ export class InscriptionDto {
 
     constructor(
         private _id: number,
-        private _character: any,   // CharacterDto
-        private _session: any      // SessionDto
-    ) {}
+        private _character: any,
+        private _characterName: String,
+        private _session: any
+    ) { }
 
     // ----- GETTERS & SETTERS -----
 
@@ -22,6 +23,13 @@ export class InscriptionDto {
         this._character = value;
     }
 
+    public get characterName(): String {
+        return this._characterName;
+    }
+    public set characterName(value: String) {
+        this._characterName = value;
+    }
+
     public get session(): any {
         return this._session;
     }
@@ -35,6 +43,7 @@ export class InscriptionDto {
         return {
             id: this.id,
             character: this.character,
+            characterName: this.characterName,
             session: this.session
         };
     }

@@ -58,20 +58,20 @@ public class SessionService {
     private Session save(Session session, CreateOrUpdateSessionRequest request) {
 
         GM gm = (GM) gmRepo.findByLogin(request.getGmLogin()).orElseThrow();
-        // List<NPC> npcs = npcRepo.findAllById(request.getNpcIds());
+        // List<NPC> npcs = npcRepo.findAllById(request.getNpcNames());
 
         session.setGm(gm);
 
         List<Inscription> inscriptions = Collections.emptyList();
-        if (request.getInscriptionIds() != null) {
-            inscriptions = inscriptionRepo.findAllById(request.getInscriptionIds());
+        if (request.getInscriptionCharacters() != null) {
+            inscriptions = inscriptionRepo.findAllByCharacter_NameIn(request.getInscriptionCharacters());
         }
 
         session.setInscriptions(inscriptions);
 
         List<NPC> npcs = Collections.emptyList();
-        if (request.getNpcIds() != null) {
-            npcs = npcRepo.findAllById(request.getNpcIds());
+        if (request.getNpcNames() != null) {
+            npcs = npcRepo.findAllByNameIn(request.getNpcNames());
         }
 
         session.setNpcs(npcs);
