@@ -1,7 +1,7 @@
 <h1>S'inscrire</h1>
 
 @if (subscriptionError) {
-<div class="alert alert-danger">Une erreur est survenue lors de la souscription</div>
+<div class="alert alert-danger">Une erreur est survenue lors de l'inscription</div>
 }
 
 <form (ngSubmit)="connecter()" [formGroup]="userForm">
@@ -63,6 +63,12 @@
       }
     </div>
   </div>
+
+  <label for="role">Rôle :</label>
+  <select id="role" formControlName="role">
+    <option value="PLAYER">Player</option>
+    <option value="GM">Game Master</option>
+  </select>
 
   <div class="btn-group">
     <input type="submit" class="btn btn-success" [disabled]="userForm.invalid" value="S'inscrire" />
