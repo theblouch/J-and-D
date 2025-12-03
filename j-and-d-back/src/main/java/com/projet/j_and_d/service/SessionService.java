@@ -64,9 +64,11 @@ public class SessionService {
 
         List<Inscription> inscriptions = Collections.emptyList();
         if (request.getInscriptionCharacters() != null) {
-            inscriptions = inscriptionRepo.findAllByCharacter_NameIn(request.getInscriptionCharacters());
+            inscriptions = inscriptionRepo.findAllByCharacterNameIn(request.getInscriptionCharacters());
         }
-
+        for (Inscription i : inscriptions) {
+            i.setSession(session);
+        }
         session.setInscriptions(inscriptions);
 
         List<NPC> npcs = Collections.emptyList();

@@ -18,7 +18,7 @@
         <label for="inscriptions" class="col-sm-2 col-form-label">Personnages</label>
         <div class="col-sm-10">
             <select id="inscriptions" class="form-select" formControlName="inscriptions" multiple>
-                <option *ngFor="let ins of inscriptions$ | async" [value]="ins.id">
+                <option *ngFor="let ins of inscriptions$ | async" [ngValue]="ins.characterName">
                     {{ ins.characterName }}
                 </option>
             </select>
@@ -31,7 +31,7 @@
         <label for="npcs" class="col-sm-2 col-form-label">Monstres</label>
         <div class="col-sm-10">
             <select id="npcs" class="form-select" formControlName="npcs" multiple>
-                <option *ngFor="let npc of npcs$ | async" [value]="npc.id">
+                <option *ngFor="let npc of npcs$ | async" [value]="npc.name">
                     {{ npc.name }}
                 </option>
             </select>

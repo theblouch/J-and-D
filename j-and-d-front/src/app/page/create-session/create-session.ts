@@ -67,6 +67,8 @@ export class CreateSession implements OnInit {
       console.error("Utilisateur non connecté !");
       return;
     }
+    console.log('Inscriptions sélectionnées :', this.inscriptionsCtrl.value);
+    console.log('NPCs sélectionnés :', this.npcsCtrl.value);
 
     const newSession = new SessionDto(
       0,
