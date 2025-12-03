@@ -8,6 +8,15 @@ public class ItemResponse {
     private boolean basedOnStrength;
     private int[] baseDamage;
     private int armorValue;
+    private Integer id;
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -51,7 +60,7 @@ public class ItemResponse {
 
     public static ItemResponse convert(Item item) {
         ItemResponse response = new ItemResponse();
-
+        response.setId(item.getId());
         response.setName(item.getName());
         response.setDescription(item.getDescription());
         response.setBasedOnStrength(item.isBasedOnStrength());

@@ -5,6 +5,15 @@ import com.projet.j_and_d.model.Inscription;
 public class InscriptionResponse {
     private Integer characterId;
     private Integer sessionId;
+    private Integer id;
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getCharacterId() {
         return characterId;
@@ -24,6 +33,7 @@ public class InscriptionResponse {
 
     public static InscriptionResponse convert(Inscription inscription) {
         InscriptionResponse response = new InscriptionResponse();
+        response.setId(inscription.getId());
         response.setCharacterId(inscription.getCharacter().getId());
         response.setSessionId(inscription.getSession().getId());
 

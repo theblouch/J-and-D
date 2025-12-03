@@ -10,6 +10,15 @@ public class SpellResponse {
     private int spellLevel;
     private Integer roleId;
     private int[] baseDamage;
+    private Integer id;
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -53,7 +62,7 @@ public class SpellResponse {
 
     public static SpellResponse convert(Spell spell) {
         SpellResponse response = new SpellResponse();
-
+        response.setId(spell.getId());
         response.setName(spell.getName());
         response.setDescription(spell.getDescription());
         response.setSpellLevel(spell.getSpellLevel());

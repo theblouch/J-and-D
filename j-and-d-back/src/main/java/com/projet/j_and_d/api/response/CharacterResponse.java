@@ -33,6 +33,15 @@ public class CharacterResponse {
     private List<String> states;
 
     private Race race;
+    private Integer id;
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public int getHp() {
         return hp;
@@ -164,6 +173,7 @@ public class CharacterResponse {
 
     public static CharacterResponse convert(Character character) {
         CharacterResponse response = new CharacterResponse();
+        response.setId(character.getId());
         response.setName(character.getName());
         response.setLevel(character.getLevel());
         response.setHp(character.getHp());
