@@ -21,15 +21,13 @@ public class PlayerTest {
 
     @BeforeEach
     public void setup() {
-        player = new Player("player1", "password", "Doe", "John");
+        player = new Player("player1", "password");
         player.setCharacters(new ArrayList<>());
     }
 
     @Test
     public void testPlayerCreation() {
         assertEquals("player1", player.getLogin());
-        assertEquals("Doe", player.getNom());
-        assertEquals("John", player.getPrenom());
     }
 
     @Test
@@ -51,7 +49,7 @@ public class PlayerTest {
 
     @Test
     public void testJoinSession() {
-        GM gm = new GM("gm", "pw", "Master");
+        GM gm = new GM("gm", "pw");
         Session session = new Session(new ArrayList<>(), gm, new ArrayList<>());
 
         Character c = new Character();

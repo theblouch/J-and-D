@@ -2,7 +2,6 @@ package com.projet.j_and_d.Servicetest;
 
 import com.projet.j_and_d.api.request.CreateOrUpdateSpellRequest;
 import com.projet.j_and_d.exception.SpellNotFoundException;
-import com.projet.j_and_d.model.Mage;
 import com.projet.j_and_d.model.Spell;
 import com.projet.j_and_d.repo.SpellRepository;
 import com.projet.j_and_d.service.SpellService;
@@ -89,7 +88,7 @@ class SpellServiceTest {
         CreateOrUpdateSpellRequest request = new CreateOrUpdateSpellRequest();
         request.setName("Fireball");
         request.setDescription("Powerful spell");
-        request.setRole(new Mage());
+        request.setRoleId(1);
         request.setSpellLevel(3);
         request.setBaseDamage(new int[] { 10, 20 });
 
