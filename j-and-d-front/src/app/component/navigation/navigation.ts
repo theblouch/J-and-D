@@ -16,10 +16,10 @@ export class Navigation {
   private hiddenRoutes = ['/login', '/inscription'];
 
   constructor(private router: Router) {
-    // Récupération du rôle depuis ton AuthService ou sessionStorage
+    
     this.role = sessionStorage.getItem('role') as any;
 
-    // Cacher le header selon la route
+    
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.showHeader = !this.hiddenRoutes.some(path => event.url.startsWith(path));
