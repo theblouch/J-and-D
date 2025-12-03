@@ -14,4 +14,9 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Intege
     @Transactional
     @Query("DELETE FROM Inscription i WHERE i.character.id = :characterId")
     void deleteAllByCharacterId(int characterId);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Inscription i WHERE i.session.id = :sessionId")
+    void deleteAllBySessionId(int sessionId);
 }
