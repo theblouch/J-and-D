@@ -56,15 +56,15 @@ export class CreateSession implements OnInit {
   }
 
   public creer() {
-    const gmId = this.authService.getUserId();
-    if (!gmId) {
+    const gmLogin = this.authService.getUserLogin();
+    if (!gmLogin) {
       console.error("Utilisateur non connecté !");
       return;
     }
 
     const newSession = new SessionDto(
       0,
-      gmId,
+      gmLogin,
       Array.isArray(this.npcsCtrl.value) ? this.npcsCtrl.value : [],       // assure tableau
       Array.isArray(this.inscriptionsCtrl.value) ? this.inscriptionsCtrl.value : [] // assure tableau
     );

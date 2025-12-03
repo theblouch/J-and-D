@@ -57,7 +57,7 @@ public class SessionService {
 
     private Session save(Session session, CreateOrUpdateSessionRequest request) {
 
-        GM gm = (GM) gmRepo.findById(request.getGmId()).orElseThrow();
+        GM gm = (GM) gmRepo.findByLogin(request.getGmLogin()).orElseThrow();
         // List<NPC> npcs = npcRepo.findAllById(request.getNpcIds());
 
         session.setGm(gm);
