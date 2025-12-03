@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomePage } from './page/home-page/home-page';
 import { LoginPage } from './page/user/login-page/login-page';
-import { RegisterPage } from './page/user/register-page/register-page';
+import { InscriptionPage } from './page/user/inscription-page/register-page';
 import { authGuard } from './guard/auth-guard';
 
 // TODO: importer les composants manquants
@@ -26,7 +26,7 @@ export const routes: Routes = [
 
   // COMMON
   { path: 'login', component: LoginPage },
-  { path: 'register', component: RegisterPage },
+  { path: 'register', component: InscriptionPage },
   { path: 'marketplace', component: HomePage }, 
   { path: 'community', component: HomePage }, 
 ];
