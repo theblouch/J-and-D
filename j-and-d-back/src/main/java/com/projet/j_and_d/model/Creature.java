@@ -17,7 +17,6 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 import com.projet.j_and_d.context.Singleton;
 
@@ -44,10 +43,10 @@ public abstract class Creature {
 	protected int armorClass;
 	@Column(nullable = false)
 	protected int initiative;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(nullable = true)
 	protected Item armor;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(nullable = false)
 	protected Item weapon;
 	@OneToMany
@@ -65,7 +64,7 @@ public abstract class Creature {
 	@Enumerated(EnumType.STRING)
 	protected List<State> state;
 
-	@OneToOne
+	@ManyToOne
 	protected Creature tauntedBy = null;
 
 	public Creature() {

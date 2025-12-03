@@ -55,6 +55,8 @@ public class NPCService {
     private NPC save(NPC npc, CreateOrUpdateNPCRequest request) {
 
         Role role = this.roleRepo.getReferenceById(request.getRoleId());
+
+        npc.setName(request.getName());
         npc.setRole(role);
 
         npc.setXP(request.getXP());
