@@ -12,4 +12,8 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
     @Modifying
     @Query(value = "DELETE FROM role_spells WHERE spells_id = :spellId", nativeQuery = true)
     void deleteRoleSpellsBySpellId(@Param("spellId") Integer spellId);
+
+    @Modifying
+    @Query(value = "DELETE FROM role_spells WHERE role_id = :roleId", nativeQuery = true)
+    void deleteRoleSpellsByRoleId(@Param("roleId") Integer roleId);
 }

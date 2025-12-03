@@ -66,6 +66,7 @@ public class RoleService {
     }
 
     public void deleteById(Integer id) {
+        this.repository.deleteRoleSpellsByRoleId(id);
         this.repository.deleteById(id);
     }
 
