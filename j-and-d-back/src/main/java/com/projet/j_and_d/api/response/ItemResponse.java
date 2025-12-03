@@ -7,6 +7,7 @@ public class ItemResponse {
     private String description;
     private boolean basedOnStrength;
     private int[] baseDamage;
+    private int armorValue;
 
     public String getName() {
         return name;
@@ -40,6 +41,14 @@ public class ItemResponse {
         this.baseDamage = baseDamage;
     }
 
+    public int getArmorValue() {
+        return armorValue;
+    }
+
+    public void setArmorValue(int armorValue) {
+        this.armorValue = armorValue;
+    }
+
     public static ItemResponse convert(Item item) {
         ItemResponse response = new ItemResponse();
 
@@ -47,7 +56,9 @@ public class ItemResponse {
         response.setDescription(item.getDescription());
         response.setBasedOnStrength(item.isBasedOnStrength());
         response.setBaseDamage(item.getBaseDamage());
+        response.setArmorValue(item.getArmorValue());
 
         return response;
     }
+
 }

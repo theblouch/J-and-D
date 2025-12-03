@@ -10,6 +10,7 @@ public class CreateOrUpdateItemRequest {
     private String description;
     private boolean basedOnStrength;
     private int[] baseDamage;
+    private int armorValue;
 
     public String getName() {
         return name;
@@ -41,6 +42,14 @@ public class CreateOrUpdateItemRequest {
 
     public void setBaseDamage(int[] baseDamage) {
         this.baseDamage = baseDamage;
+    }
+
+    public int getArmorValue() {
+        return armorValue;
+    }
+
+    public void setArmorValue(int armorValue) {
+        this.armorValue = armorValue;
     }
 
 }

@@ -45,6 +45,7 @@ public class ItemService {
         item.setDescription(request.getDescription());
         item.setBasedOnStrength(request.isBasedOnStrength());
         item.setBaseDamage(request.getBaseDamage());
+        item.setArmorValue(request.getArmorValue());
 
         return this.repository.save(item);
     }

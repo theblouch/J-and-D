@@ -23,14 +23,17 @@ public class Item {
 
 	private int[] baseDamage;
 
+	private int armorValue;
+
 	public Item() {
 	}
 
-	public Item(String name, String description, boolean basedOnStrength, int[] baseDamage) {
+	public Item(String name, String description, boolean basedOnStrength, int[] baseDamage, int armorValue) {
 		this.name = name;
 		this.description = description;
 		this.basedOnStrength = basedOnStrength;
 		this.baseDamage = baseDamage;
+		this.armorValue = armorValue;
 	}
 
 	public Integer getId() {
@@ -76,6 +79,14 @@ public class Item {
 	public Item id(Integer id) {
 		setId(id);
 		return this;
+	}
+
+	public int getArmorValue() {
+		return this.armorValue;
+	}
+
+	public void setArmorValue(int armorValue) {
+		this.armorValue = armorValue;
 	}
 
 	@Override
