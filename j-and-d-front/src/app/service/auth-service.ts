@@ -43,4 +43,30 @@ export class AuthService {
   public isLogged() {
     return !!this._token;
   }
+
+  private parseJwt(token: string): any {
+    try {
+      const base64Url = token.split('.')[1]; // récupère la partie payload
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  public getUserId(): number | null {
+    const payload = this.parseJwt(this._token);
+    if (!payload) return null;
+
+    // adapte selon ton backend
+    return payload.sub ?? payload.id ?? null;
+  }
+
+
 }

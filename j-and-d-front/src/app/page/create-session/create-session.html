@@ -17,20 +17,11 @@
         </div>
     </div>
 
-    <!-- GM -->
+    <!-- GM connecté (lecture seule) -->
     <div class="mb-3 row">
-        <label for="gm" class="col-sm-2 col-form-label">GM</label>
+        <label class="col-sm-2 col-form-label">GM</label>
         <div class="col-sm-10">
-            <select id="gm" class="form-select" formControlName="gm"
-                [class.is-invalid]="gmCtrl.invalid && (gmCtrl.dirty || gmCtrl.touched)">
-                <option *ngFor="let gm of gms$ | async" [value]="gm.id">
-                    {{ gm.id }}
-                </option>
-            </select>
-
-            @if (gmCtrl.hasError('required')) {
-            <div class="invalid-feedback">Le GM est obligatoire</div>
-            }
+            <input type="text" class="form-control" [value]="authService.getUserId()" readonly>
         </div>
     </div>
 
@@ -48,12 +39,8 @@
 
     <!-- BUTTONS -->
     <div class="btn-group">
-        @if (editingSession) {
-        <input type="submit" [disabled]="sessionForm.invalid" class="btn btn-warning" value="Modifier" />
-        }
-        @else {
-        <input type="submit" [disabled]="sessionForm.invalid" class="btn btn-success" value="Créer" />
-        }
+        <input type="submit" [disabled]="sessionForm.invalid" [value]="editingSession ? 'Modifier' : 'Créer'"
+            [class.btn-warning]="editingSession" [class.btn-success]="!editingSession" class="btn" />
 
         <button type="button" class="btn btn-danger" (click)="annulerEditer()">
             Annuler
@@ -79,21 +66,13 @@
         <tr *ngFor="let session of sessions$ | async; trackBy: trackSession">
             <td>{{ session.id }}</td>
             <td>{{ session.gmId }}</td>
-
-            <td>
-                {{ session.inscriptionIds?.length || 0 }}
-            </td>
-
-            <td>
-                {{ session.npcIds?.length || 0 }}
-            </td>
-
+            <td>{{ session.inscriptionIds?.length || 0 }}</td>
+            <td>{{ session.npcIds?.length || 0 }}</td>
             <td>
                 <div class="btn-group">
                     <button class="btn btn-warning" (click)="editer(session)">
                         Modifier
                     </button>
-
                     <button class="btn btn-danger" (click)="delete(session.id)">
                         Supprimer
                     </button>
