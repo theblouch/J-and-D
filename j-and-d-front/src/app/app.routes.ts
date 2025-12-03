@@ -5,7 +5,7 @@ import { RegisterPage } from './page/user/register-page/register-page';
 import { authGuard } from './guard/auth-guard';
 
 // TODO: importer les composants manquants
-import { CreateSessionPage } from './page/gm/create-session-page/create-session-page';
+import { CreateSession } from './page/create-session/create-session';
 import { ToolsPage } from './page/gm/tools-page/tools-page';
 
 import { CreateCharacterPage } from './page/player/create-character-page/create-character-page';
@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: 'mycharacters', component: MyCharactersPage, canActivate: [authGuard] },
 
   // PAGES GM
-  { path: 'createsession', component: CreateSessionPage, canActivate: [authGuard] },
+  { path: 'createsession', component: CreateSession, canActivate: [authGuard] },
   { path: 'tools', component: ToolsPage, canActivate: [authGuard] },
 
   // COMMON
