@@ -17,8 +17,8 @@ export const routes: Routes = [
   { path: 'home', component: HomePage, canActivate: [authGuard] },
 
   // PAGES PLAYER
-  { path: 'createcharacter', component: CreateCharacterPage, canActivate: [authGuard] },
-  { path: 'mycharacters', component: MyCharactersPage, canActivate: [authGuard] },
+  { path: 'createcharacter', component: CreateCharacterPage},
+  { path: 'mycharacters', component: MyCharactersPage},
 
   // PAGES GM
   { path: 'createsession', component: CreateSession},
