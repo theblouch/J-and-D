@@ -16,9 +16,6 @@ public class Warrior extends Role {
         this.baseArmor = 12; // Armure légère + bouclier simple
         this.baseIni = 10; // Initiative neutre
 
-        // this.armor = ItemFactory.createArmor("Basic Leather Armor", 2);
-        // this.weapon = ItemFactory.createWeapon("Training Sword", 4);
-
         this.baseStats = new Stats(
                 10, // Wisdom
                 16, // Strength

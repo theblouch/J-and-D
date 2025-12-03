@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn: 'root' })
 export class CharacterService {
-    private api = 'http://localhost:8080/characters';
+    private api = '/characters';
 
     constructor(private http: HttpClient) { }
 

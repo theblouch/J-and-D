@@ -2,18 +2,17 @@ package com.projet.j_and_d.api.response;
 
 import java.util.List;
 
-import com.projet.j_and_d.model.Inscription;
 import com.projet.j_and_d.model.NPC;
 import com.projet.j_and_d.model.Session;
 
 public class SessionResponse {
     private Integer id;
 
-    private List<Integer> inscriptionIds;
+    private List<String> inscriptionCharacters;
 
     private String gmLogin;
 
-    private List<Integer> npcIds;
+    private List<String> npcNames;
 
     public Integer getId() {
         return this.id;
@@ -23,12 +22,12 @@ public class SessionResponse {
         this.id = id;
     }
 
-    public List<Integer> getInscriptionIds() {
-        return this.inscriptionIds;
+    public List<String> getInscriptionCharacters() {
+        return this.inscriptionCharacters;
     }
 
-    public void setInscriptionIds(List<Integer> inscriptionIds) {
-        this.inscriptionIds = inscriptionIds;
+    public void setInscriptionCharacters(List<String> inscriptionCharacters) {
+        this.inscriptionCharacters = inscriptionCharacters;
     }
 
     public String getGmLogin() {
@@ -39,12 +38,12 @@ public class SessionResponse {
         this.gmLogin = gmLogin;
     }
 
-    public List<Integer> getNpcIds() {
-        return this.npcIds;
+    public List<String> getNpcNames() {
+        return this.npcNames;
     }
 
-    public void setNpcIds(List<Integer> npcIds) {
-        this.npcIds = npcIds;
+    public void setNpcNames(List<String> npcNames) {
+        this.npcNames = npcNames;
     }
 
     public static SessionResponse convert(Session session) {
@@ -52,15 +51,15 @@ public class SessionResponse {
 
         response.setId(session.getId());
         response.setGmLogin(session.getGm().getLogin());
-        response.setInscriptionIds(
+        response.setInscriptionCharacters(
                 session.getInscriptions()
                         .stream()
-                        .map(Inscription::getId)
+                        .map(inscription -> inscription.getCharacter().getName())
                         .toList());
-        response.setNpcIds(
+        response.setNpcNames(
                 session.getNpcs()
                         .stream()
-                        .map(NPC::getId)
+                        .map(NPC::getName)
                         .toList());
 
         return response;

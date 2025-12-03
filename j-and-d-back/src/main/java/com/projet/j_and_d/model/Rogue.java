@@ -16,10 +16,6 @@ public class Rogue extends Role {
         this.baseMs = 6.0;
         this.baseArmor = 11;
         this.baseIni = 15;
-
-        // this.armor = ItemFactory.createArmor("Padded Vest", 1);
-        // this.weapon = ItemFactory.createWeapon("Rusty Dagger", 3);
-
         this.baseStats = new Stats(
                 10, // Wisdom
                 10, // Strength

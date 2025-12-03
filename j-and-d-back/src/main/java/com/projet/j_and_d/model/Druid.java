@@ -17,9 +17,6 @@ public class Druid extends Role {
         this.baseArmor = 10;
         this.baseIni = 11;
 
-        // this.armor = ItemFactory.createArmor("Woven Natural Robe", 1);
-        // this.weapon = ItemFactory.createWeapon("Oak Staff", 2);
-
         this.baseStats = new Stats(
                 16, // Wisdom
                 10, // Strength

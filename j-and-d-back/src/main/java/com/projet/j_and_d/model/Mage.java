@@ -17,9 +17,6 @@ public class Mage extends Role {
         this.baseArmor = 8;
         this.baseIni = 12;
 
-        // this.armor = ItemFactory.createArmor("Cloth Robe", 0);
-        // this.weapon = ItemFactory.createWeapon("Apprentice Wand", 2);
-
         this.baseStats = new Stats(
                 14, // Wisdom
                 8, // Strength

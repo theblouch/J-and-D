@@ -1,5 +1,7 @@
 package com.projet.j_and_d.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +16,6 @@ public interface NPCRepository extends JpaRepository<NPC, Integer> {
     @Transactional
     @Query("DELETE FROM NPC i WHERE i.session.id = :sessionId")
     void deleteAllBySessionId(int sessionId);
+
+    List<NPC> findAllByNameIn(List<String> npcNames);
 }
