@@ -21,8 +21,8 @@ export const routes: Routes = [
   { path: 'mycharacters', component: MyCharactersPage, canActivate: [authGuard] },
 
   // PAGES GM
-  { path: 'createsession', component: CreateSession, canActivate: [authGuard] },
-  { path: 'tools', component: ToolsPage, canActivate: [authGuard] },
+  { path: 'createsession', component: CreateSession},
+  { path: 'tools', component: ToolsPage},
 
   // COMMON
   { path: 'login', component: LoginPage },
