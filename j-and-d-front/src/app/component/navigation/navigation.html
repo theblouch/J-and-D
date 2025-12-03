@@ -1,43 +1,16 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Biblio</a>
+<nav class="header" *ngIf="showHeader">
+  <ul>
+    <!-- Player -->
+    <li *ngIf="role === 'Player'"><a routerLink="/createcharacter">Créer perso</a></li>
+    <li *ngIf="role === 'Player'"><a routerLink="/mycharacters">Mes persos</a></li>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- GM -->
+    <li *ngIf="role === 'GM'"><a routerLink="/createsession">Créer Session</a></li>
+    <li *ngIf="role === 'GM'"><a routerLink="/tools">Outils</a></li>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="home" routerLinkActive="active">Accueil</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="parties" routerLinkActive="active">Parties</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="auteur" routerLinkActive="active">Auteurs</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="outils" routerLinkActive="active">Outils</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="communaute" routerLinkActive="active"
-            >Communauté de l'agneau</a
-          >
-        </li>
-      </ul>
-    </div>
-  </div>
+    <!-- Global -->
+    <li><a routerLink="/">ACCUEIL</a></li>
+    <li><a routerLink="/marketplace">Marketplace</a></li>
+    <li><a routerLink="/community">Communauté</a></li>
+  </ul>
 </nav>
