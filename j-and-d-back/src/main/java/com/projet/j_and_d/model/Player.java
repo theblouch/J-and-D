@@ -7,9 +7,6 @@ import java.util.List;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -18,10 +15,6 @@ import jakarta.persistence.OneToMany;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("Player")
 public class Player extends User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
 
     @OneToMany
     @JoinColumn(name = "character_id", referencedColumnName = "id")
@@ -32,14 +25,6 @@ public class Player extends User {
 
     public Player(String login, String password) {
         super(login, password);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public List<Character> getCharacters() {
