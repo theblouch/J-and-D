@@ -1,0 +1,71 @@
+/* --- Conteneur global --- */
+
+/* --- Titre principal --- */
+.home-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* --- Bouton Créer une session --- */
+.home-container .btn-light {
+  display: block;
+  margin: 0 auto 25px auto;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 20px;
+  border: 2px solid #d8a67b;
+  background-color: #fffdfb;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.home-container .btn-light:hover {
+  background-color: #f5deb3;
+  box-shadow: 0 0 8px rgba(216, 166, 123, 0.5);
+}
+
+/* --- Grille des sessions --- */
+.sessions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* --- Carte session --- */
+.session-card {
+  border-radius: 12px;
+  background: #fffdfb;
+  border: 1px solid #d8a67b;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.session-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.session-card .card-body {
+  padding: 20px;
+}
+
+.session-card h5 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* --- Boutons dans les cartes --- */
+.session-card .btn-danger {
+  background-color: #c43b47;
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-top: 10px;
+}
+
+.session-card .btn-danger:hover {
+  background-color: #a12d35;
+}
