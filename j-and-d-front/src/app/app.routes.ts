@@ -20,7 +20,7 @@ import { NPCPage } from './page/tools/npc-page/npc-page';
 export const routes: Routes = [
   // HOME
   { path: '', component: HomePage, canActivate: [authGuard] },
-  { path: 'home', title: 'Java & Dragons', component: HomePage, canActivate: [authGuard] },
+  { path: 'home', title: 'Java & Dragon', component: HomePage, canActivate: [authGuard] },
 
   // PLAYER
   { path: 'createcharacter', title: 'Création de personnages', component: CreateCharacterPage },
@@ -37,7 +37,7 @@ export const routes: Routes = [
   // TOOLS
   { path: 'item', title: 'Item', component: ItemPage },
   { path: 'spell', title: 'Sorts', component: SpellPage },
-  { path: 'npc', title: 'NPC', component: NPCPage },
+  { path: 'npc', title: 'Monstres', component: NPCPage },
 
   // COMMON
   { path: 'login', title: 'Se Connecter', component: LoginPage },
