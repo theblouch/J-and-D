@@ -1,12 +1,13 @@
-<div class="header">
+<div class="header" *ngIf="showHeader">
 
-  <!-- Logo Java & Dragon -->
-  
-
-  <!-- Navigation -->
-  <ul>
-     <img src="/assets/couronne.png" alt="couronne" class="logo-icon" />
+  <!-- Logo gauche -->
+  <div class="header-left">
+    <img src="/assets/couronne.png" alt="couronne" class="logo-icon" />
     <span class="logo-text">Java & Dragon</span>
+  </div>
+
+  <!-- Menu du centre -->
+  <ul class="nav-menu">
     <li><a routerLink="/marketplace">Marketplace</a></li>
     <li><a routerLink="/community">Communauté</a></li>
     <li><a routerLink="/createsession">Créer Session</a></li>
@@ -20,5 +21,9 @@
     <li><a routerLink="/mycharacters">Mes persos</a></li>
   </ul>
 
-</div>
+  <!-- Bouton Déconnexion -->
+  <button class="logout-btn" (click)="logout()">
+    Déconnexion
+  </button>
 
+</div>
