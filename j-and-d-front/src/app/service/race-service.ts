@@ -2,12 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn: 'root' })
-export class CharacterService {
-    private api = '/character';
+export class RaceService {
+    private api = '/race';
 
     constructor(private http: HttpClient) { }
 
-    create(character: any) {
-        return this.http.post<any>(this.api, character);
+    getAll() {
+        return this.http.get<any>(this.api);
     }
 }

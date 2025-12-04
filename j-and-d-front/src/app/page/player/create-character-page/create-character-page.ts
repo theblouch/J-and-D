@@ -3,6 +3,7 @@ import { CharacterService } from '../../../service/character-service';
 import { RoleService } from '../../../service/role-service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RaceService } from '../../../service/race-service';
 
 @Component({
   selector: 'app-create-character-page',
@@ -12,24 +13,29 @@ import { CommonModule } from '@angular/common';
 })
 export class CreateCharacterPage {
   roles: any[] = [];
+  races: any[] = [];
   selectedRole: any | null = null;
   selectedRoleId: number | null = null;
+  selectedRace: string | null = null;
 
   successMessage: string = '';
 
   character: any = {
     name: '',
     roleId: null,
-    stats: null
+    stats: null,
+    race: 'HUMAN'
   };
 
   constructor(
     private characterService: CharacterService,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private raceService: RaceService
   ) { }
 
   ngOnInit(): void {
     this.loadRoles();
+    this.loadRaces();
   }
 
   loadRoles(): void {
@@ -41,21 +47,37 @@ export class CreateCharacterPage {
     });
   }
 
+  loadRaces(): void {
+    this.raceService.getAll().subscribe({
+      next: (data: any) => {
+        this.races = data;
+      },
+      error: err => console.error(err)
+    });
+  }
+
   onRoleChange(): void {
     this.selectedRole = this.roles.find(r => r.id == this.selectedRoleId);
 
     if (this.selectedRole) {
       // ========== STATS PAR DÉFAUT ==========
       this.character.roleId = this.selectedRole.id;
-      this.character.stats = { ...this.selectedRole.stats };
+      this.character.stats = { ...this.selectedRole.baseStats };
       // (copie profonde pour éviter que l'utilisateur modifie les stats du rôle)
     }
+  }
+
+
+  onRaceChange(race: any): void {
+    this.selectedRace = race;
+
+    this.character.race = race;
   }
 
   createCharacter(): void {
     this.characterService.create(this.character).subscribe({
       next: created => {
-        this.successMessage = `Personnage "${created.name}" créé avec succès !`;
+        this.successMessage = `Personnage "${this.character.name}" créé avec succès !`;
       },
       error: err => console.error(err)
     });

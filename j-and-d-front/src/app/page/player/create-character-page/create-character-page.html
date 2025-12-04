@@ -4,7 +4,16 @@
   <!-- NOM -->
   <div class="form-group">
     <label for="name">Nom du personnage :</label>
-    <!-- <input id="name" type="text" [(ngModel)]="character.name" class="form-control" placeholder="Entrez un nom" />-->
+    <input id="name" type="text" [(ngModel)]="character.name" class="form-control" placeholder="Entrez un nom" />
+  </div>
+  <!-- RACE -->
+  <div class="form-group mt-3">
+    <label for="race">Choisir une race :</label>
+    <select [(ngModel)]="selectedRace" (ngModelChange)="onRaceChange($event)" class="form-control">
+      <option *ngFor="let race of races" (click)="onRaceChange(race)">
+        {{ race }}
+      </option>
+    </select>
   </div>
   <!-- ROLE -->
   <div class="form-group mt-3">
