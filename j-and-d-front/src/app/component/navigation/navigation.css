@@ -4,8 +4,8 @@
   background: rgba(255, 230, 200, 0.95);
   padding: 0 40px;
 
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* ← LA MAGIE */
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 
   position: fixed;
@@ -35,11 +35,12 @@
 /* ------------ CENTER : NAVIGATION ------------ */
 .nav-menu {
   display: flex;
-  justify-content: center; /* centre parfaitement */
-  gap: 32px; /* espace entre les liens */
+  justify-content: center;
+  flex: 1;
+  gap: 32px;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 40px;
 }
 
 .nav-menu a {
@@ -56,24 +57,28 @@
   height: 28px;
 }
 
-/* ------------ RIGHT : DÉCONNEXION ------------ */
+/* ------------ RIGHT : ICÔNE DE DÉCONNEXION ------------ */
 .header-right {
+  width: 140px;          /* ← augmente la zone (avant : 80px) */
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;  /* ← centre horizontalement */
+  align-items: center;      /* ← centre verticalement */
 }
 
-.logout-btn {
-  background: #c0392b;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+
+/* Icône bien visible */
+.logout-icon {
+  height: 42px;         /* taille augmentée */
   cursor: pointer;
-  font-weight: bold;
+  opacity: 1;
+  transition: transform 0.15s ease, opacity 0.2s ease;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));
 }
 
-.logout-btn:hover {
-  background: #a93226;
+/* Effet hover */
+.logout-icon:hover {
+  transform: scale(1.08);
+  opacity: 0.9;
 }
 
 /* Compense le header fixé */

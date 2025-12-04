@@ -21,9 +21,14 @@
     <li><a routerLink="/mycharacters">Mes persos</a></li>
   </ul>
 
-  <!-- Zone droite -->
+  <!-- Zone droite : icône de déconnexion -->
   <div class="header-right">
-    <button class="logout-btn" (click)="logout()">Déconnexion</button>
+    <img 
+      src="/assets/deco2.png"
+      alt="Déconnexion"
+      class="logout-icon"
+      (click)="logout()"
+    />
   </div>
 
 </div>
