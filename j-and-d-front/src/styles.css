@@ -3,6 +3,7 @@
 /* --- Reset global --- */
 body {
   margin: 0;
+  padding-top: 80px;
   font-family: 'Caudex', serif;
   color: #333;
   background-image: url('/assets/fondjandd.png');
@@ -129,4 +130,10 @@ td {
 thead {
   background-color: #f5deb3;
   font-weight: bold;
+}
+
+main, .page-container, .content, body > *:not(.header) {
+  width: 100%;
+  max-width: 1400px; /* ou auto si tu veux full full width */
+  margin: 0 auto;    /* CENTRE le contenu */
 }

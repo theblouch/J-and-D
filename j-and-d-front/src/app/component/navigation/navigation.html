@@ -1,22 +1,24 @@
-<nav class="header" *ngIf="showHeader">
+<div class="header">
+
+  <!-- Logo Java & Dragon -->
+  
+
+  <!-- Navigation -->
   <ul>
-    Player 
-    <li *ngIf="role === 'Player'"><a routerLink="/createcharacter">Créer perso</a></li>
-    <li *ngIf="role === 'Player'"><a routerLink="/mycharacters">Mes persos</a></li>
-
-    <!-- GM 
-    <li *ngIf="role === 'GM'"><a routerLink="/createsession">Créer Session</a></li>
-    <li *ngIf="role === 'GM'"><a routerLink="/tools">Outils</a></li>-->
-
-    <!-- Global -->
-    
+     <img src="/assets/couronne.png" alt="couronne" class="logo-icon" />
+    <span class="logo-text">Java & Dragon</span>
     <li><a routerLink="/marketplace">Marketplace</a></li>
     <li><a routerLink="/community">Communauté</a></li>
     <li><a routerLink="/createsession">Créer Session</a></li>
-    <li><a routerLink="/">ACCUEIL</a></li>
+    <li>
+      <a routerLink="/home">
+        <img src="/assets/masc.png" alt="Accueil" class="home-icon" />
+      </a>
+    </li>
     <li><a routerLink="/tools">Outils</a></li>
     <li><a routerLink="/createcharacter">Créer perso</a></li>
     <li><a routerLink="/mycharacters">Mes persos</a></li>
-
   </ul>
-</nav>
+
+</div>
+
