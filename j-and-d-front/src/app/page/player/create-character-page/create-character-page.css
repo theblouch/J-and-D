@@ -12,6 +12,10 @@
     transition: transform 0.2s ease;
 }
 
+#name {
+    width: 620px;
+}
+
 .container:hover {
     transform: scale(1.01);
 }

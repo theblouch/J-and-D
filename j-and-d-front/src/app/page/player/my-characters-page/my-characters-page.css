@@ -6,7 +6,6 @@
     background-color: #ffe5c3;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    font-family: Arial, sans-serif;
 }
 
 /* Titre principal */
@@ -26,7 +25,7 @@ h2 {
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Liste des personnages */
@@ -43,7 +42,7 @@ h2 {
     padding: 15px 20px;
     margin-bottom: 16px;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.10);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
