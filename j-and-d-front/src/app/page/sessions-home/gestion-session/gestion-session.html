@@ -16,7 +16,7 @@
     <h3>Monstres</h3>
     <p *ngIf="npcList.length === 0">Aucun Monstre</p>
 
-    <div *ngFor="let npc of npcList" class="character-item" (click)="selectNPC(npc)">
+    <div *ngFor="let npc of npcList" class="character-item">
         {{ npc }}
     </div>
 </div>
@@ -27,11 +27,9 @@
     <h3>Personnages</h3>
     <p *ngIf="charactersList.length === 0">Aucun personnage</p>
 
-    <div *ngFor="let character of charactersList" class="character-item" (click)="selectCharacter(character)">
-        {{ character }}
+    <div *ngFor="let character of charactersList" class="character-item" (click)="goToCharacter(character.id)"
+        style="cursor: pointer;">
+        {{ character.name }}
     </div>
-</div>
 
-<div *ngIf="!(session$ | async)">
-    <p>Session introuvable...</p>
 </div>

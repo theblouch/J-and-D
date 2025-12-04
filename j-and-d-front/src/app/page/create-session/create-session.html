@@ -1,10 +1,8 @@
-<h1>Liste des sessions</h1>
-
 <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light">
     Créer une session
 </button>
 
-<form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="sessionForm">
+<form *ngIf="showForm" (ngSubmit)="editingSession ? modifier() : creer()" [formGroup]="sessionForm">
     <!-- NOM DE LA SESSION -->
     <div class="mb-3 row">
         <label for="name" class="col-sm-2 col-form-label">Nom de la session</label>
@@ -22,28 +20,34 @@
 
     <!-- INSCRIPTIONS -->
     <div class="mb-3 row">
-        <label for="inscriptions" class="col-sm-2 col-form-label">Personnages</label>
-        <div class="col-sm-10">
-            <select id="inscriptions" class="form-select" formControlName="inscriptions" multiple>
-                <option *ngFor="let c of characters$ | async" [ngValue]="c.name">
+        <label class="col-sm-2 col-form-label">Personnages</label>
+        <div class="checkbox-group">
+            <div *ngFor="let c of characters$ | async">
+                <label>
+                    <input type="checkbox" [value]="c.name" (change)="toggleCharacter($event)"
+                        [checked]="inscriptionsCtrl.value.includes(c.name)">
                     {{ c.name }}
-                </option>
-            </select>
+                </label>
+            </div>
         </div>
     </div>
+
 
 
     <!-- NPCs -->
     <div class="mb-3 row">
-        <label for="npcs" class="col-sm-2 col-form-label">Monstres</label>
-        <div class="col-sm-10">
-            <select id="npcs" class="form-select" formControlName="npcs" multiple>
-                <option *ngFor="let npc of npcs$ | async" [value]="npc.name">
+        <label class="col-sm-2 col-form-label">Monstres</label>
+        <div class="checkbox-group">
+            <div *ngFor="let npc of npcs$ | async">
+                <label>
+                    <input type="checkbox" [value]="npc.name" (change)="toggleNpc($event)"
+                        [checked]="npcsCtrl.value.includes(npc.name)">
                     {{ npc.name }}
-                </option>
-            </select>
+                </label>
+            </div>
         </div>
     </div>
+
 
     <!-- BUTTONS -->
     <div class="btn-group">
@@ -56,9 +60,8 @@
     </div>
 </form>
 
-<hr />
-
 <!-- TABLEAU SESSIONS -->
+<h1>Liste des sessions</h1>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -78,7 +81,10 @@
             <td>{{ displayList(session.npcNames) }}</td>
             <td>
                 <div class="btn-group">
-                    <button class="btn btn-danger" (click)="delete(session.id)">
+                    <button class="btn btn-warning" (click)="editer(session)">
+                        Éditer
+                    </button>
+                    <button class="btn btn-danger" (click)="askDelete(session.id)">
                         Supprimer
                     </button>
                 </div>
@@ -86,3 +92,19 @@
         </tr>
     </tbody>
 </table>
+
+<div *ngIf="showDeleteModal" class="custom-modal-overlay">
+    <div class="custom-modal">
+        <h3>Confirmer la suppression</h3>
+        <p>Voulez-vous vraiment supprimer cette session ?</p>
+
+        <div class="modal-buttons">
+            <button class="btn btn-secondary" (click)="cancelDelete()">
+                Annuler
+            </button>
+            <button class="btn btn-danger" (click)="confirmDelete()">
+                Supprimer
+            </button>
+        </div>
+    </div>
+</div>

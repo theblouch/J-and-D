@@ -1,4 +1,7 @@
 <div class="spell-container">
+  <div class="mb-3">
+    <button class="btn btn-light" (click)="goHome()">← Retour aux outils</button>
+  </div>
   <h1>Liste des sorts</h1>
 
   <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light mb-3">
@@ -24,7 +27,11 @@
 
     <div class="mb-3">
       <label class="form-label">Rôle</label>
-      <input type="text" class="form-control" formControlName="role" />
+      <select class="form-select" formControlName="role">
+        <option *ngFor="let r of roles$ | async" [value]="r.id">
+          {{ r.name }}
+        </option>
+      </select>
     </div>
 
     <div class="mb-3">
@@ -33,14 +40,8 @@
     </div>
 
     <div class="btn-group">
-      <input
-        type="submit"
-        [disabled]="spellForm.invalid"
-        [value]="editingSpell ? 'Modifier' : 'Créer'"
-        [class.btn-warning]="editingSpell"
-        [class.btn-success]="!editingSpell"
-        class="btn"
-      />
+      <input type="submit" [disabled]="spellForm.invalid" [value]="editingSpell ? 'Modifier' : 'Créer'"
+        [class.btn-warning]="editingSpell" [class.btn-success]="!editingSpell" class="btn" />
       <button type="button" class="btn btn-danger" (click)="annulerEditer()">Annuler</button>
     </div>
   </form>
@@ -51,7 +52,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ spell.name }} (Niveau {{ spell.spellLevel }})</h5>
         <p><strong>Description :</strong> {{ spell.description }}</p>
-        <p><strong>Rôle :</strong> {{ spell.role }}</p>
+        <p><strong>Rôle:</strong> {{ spell.role?.name }}</p>
         <p><strong>Dégâts :</strong> {{ displayDamage(spell.baseDamage) }}</p>
         <div class="btn-group">
           <button class="btn btn-warning btn-sm" (click)="editer(spell)">Modifier</button>

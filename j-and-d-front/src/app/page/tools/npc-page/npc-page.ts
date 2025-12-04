@@ -2,84 +2,93 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+
 import { NPCDto } from '../../../dto/npc-dto';
 import { NPCService } from '../../../service/npc-service';
+import { ItemService } from '../../../service/item-service';
+import { SessionService } from '../../../service/session-service';
+import { ItemDto } from '../../../dto/item-dto';
+import { SessionDto } from '../../../dto/session-dto';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-npc',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './npc-page.html',
-  styleUrls: ['./npc-page.css'],
+  styleUrl: './npc-page.css'
 })
-export class NpcPage implements OnInit {
+export class NPCPage implements OnInit {
 
-  npcForm!: FormGroup;
   npcs$!: Observable<NPCDto[]>;
-  showForm = false;
+  npcForm!: FormGroup;
+
+  items$!: Observable<ItemDto[]>;
+  sessions$!: Observable<SessionDto[]>;
+
   editingNpc: NPCDto | null = null;
+  showForm: boolean = false;
+
+  // constantes Monster
+  readonly MONSTER_ROLE_ID = 5;
+  readonly DEFAULT_ARMOR_ID = 10;
+  readonly DEFAULT_WEAPON_ID = 9;
+
+  readonly MONSTER_STATS = {
+    charisma: 6,
+    constitution: 12,
+    dexterity: 12,
+    intelligence: 6,
+    strength: 13,
+    wisdom: 8
+  };
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private npcService: NPCService,
-  ) {}
+    private itemService: ItemService,
+    private sessionService: SessionService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-
     this.npcs$ = this.npcService.findAll();
+    this.items$ = this.itemService.findAll();
+    this.sessions$ = this.sessionService.findAll();
 
-    this.npcForm = this.formBuilder.group({
+    this.npcForm = this.fb.group({
       name: ['', Validators.required],
-      level: [1, Validators.required],
-      hp: [1, Validators.required],
-      mp: [0],
-      speed: [1],
-      armorClass: [0],
-      initiative: [0],
+      level: [1, [Validators.required, Validators.min(1)]],
+
+      hp: [8, Validators.required],
+      mp: [0, Validators.required],
+      speed: [5.0, Validators.required],
       alive: [true],
+      armorClass: [10, Validators.required],
+      initiative: [10, Validators.required],
+      xP: [0],
 
-      armor: [''],       // string → envoyé tel quel
-      weapon: [''],      // string
-      itemWorn: [''],    // liste séparée par virgules
-      inventory: [''],   // liste séparée par virgules
+      armorId: [this.DEFAULT_ARMOR_ID, Validators.required],
+      weaponId: [this.DEFAULT_WEAPON_ID, Validators.required],
 
-      statsStr: ['', Validators.required],  // ex: "10,10,10,10,10,10"
+      itemWornIds: [[]],
+      inventoryIds: [[]],
 
-      roleName: ['', Validators.required],
-
-      state: [''],        // ex: "poison,slow"
-
-      xp: [0],
+      sessionId: [null]
     });
   }
-
+  goHome() {
+    this.router.navigate(['/tools']);
+  }
+  /* -------------------- CRÉER / MODIFIER -------------------- */
   public creer(): void {
     const f = this.npcForm.value;
 
-    const statsArray = f.statsStr.split(',').map((x: string) => Number(x.trim()));
-
-    const stats = {
-      strength: statsArray[0] ?? 0,
-      dexterity: statsArray[1] ?? 0,
-      constitution: statsArray[2] ?? 0,
-      intelligence: statsArray[3] ?? 0,
-      wisdom: statsArray[4] ?? 0,
-      charisma: statsArray[5] ?? 0,
-    };
-
-    const itemWorn = f.itemWorn ? f.itemWorn.split(',').map((x: string) => x.trim()) : [];
-    const inventory = f.inventory ? f.inventory.split(',').map((x: string) => x.trim()) : [];
-    const state = f.state ? f.state.split(',').map((x: string) => x.trim()) : [];
-
-    const role = {
-      id: 0,
-      name: f.roleName
-    };
-
     const npc = new NPCDto(
-      0,
+      this.editingNpc ? this.editingNpc.id : 0,
       f.name,
       f.level,
+
       f.hp,
       f.mp,
       f.speed,
@@ -87,25 +96,22 @@ export class NpcPage implements OnInit {
       f.armorClass,
       f.initiative,
 
-      f.armor || null,
-      f.weapon || null,
-      itemWorn,
-      inventory,
-      stats,
-      role,
-      state,
-      null,
-      f.xp,
-      null
+      { id: f.armorId },
+      { id: f.weaponId },
+
+      (f.itemWornIds || []).map((id: number) => ({ id })),
+      (f.inventoryIds || []).map((id: number) => ({ id })),
+
+      this.MONSTER_STATS,
+      { id: this.MONSTER_ROLE_ID },
+
+      [],          // state
+      null,        // tauntedBy
+      f.xP,
+      f.sessionId ? { id: f.sessionId } : null
     );
-
-    this.npcService.save(npc);
-
-    this.showForm = false;
-    this.editingNpc = null;
-    this.npcForm.reset();
   }
-
+  /* -------------------- EDITER -------------------- */
   public editer(npc: NPCDto): void {
     this.editingNpc = npc;
     this.showForm = true;
@@ -116,32 +122,29 @@ export class NpcPage implements OnInit {
       hp: npc.hp,
       mp: npc.mp,
       speed: npc.speed,
+      alive: npc.alive,
       armorClass: npc.armorClass,
       initiative: npc.initiative,
-      alive: npc.alive,
+      xP: npc.xP,
 
-      armor: npc.armor || "",
-      weapon: npc.weapon || "",
-      itemWorn: npc.itemWorn?.join(', ') ?? "",
-      inventory: npc.inventory?.join(', ') ?? "",
-      statsStr: Object.values(npc.stats).join(','),
-      roleName: npc.role?.name ?? "",
-      state: npc.state?.join(',') ?? "",
-      xp: npc.xP,
+      armorId: npc.armor?.id ?? this.DEFAULT_ARMOR_ID,
+      weaponId: npc.weapon?.id ?? this.DEFAULT_WEAPON_ID,
+
+      itemWornIds: npc.itemWorn?.map((x: any) => x.id) ?? [],
+      inventoryIds: npc.inventory?.map((x: any) => x.id) ?? [],
+
+      sessionId: npc.session?.id ?? null
     });
   }
 
-  public annuler(): void {
+  public annulerEditer(): void {
     this.showForm = false;
     this.editingNpc = null;
     this.npcForm.reset();
   }
 
+  /* -------------------- SUPPRIMER -------------------- */
   public delete(id: number): void {
     this.npcService.deleteById(id);
-  }
-
-  public displayBoolean(v: boolean): string {
-    return v ? "Oui" : "Non";
   }
 }

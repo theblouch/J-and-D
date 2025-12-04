@@ -41,6 +41,7 @@
   list-style: none;
   padding: 0;
   margin: 0 40px;
+  margin-left: -100px;
 }
 
 .nav-menu a {
@@ -59,16 +60,20 @@
 
 /* ------------ RIGHT : ICÔNE DE DÉCONNEXION ------------ */
 .header-right {
-  width: 140px;          /* ← augmente la zone (avant : 80px) */
+  width: 140px;
+  /* ← augmente la zone (avant : 80px) */
   display: flex;
-  justify-content: center;  /* ← centre horizontalement */
-  align-items: center;      /* ← centre verticalement */
+  justify-content: center;
+  /* ← centre horizontalement */
+  align-items: center;
+  /* ← centre verticalement */
 }
 
 
 /* Icône bien visible */
 .logout-icon {
-  height: 42px;         /* taille augmentée */
+  height: 42px;
+  /* taille augmentée */
   cursor: pointer;
   opacity: 1;
   transition: transform 0.15s ease, opacity 0.2s ease;

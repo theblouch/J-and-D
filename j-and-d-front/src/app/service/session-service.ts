@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, startWith, Subject, switchMap } from 'rxjs';
+import { Observable, startWith, Subject, switchMap, tap } from 'rxjs';
 import { SessionDto } from '../dto/session-dto';
 
 @Injectable({
@@ -15,34 +15,35 @@ export class SessionService {
   public findAll(): Observable<SessionDto[]> {
     return this.refresh$.pipe(
       startWith(null),
-
-      switchMap(() => {
-        return this.http.get<SessionDto[]>(this.apiUrl);
-      })
+      switchMap(() => this.http.get<SessionDto[]>(this.apiUrl))
     );
   }
 
   public refresh() {
-    this.refresh$.next(); // Permet d'envoyer des nouvelles infos
+    this.refresh$.next(); // Permet de notifier les changements
   }
 
   public findById(id: number): Observable<SessionDto> {
     return this.http.get<SessionDto>(`${this.apiUrl}/${id}`);
   }
 
-  public save(sessionDto: SessionDto): void {
+  public save(sessionDto: SessionDto): Observable<SessionDto> {
     const payload = sessionDto.toJson();
 
     if (!sessionDto.id) {
-      this.http.post<SessionDto>(this.apiUrl, payload).subscribe(() => this.refresh());
-      return;
+      return this.http.post<SessionDto>(this.apiUrl, payload).pipe(
+        tap(() => this.refresh())
+      );
     }
 
-    this.http.put<SessionDto>(`${this.apiUrl}/${sessionDto.id}`, payload).subscribe(() => this.refresh());
+    return this.http.put<SessionDto>(`${this.apiUrl}/${sessionDto.id}`, payload).pipe(
+      tap(() => this.refresh())
+    );
   }
 
-  public deleteById(id: number): void {
-    this.http.delete<void>(`${this.apiUrl}/${id}`).subscribe(() => this.refresh());
+  public deleteById(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      tap(() => this.refresh())
+    );
   }
 }
-

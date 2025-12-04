@@ -1,29 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
-import { SessionDto } from '../../dto/session-dto';
-import { SessionService } from '../../service/session-service';
 import { CommonModule } from '@angular/common';
+import { SessionService } from '../../../service/session-service';
+import { CharacterService } from '../../../service/character-service';
+import { SessionDto } from '../../../dto/session-dto';
+import { CharacterDto } from '../../../dto/character-dto';
 
 @Component({
   selector: 'app-gestion-session',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './gestion-session.html',
-  styleUrl: './gestion-session.css',
+  styleUrls: ['./gestion-session.css'],
 })
 export class GestionSession implements OnInit {
   sessionId!: string;
   session$!: Observable<SessionDto | null>;
   showCharactersSection: boolean = false;
-  charactersList: string[] = [];
-  selectedCharacter: string | null = null;
+  charactersList: { id: number, name: string }[] = [];
   showNPCsSection: boolean = false;
   npcList: string[] = [];
-  selectedNPC: string | null = null;
+
+  allCharacters: CharacterDto[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private sessionService: SessionService,
+    private characterService: CharacterService,
     private router: Router
   ) { }
 
@@ -31,10 +34,17 @@ export class GestionSession implements OnInit {
     // Récupère l'ID depuis l'URL
     this.sessionId = this.route.snapshot.paramMap.get('sessionId')!;
 
-    // Charge la session depuis le service
+    // Charger tous les personnages pour mapping réel
+    this.characterService.getAll().subscribe(chars => {
+      this.allCharacters = chars;
+      this.loadSession();
+    });
+  }
+
+  loadSession() {
     this.session$ = this.sessionService.findById(Number(this.sessionId))
       .pipe(
-        switchMap(session => of(session)) // convertit en Observable si nécessaire
+        switchMap(session => of(session))
       );
   }
 
@@ -42,23 +52,24 @@ export class GestionSession implements OnInit {
     this.router.navigate(['/home']);
   }
 
-
-  selectCharacter(character: string) {
-    this.selectedCharacter = character;
+  goToCharacter(id: number): void {
+    this.router.navigate(['/home', 'character', id]);
   }
 
+
   showCharacters(session: SessionDto) {
-    this.charactersList = session.inscriptionCharacters || [];
+    // Mapping réel des personnages inscrits
+    this.charactersList = session.inscriptionCharacters?.map(name => {
+      const character = this.allCharacters.find(c => c.name === name);
+      return character ? { id: character.id, name: character.name } : null;
+    }).filter(c => c !== null) as { id: number, name: string }[];
+
     this.showCharactersSection = !this.showCharactersSection;
   }
 
   showNPCs(session: SessionDto) {
     this.npcList = session.npcNames || [];
     this.showNPCsSection = !this.showNPCsSection;
-  }
-
-  selectNPC(npc: string) {
-    this.selectedNPC = npc;
   }
 
   rollDice() {
