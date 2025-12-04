@@ -1,0 +1,96 @@
+<div class="npc-container">
+
+  <h1>Liste des NPC</h1>
+
+  <!-- CAS : PAS DE SESSION -->
+  <div *ngIf="!sessionId" class="alert alert-warning text-center p-4">
+    <h3>Aucune session sélectionnée</h3>
+    <p>Vous devez d’abord sélectionner une session dans /sessions avant de créer des NPC.</p>
+  </div>
+
+  <!-- CAS : SESSION OK -->
+  <ng-container *ngIf="sessionId">
+
+    <!-- bouton créer -->
+    <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light mb-3">
+      Créer un NPC
+    </button>
+
+    <!-- formulaire -->
+    <form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="npcForm" class="card p-3 mb-4">
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label>Nom</label>
+          <input class="form-control" formControlName="name" />
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <label>Niveau</label>
+          <input class="form-control" type="number" formControlName="level" />
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <label>HP</label>
+          <input class="form-control" type="number" formControlName="hp" />
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <label>MP</label>
+          <input class="form-control" type="number" formControlName="mp" />
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <label>Vitesse</label>
+          <input class="form-control" type="number" formControlName="speed" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Classe d'armure</label>
+          <input class="form-control" type="number" formControlName="armorClass" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Initiative</label>
+          <input class="form-control" type="number" formControlName="initiative" />
+        </div>
+
+        <div class="col-md-3 form-check mb-3 mt-4">
+          <input type="checkbox" class="form-check-input" formControlName="alive" />
+          <label class="form-check-label">En vie</label>
+        </div>
+      </div>
+
+      <div class="btn-group mt-3">
+        <button class="btn btn-success" type="submit">Créer</button>
+        <button class="btn btn-danger" type="button" (click)="annuler()">Annuler</button>
+      </div>
+
+    </form>
+
+    <!-- LISTE NPC -->
+    <div class="npc-grid">
+
+      <div class="card npc-card" *ngFor="let npc of npcs$ | async">
+        <div class="card-body">
+
+          <h5>{{ npc.name }} (Niv {{ npc.level }})</h5>
+
+          <p><strong>HP :</strong> {{ npc.hp }}</p>
+          <p><strong>MP :</strong> {{ npc.mp }}</p>
+          <p><strong>Vitesse :</strong> {{ npc.speed }}</p>
+          <p><strong>CA :</strong> {{ npc.armorClass }}</p>
+          <p><strong>Initiative :</strong> {{ npc.initiative }}</p>
+          <p><strong>En vie :</strong> {{ displayBoolean(npc.alive) }}</p>
+
+          <div class="btn-group">
+            <button class="btn btn-warning btn-sm" (click)="editer(npc)">Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="delete(npc.id)">Supprimer</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>

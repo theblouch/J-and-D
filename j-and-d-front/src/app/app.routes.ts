@@ -4,7 +4,6 @@ import { LoginPage } from './page/user/login-page/login-page';
 import { InscriptionPage } from './page/user/register-page/register-page';
 import { authGuard } from './guard/auth-guard';
 
-// TODO: importer les composants manquants
 import { CreateSession } from './page/create-session/create-session';
 import { ToolsPage } from './page/gm/tools-page/tools-page';
 
@@ -14,26 +13,31 @@ import { InProgress } from './page/in-progress/in-progress';
 import { ItemPage } from './page/tools/item/item-page';
 import { SpellPage } from './page/tools/spell-page/spell-page';
 import { CharacterDetail } from './page/player/character-detail/character-detail';
+import { NpcPage } from './page/tools/npc-page/npc-page';
 
 export const routes: Routes = [
   // HOME
   { path: '', component: HomePage, canActivate: [authGuard] },
   { path: 'home', title: 'Java & Dragons', component: HomePage, canActivate: [authGuard] },
 
-  // PAGES PLAYER
+  // PLAYER
   { path: 'createcharacter', title: 'Création de personnages', component: CreateCharacterPage },
   { path: 'mycharacters', title: 'Mes personnages', component: MyCharactersPage },
+  { path: 'mycharacters/:id', component: CharacterDetail },
 
-  // PAGES GM
+  // GM
   { path: 'createsession', title: 'Création de session', component: CreateSession },
   { path: 'tools', title: 'Outils', component: ToolsPage },
+  
+
+  // TOOLS
   { path: 'item', title: 'Item', component: ItemPage },
   { path: 'spell', title: 'Sorts', component: SpellPage },
+  { path: 'npc', title: 'NPC', component: NpcPage },
 
   // COMMON
   { path: 'login', title: 'Se Connecter', component: LoginPage },
   { path: 'register', title: 'Créer un compte', component: InscriptionPage },
   { path: 'marketplace', title: 'Boutique', component: InProgress },
   { path: 'community', title: 'Bienvenue', component: InProgress },
-  { path: 'mycharacters/:id', component: CharacterDetail }
 ];

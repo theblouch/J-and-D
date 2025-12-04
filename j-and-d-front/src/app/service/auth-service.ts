@@ -68,5 +68,11 @@ export class AuthService {
     return payload.sub ?? payload.id ?? null;
   }
 
+  public logout(): void {
+  this._token = '';
+  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('role');
+}
+
 
 }
