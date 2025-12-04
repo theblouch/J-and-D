@@ -85,6 +85,8 @@ export class CreateSession implements OnInit {
       this.showForm = false;
       this.editingSession = null;
       this.sessionForm.reset();
+      this.inscriptionsCtrl.setValue([]);
+      this.npcsCtrl.setValue([]);
     });
   }
   public modifier() {
@@ -102,6 +104,8 @@ export class CreateSession implements OnInit {
       this.showForm = false;
       this.editingSession = null;
       this.sessionForm.reset();
+      this.inscriptionsCtrl.setValue([]);
+      this.npcsCtrl.setValue([]);
     });
   }
 
@@ -126,6 +130,8 @@ export class CreateSession implements OnInit {
     this.showForm = false;
     this.editingSession = null;
     this.sessionForm.reset();
+    this.inscriptionsCtrl.setValue([]);
+    this.npcsCtrl.setValue([]);
   }
   public askDelete(id: number) {
     this.sessionToDelete = id;
