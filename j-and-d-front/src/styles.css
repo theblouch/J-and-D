@@ -1,7 +1,132 @@
-body{
-    margin: 0;
-    background-image: url('/assets/arbres.png');
+@import url('https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap');
+
+/* --- Reset global --- */
+body {
+  margin: 0;
+  font-family: 'Caudex', serif;
+  color: #333;
+  background-image: url('/assets/fondjandd.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}/* You can add global styles to this file, and also import other style files */
+  min-height: 100vh;
+}
+
+/* --- Titres globaux --- */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* --- Liens --- */
+a {
+  text-decoration: none;
+  color: #e68a3f;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #c96c23;
+}
+
+/* --- Boutons globaux --- */
+button,
+.btn {
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  font-family: 'Caudex', serif;
+}
+
+/* Bouton principal (success) */
+.btn-success {
+  background-color: #e68a3f;
+  border: 2px solid #c96c23;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background-color: #c96c23;
+  border-color: #a64b1f;
+}
+
+/* Bouton danger */
+.btn-danger {
+  background-color: #c43b47;
+  border: none;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #a12d35;
+}
+
+/* Bouton neutre */
+.btn-light {
+  background-color: #fffdfb;
+  border: 2px solid #d8a67b;
+  color: #333;
+}
+
+.btn-light:hover {
+  background-color: #f5deb3;
+  box-shadow: 0 0 8px rgba(216, 166, 123, 0.5);
+}
+
+/* --- Cartes globales --- */
+.card {
+  background: #fffdfb;
+  border: 1px solid #d8a67b;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Champs de formulaire --- */
+.form-control,
+.form-select {
+  font-size: 1.05rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #d8a67b;
+  background: #fffdfb;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #e68a3f;
+  box-shadow: 0 0 8px rgba(230, 138, 63, 0.5);
+}
+
+/* --- Tableaux --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #d8a67b;
+  padding: 10px;
+  text-align: center;
+}
+
+thead {
+  background-color: #f5deb3;
+  font-weight: bold;
+}
