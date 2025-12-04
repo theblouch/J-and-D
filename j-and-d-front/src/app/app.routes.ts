@@ -13,7 +13,7 @@ import { InProgress } from './page/in-progress/in-progress';
 import { ItemPage } from './page/tools/item/item-page';
 import { SpellPage } from './page/tools/spell-page/spell-page';
 import { CharacterDetail } from './page/player/character-detail/character-detail';
-import { NpcPage } from './page/tools/npc-page/npc-page';
+import { NPCPage } from './page/tools/npc-page/npc-page';
 import { GestionSession } from './page/gestion-session/gestion-session';
 
 export const routes: Routes = [
@@ -35,7 +35,7 @@ export const routes: Routes = [
   // TOOLS
   { path: 'item', title: 'Item', component: ItemPage },
   { path: 'spell', title: 'Sorts', component: SpellPage },
-  { path: 'npc', title: 'NPC', component: NpcPage },
+  { path: 'npc', title: 'NPC', component: NPCPage },
 
   // COMMON
   { path: 'login', title: 'Se Connecter', component: LoginPage },

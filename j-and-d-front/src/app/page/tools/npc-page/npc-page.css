@@ -1,97 +1,28 @@
-/* TITRE */
 .npc-container h1 {
   text-align: center;
   margin-bottom: 30px;
-  color: #333;
   font-weight: bold;
+  color: #333;
 }
 
-/* MESSAGE D’AVERTISSEMENT */
-.alert {
-  border-radius: 12px;
-  font-size: 1.2rem;
-}
-
-/* GRID NPC */
-.npc-grid {
+.items-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
-/* NPC CARD */
-.npc-card {
+.item-card {
   border-radius: 12px;
   background: #fffdfb;
   border: 1px solid #d8a67b;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
 }
 
-.npc-card:hover {
+.item-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.npc-card .card-body {
+.item-card .card-body {
   padding: 20px;
-}
-
-.npc-card h5 {
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-/* FORMULAIRE */
-.card {
-  border-radius: 12px;
-  background: #fffdfb;
-  border: 1px solid #d8a67b;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-}
-
-.card label {
-  font-weight: bold;
-}
-
-.btn-group {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-group .btn {
-  min-width: 100px;
-}
-
-/* CHAMPS FORMULAIRES */
-input.form-control,
-textarea.form-control,
-select.form-control {
-  border: 1px solid #d8a67b;
-  border-radius: 8px;
-}
-
-input.form-control:focus,
-textarea.form-control:focus,
-select.form-control:focus {
-  border-color: #b67d4b;
-  box-shadow: 0 0 6px rgba(182, 125, 75, 0.4);
-}
-
-/* BOUTONS */
-button.btn-light {
-  background: #ffe7c7;
-  border: 1px solid #d8a67b;
-}
-
-button.btn-light:hover {
-  background: #ffd8a4;
-}
-
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .btn-group {
-    flex-direction: column;
-  }
 }

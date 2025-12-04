@@ -1,129 +1,139 @@
 <div class="npc-container">
-
   <h1>Liste des Monstres</h1>
 
-  <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light mb-3">
-    Créer un Monstre
+  <!-- Bouton afficher formulaire -->
+  <button *ngIf="!showForm" class="btn btn-light mb-3" (click)="showForm = true">
+    Créer un monstre
   </button>
 
-  <form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="npcForm" class="card p-3 mb-4">
+  <!-- FORMULAIRE -->
+  <form *ngIf="showForm" [formGroup]="npcForm" (ngSubmit)="creer()" class="card p-3 mb-4">
 
     <div class="row">
-
-      <div class="col-md-4 mb-3">
+      <div class="col">
         <label>Nom du monstre</label>
-        <input class="form-control" formControlName="name" />
+        <input type="text" class="form-control" formControlName="name" />
       </div>
 
-      <div class="col-md-2 mb-3">
+      <div class="col">
         <label>Niveau</label>
         <input type="number" class="form-control" formControlName="level" />
       </div>
+    </div>
 
-      <div class="col-md-2 mb-3">
+    <hr />
+
+    <div class="row mt-2">
+      <div class="col">
         <label>HP</label>
         <input type="number" class="form-control" formControlName="hp" />
       </div>
 
-      <div class="col-md-2 mb-3">
+      <div class="col">
         <label>MP</label>
         <input type="number" class="form-control" formControlName="mp" />
       </div>
 
-      <div class="col-md-2 mb-3">
+      <div class="col">
         <label>Vitesse</label>
-        <input type="number" class="form-control" formControlName="speed" />
+        <input type="number" step="0.1" class="form-control" formControlName="speed" />
       </div>
+    </div>
 
-      <div class="col-md-3 mb-3">
+    <div class="mt-2 form-check">
+      <input type="checkbox" class="form-check-input" formControlName="alive" />
+      <label class="form-check-label">En vie</label>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col">
         <label>Classe d'armure</label>
-        <input class="form-control" type="number" formControlName="armorClass" />
+        <input type="number" class="form-control" formControlName="armorClass" />
       </div>
 
-      <div class="col-md-3 mb-3">
+      <div class="col">
         <label>Initiative</label>
-        <input class="form-control" type="number" formControlName="initiative" />
+        <input type="number" class="form-control" formControlName="initiative" />
       </div>
 
-      <div class="col-md-3 form-check mb-3 mt-4">
-        <input type="checkbox" class="form-check-input" formControlName="alive" />
-        <label class="form-check-label">En vie</label>
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <label>Armure</label>
-        <input class="form-control" formControlName="armor" />
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <label>Arme</label>
-        <input class="form-control" formControlName="weapon" />
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <label>Équipement porté (séparé par virgules)</label>
-        <input class="form-control" formControlName="itemWorn" />
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <label>Inventaire (séparé par virgules)</label>
-        <input class="form-control" formControlName="inventory" />
-      </div>
-
-      <div class="col-md-12 mb-3">
-        <label>Stats (STR,DEX,CON,INT,WIS,CHA)</label>
-        <input class="form-control" placeholder="10,12,14,8,11,9" formControlName="statsStr" />
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <label>Rôle du monstre</label>
-        <input class="form-control" formControlName="roleName" />
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <label>États (séparés par virgules)</label>
-        <input class="form-control" formControlName="state" />
-      </div>
-
-      <div class="col-md-3 mb-3">
+      <div class="col">
         <label>XP</label>
-        <input type="number" class="form-control" formControlName="xp" />
+        <input type="number" class="form-control" formControlName="xP" />
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row mt-2">
+      <div class="col">
+        <label>Armure</label>
+        <select class="form-select" formControlName="armorId">
+          <option *ngFor="let item of items$ | async" [value]="item.id">
+            {{ item.name }}
+          </option>
+        </select>
       </div>
 
+      <div class="col">
+        <label>Arme</label>
+        <select class="form-select" formControlName="weaponId">
+          <option *ngFor="let item of items$ | async" [value]="item.id">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <label>Équipement porté</label>
+      <select multiple class="form-select" formControlName="itemWornIds">
+        <option *ngFor="let item of items$ | async" [value]="item.id">{{ item.name }}</option>
+      </select>
+    </div>
+
+    <div class="mt-3">
+      <label>Inventaire</label>
+      <select multiple class="form-select" formControlName="inventoryIds">
+        <option *ngFor="let item of items$ | async" [value]="item.id">{{ item.name }}</option>
+      </select>
+    </div>
+
+    <hr />
+
+    <div class="mt-3">
+      <label>Session</label>
+      <select class="form-select" formControlName="sessionId">
+        <option [ngValue]="null">Aucune</option>
+        <option *ngFor="let s of sessions$ | async" [value]="s.id">{{ s.name }}</option>
+      </select>
     </div>
 
     <div class="btn-group mt-3">
-      <button class="btn btn-success" type="submit">Créer</button>
-      <button class="btn btn-danger" type="button" (click)="annuler()">Annuler</button>
+      <button type="submit" class="btn btn-success" [disabled]="npcForm.invalid">Créer</button>
+      <button type="button" class="btn btn-danger" (click)="annulerEditer()">Annuler</button>
     </div>
-
   </form>
 
-  <div class="npc-grid">
-
-    <div class="card npc-card" *ngFor="let npc of npcs$ | async">
+  <!-- LISTE DES NPCS -->
+  <div class="items-grid">
+    <div class="card item-card" *ngFor="let npc of npcs$ | async">
       <div class="card-body">
-
-        <h5>{{ npc.name }} (Niv {{ npc.level }})</h5>
+        <h5 class="card-title">{{ npc.name }} (lvl {{ npc.level }})</h5>
 
         <p><strong>HP :</strong> {{ npc.hp }}</p>
         <p><strong>MP :</strong> {{ npc.mp }}</p>
         <p><strong>Vitesse :</strong> {{ npc.speed }}</p>
-        <p><strong>Armure :</strong> {{ npc.armor || "Aucune" }}</p>
-        <p><strong>Arme :</strong> {{ npc.weapon || "Aucune" }}</p>
-        <p><strong>Classe d’armure :</strong> {{ npc.armorClass }}</p>
-        <p><strong>Initiative :</strong> {{ npc.initiative }}</p>
-        <p><strong>Rôle :</strong> {{ npc.role?.name }}</p>
-        <p><strong>XP :</strong> {{ npc.xP }}</p>
+
+        <p><strong>Armure :</strong> {{ npc.armor?.name }}</p>
+        <p><strong>Arme :</strong> {{ npc.weapon?.name }}</p>
+
+        <p><strong>Session :</strong> {{ npc.session?.name ?? 'Aucune' }}</p>
 
         <div class="btn-group">
           <button class="btn btn-warning btn-sm" (click)="editer(npc)">Modifier</button>
           <button class="btn btn-danger btn-sm" (click)="delete(npc.id)">Supprimer</button>
         </div>
-
       </div>
     </div>
-
   </div>
-
 </div>
