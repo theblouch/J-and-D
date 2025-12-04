@@ -1,1 +1,13 @@
-<p>gestion-session works!</p>
+<div class="gestion-session-container" *ngIf="session$ | async as session">
+    <h1>Session : {{ session.name }}</h1>
+
+    <div class="btn-group mt-3">
+        <button class="btn btn-primary" (click)="showNPCs(session)">NPCs</button>
+        <button class="btn btn-secondary" (click)="showCharacters(session)">Characters</button>
+        <button class="btn btn-success" (click)="rollDice()">Lancer les dés</button>
+    </div>
+</div>
+
+<div *ngIf="!(session$ | async)">
+    <p>Session introuvable...</p>
+</div>
