@@ -46,12 +46,11 @@ export class CreateSession implements OnInit {
     this.sessions$ = this.sessionService.findAll().pipe(
       map(sessions => sessions.filter(session => session.gmLogin === gmLogin))
     );
-    this.inscriptionService.findAll().subscribe(data => {
-      console.log('inscriptions$', data);
-      this.inscriptions$ = of(data);
-    });
+
+    this.inscriptionService.findAll().subscribe(data => this.inscriptions$ = of(data));
     this.npcs$ = this.npcService.findAll();
     this.characters$ = this.characterService.getAll();
+
     this.inscriptionsCtrl = this.formBuilder.control([]);
     this.npcsCtrl = this.formBuilder.control([]);
     this.nameCtrl = this.formBuilder.control('', Validators.required);
@@ -69,34 +68,38 @@ export class CreateSession implements OnInit {
 
   public creer() {
     const gmLogin = this.authService.getUserLogin();
-    if (!gmLogin) {
-      console.error("Utilisateur non connecté !");
-      return;
-    }
+    if (!gmLogin) return;
 
     const newSession = new SessionDto(
       0,
       gmLogin,
       this.sessionForm.get('name')?.value,
-      Array.isArray(this.npcsCtrl.value) ? this.npcsCtrl.value : [],       // assure tableau
-      Array.isArray(this.inscriptionsCtrl.value) ? this.inscriptionsCtrl.value : [] // assure tableau
+      Array.isArray(this.npcsCtrl.value) ? this.npcsCtrl.value : [],
+      Array.isArray(this.inscriptionsCtrl.value) ? this.inscriptionsCtrl.value : []
     );
 
-    this.sessionService.save(newSession);
-
-    this.showForm = false;
-    this.editingSession = null;
-    this.sessionForm.reset();
+    this.sessionService.save(newSession).subscribe(() => {
+      this.showForm = false;
+      this.editingSession = null;
+      this.sessionForm.reset();
+    });
   }
+
 
   public editer(session: SessionDto) {
     this.editingSession = session;
     this.showForm = true;
+
     this.sessionForm.patchValue({
       name: session.name,
     });
-    this.inscriptionsCtrl.setValue(session.inscriptionCharacters);
-    this.npcsCtrl.setValue(session.npcNames);
+
+    const characters = Array.isArray(session.inscriptionCharacters)
+      ? session.inscriptionCharacters
+      : [];
+
+    this.inscriptionsCtrl.setValue(characters);
+    this.npcsCtrl.setValue(session.npcNames || []);
   }
 
   public annulerEditer() {
@@ -106,8 +109,39 @@ export class CreateSession implements OnInit {
   }
 
   public delete(id: number) {
-    this.sessionService.deleteById(id);
+    this.sessionService.deleteById(id).subscribe(() => {
+      console.log(`Session ${id} supprimée`);
+    });
   }
+  toggleCharacter(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    let selected: string[] = this.inscriptionsCtrl.value || [];
+
+    if (input.checked) {
+      selected.push(value);
+    } else {
+      selected = selected.filter(v => v !== value);
+    }
+
+    this.inscriptionsCtrl.setValue(selected);
+  }
+  toggleNpc(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    let selected: string[] = this.npcsCtrl.value || [];
+
+    if (input.checked) {
+      // Ajouter le monstre sélectionné
+      selected.push(value);
+    } else {
+      // Retirer le monstre désélectionné
+      selected = selected.filter(v => v !== value);
+    }
+
+    this.npcsCtrl.setValue(selected);
+  }
+
 
   public displayList(list?: string[]): string {
     if (!list || list.length === 0) {
