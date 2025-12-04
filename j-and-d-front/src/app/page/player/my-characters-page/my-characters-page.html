@@ -4,7 +4,7 @@
     <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
     <ul *ngIf="characters.length > 0" class="character-list">
-        <li *ngFor="let c of characters" class="character-item">
+        <li *ngFor="let c of characters" class="character-item" (click)="goToCharacter(c.id)" style="cursor: pointer;">
             <strong>{{ c.name }}</strong><br>
             Race: {{ c.race }} <br>
             Rôle: {{ getRoleName(c.roleId) }}

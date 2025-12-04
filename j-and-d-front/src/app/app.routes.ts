@@ -13,6 +13,7 @@ import { MyCharactersPage } from './page/player/my-characters-page/my-characters
 import { InProgress } from './page/in-progress/in-progress';
 import { ItemPage } from './page/tools/item/item-page';
 import { SpellPage } from './page/tools/spell-page/spell-page';
+import { CharacterDetail } from './page/player/character-detail/character-detail';
 
 export const routes: Routes = [
   // HOME
@@ -34,4 +35,5 @@ export const routes: Routes = [
   { path: 'register', title: 'Créer un compte', component: InscriptionPage },
   { path: 'marketplace', title: 'Boutique', component: InProgress },
   { path: 'community', title: 'Bienvenue', component: InProgress },
+  { path: 'mycharacters/:id', component: CharacterDetail }
 ];

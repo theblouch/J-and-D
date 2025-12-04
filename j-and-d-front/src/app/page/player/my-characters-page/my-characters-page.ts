@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CharacterService } from '../../../service/character-service';
-import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../../service/role-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-characters-page',
@@ -15,7 +15,7 @@ export class MyCharactersPage {
   roles: any[] = [];
   errorMessage: string | null = null;
 
-  constructor(private characterService: CharacterService, private roleService: RoleService) { }
+  constructor(private characterService: CharacterService, private roleService: RoleService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadCharacters();
@@ -50,6 +50,10 @@ export class MyCharactersPage {
   getRoleName(roleId: number): string {
     const role = this.roles.find(r => r.id === roleId);
     return role ? role.name : 'Inconnu';
+  }
+
+  goToCharacter(id: number): void {
+    this.router.navigate(['/mycharacters', id]);
   }
 }
 
