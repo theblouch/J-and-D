@@ -1,12 +1,12 @@
 <div class="header" *ngIf="showHeader">
 
-  <!-- Logo gauche -->
+  <!-- Zone gauche -->
   <div class="header-left">
     <img src="/assets/couronne.png" alt="couronne" class="logo-icon" />
     <span class="logo-text">Java & Dragon</span>
   </div>
 
-  <!-- Menu du centre -->
+  <!-- Zone centre -->
   <ul class="nav-menu">
     <li><a routerLink="/marketplace">Marketplace</a></li>
     <li><a routerLink="/community">Communauté</a></li>
@@ -21,9 +21,9 @@
     <li><a routerLink="/mycharacters">Mes persos</a></li>
   </ul>
 
-  <!-- Bouton Déconnexion -->
-  <button class="logout-btn" (click)="logout()">
-    Déconnexion
-  </button>
+  <!-- Zone droite -->
+  <div class="header-right">
+    <button class="logout-btn" (click)="logout()">Déconnexion</button>
+  </div>
 
 </div>
