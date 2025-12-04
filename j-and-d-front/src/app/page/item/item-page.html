@@ -1,0 +1,59 @@
+<div class="item-container">
+  <h1>Liste des Items</h1>
+
+  <!-- Bouton pour afficher le formulaire -->
+  <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light mb-3">
+    Créer un item
+  </button>
+
+  <!-- FORMULAIRE CREATION/MODIFICATION -->
+  <form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="itemForm" class="card p-3 mb-4">
+    <div class="mb-3">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" formControlName="basedOnStrength" />
+      <label class="form-check-label">Basé sur la force</label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Dégâts de base (séparés par des virgules)</label>
+      <input type="text" class="form-control" (change)="updateBaseDamage($event)" />
+    </div>
+
+    <div class="btn-group">
+      <input
+        type="submit"
+        [disabled]="itemForm.invalid"
+        [value]="editingItem ? 'Modifier' : 'Créer'"
+        [class.btn-warning]="editingItem"
+        [class.btn-success]="!editingItem"
+        class="btn"
+      />
+      <button type="button" class="btn btn-danger" (click)="annulerEditer()">Annuler</button>
+    </div>
+  </form>
+
+  <!-- LISTE DES ITEMS -->
+  <div class="items-grid">
+    <div class="card item-card" *ngFor="let item of items$ | async">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p><strong>Description :</strong> {{ item.description }}</p>
+        <p><strong>Basé sur la force :</strong> {{ item.basedOnStrength ? 'Oui' : 'Non' }}</p>
+        <p><strong>Dégâts :</strong> {{ displayDamage(item.baseDamage) }}</p>
+        <div class="btn-group">
+          <button class="btn btn-warning btn-sm" (click)="editer(item)">Modifier</button>
+          <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

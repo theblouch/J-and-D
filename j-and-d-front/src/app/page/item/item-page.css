@@ -1,0 +1,35 @@
+.item-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.item-card {
+  border-radius: 12px;
+  background: #fffdfb;
+  border: 1px solid #d8a67b;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.item-card .card-body {
+  padding: 20px;
+}
+
+.item-card h5 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
