@@ -64,12 +64,12 @@ export class GestionSession implements OnInit {
       return character ? { id: character.id, name: character.name } : null;
     }).filter(c => c !== null) as { id: number, name: string }[];
 
-    this.showCharactersSection = true;
+    this.showCharactersSection = !this.showCharactersSection;
   }
 
   showNPCs(session: SessionDto) {
     this.npcList = session.npcNames || [];
-    this.showNPCsSection = true;
+    this.showNPCsSection = !this.showNPCsSection;
   }
 
   rollDice() {
