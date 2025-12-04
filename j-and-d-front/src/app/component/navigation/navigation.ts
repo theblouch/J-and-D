@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { AuthService } from '../../service/auth-service';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [RouterLink, NgIf, NgFor],
+  imports: [RouterLink, NgIf],
   templateUrl: './navigation.html',
   styleUrls: ['./navigation.css'],
 })
