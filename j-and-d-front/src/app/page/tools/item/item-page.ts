@@ -18,6 +18,10 @@ export class ItemPage implements OnInit {
   editingItem: ItemDto | null = null;
   showForm: boolean = false;
 
+  // AJOUT POUR POPUP
+  itemToDelete: number | null = null;
+  showDeleteModal: boolean = false;
+
   constructor(private formBuilder: FormBuilder, private itemService: ItemService, private router: Router
 
   ) { }
@@ -53,6 +57,23 @@ export class ItemPage implements OnInit {
     this.showForm = false;
     this.editingItem = null;
     this.itemForm.reset();
+  }
+  public askDelete(id: number) {
+    this.itemToDelete = id;
+    this.showDeleteModal = true;
+  }
+
+  public confirmDelete() {
+    if (!this.itemToDelete) return;
+
+    this.itemService.deleteById(this.itemToDelete);
+    this.showDeleteModal = false;
+    this.itemToDelete = null;
+  }
+
+  public cancelDelete() {
+    this.showDeleteModal = false;
+    this.itemToDelete = null;
   }
 
   public editer(item: ItemDto): void {

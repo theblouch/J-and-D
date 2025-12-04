@@ -55,9 +55,25 @@
         <p><strong>Valeur d'armure :</strong> {{ item.armorValue }}</p>
         <div class="btn-group">
           <button class="btn btn-warning btn-sm" (click)="editer(item)">Modifier</button>
-          <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Supprimer</button>
+          <button class="btn btn-danger btn-sm" (click)="askDelete(item.id)">Supprimer</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<!-- POPUP SUPPRESSION -->
+<div *ngIf="showDeleteModal" class="custom-modal-overlay">
+  <div class="custom-modal">
+    <h3>Confirmer la suppression</h3>
+    <p>Voulez-vous vraiment supprimer cet item ?</p>
+
+    <div class="modal-buttons">
+      <button class="btn btn-cancel" (click)="cancelDelete()">
+        Annuler
+      </button>
+      <button class="btn btn-delete" (click)="confirmDelete()">
+        Supprimer
+      </button>
     </div>
   </div>
 </div>
