@@ -2,12 +2,10 @@
 
   <h1>Liste des Monstres</h1>
 
-  <!-- bouton créer -->
   <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light mb-3">
     Créer un Monstre
   </button>
 
-  <!-- formulaire -->
   <form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="npcForm" class="card p-3 mb-4">
 
     <div class="row">
@@ -52,6 +50,46 @@
         <label class="form-check-label">En vie</label>
       </div>
 
+      <div class="col-md-6 mb-3">
+        <label>Armure</label>
+        <input class="form-control" formControlName="armor" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label>Arme</label>
+        <input class="form-control" formControlName="weapon" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label>Équipement porté (séparé par virgules)</label>
+        <input class="form-control" formControlName="itemWorn" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label>Inventaire (séparé par virgules)</label>
+        <input class="form-control" formControlName="inventory" />
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <label>Stats (STR,DEX,CON,INT,WIS,CHA)</label>
+        <input class="form-control" placeholder="10,12,14,8,11,9" formControlName="statsStr" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label>Rôle du monstre</label>
+        <input class="form-control" formControlName="roleName" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label>États (séparés par virgules)</label>
+        <input class="form-control" formControlName="state" />
+      </div>
+
+      <div class="col-md-3 mb-3">
+        <label>XP</label>
+        <input type="number" class="form-control" formControlName="xp" />
+      </div>
+
     </div>
 
     <div class="btn-group mt-3">
@@ -61,7 +99,6 @@
 
   </form>
 
-  <!-- LISTE DES MONSTRES -->
   <div class="npc-grid">
 
     <div class="card npc-card" *ngFor="let npc of npcs$ | async">
@@ -72,9 +109,12 @@
         <p><strong>HP :</strong> {{ npc.hp }}</p>
         <p><strong>MP :</strong> {{ npc.mp }}</p>
         <p><strong>Vitesse :</strong> {{ npc.speed }}</p>
+        <p><strong>Armure :</strong> {{ npc.armor || "Aucune" }}</p>
+        <p><strong>Arme :</strong> {{ npc.weapon || "Aucune" }}</p>
         <p><strong>Classe d’armure :</strong> {{ npc.armorClass }}</p>
         <p><strong>Initiative :</strong> {{ npc.initiative }}</p>
-        <p><strong>En vie :</strong> {{ displayBoolean(npc.alive) }}</p>
+        <p><strong>Rôle :</strong> {{ npc.role?.name }}</p>
+        <p><strong>XP :</strong> {{ npc.xP }}</p>
 
         <div class="btn-group">
           <button class="btn btn-warning btn-sm" (click)="editer(npc)">Modifier</button>

@@ -28,6 +28,11 @@
       <input type="text" class="form-control" (change)="updateBaseDamage($event)" />
     </div>
 
+    <div class="mb-3">
+      <label class="form-label">Valeur d'armure</label>
+      <input type="text" class="form-control" formControlName="armorValue" />
+    </div>
+
     <div class="btn-group">
       <input
         type="submit"
@@ -49,6 +54,7 @@
         <p><strong>Description :</strong> {{ item.description }}</p>
         <p><strong>Basé sur la force :</strong> {{ item.basedOnStrength ? 'Oui' : 'Non' }}</p>
         <p><strong>Dégâts :</strong> {{ displayDamage(item.baseDamage) }}</p>
+        <p><strong>Valeur d'armure :</strong> {{ item.armorValue }}</p>
         <div class="btn-group">
           <button class="btn btn-warning btn-sm" (click)="editer(item)">Modifier</button>
           <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Supprimer</button>

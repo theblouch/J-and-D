@@ -6,14 +6,16 @@
 
   <!-- LISTE DES SESSIONS EN ENCARTS -->
   <div class="sessions-grid">
-    <div class="card session-card" *ngFor="let session of sessions$ | async; trackBy: trackSession">
+    <div class="card session-card" *ngFor="let session of sessions$ | async; trackBy: trackSession"
+      [routerLink]="['/home', session.id]" style="cursor: pointer;">
       <div class="card-body">
         <h3 class="card-title">🎲 {{ session.name }}</h3>
         <h5 class="card-title">📌 Session du MJ {{ session.gmLogin }}</h5>
         <p><strong>Personnages :</strong> {{ displayList(session.inscriptionCharacters) }}</p>
         <p><strong>Monstres :</strong> {{ displayList(session.npcNames) }}</p>
         <div class="btn-group">
-          <button class="btn btn-danger btn-sm" (click)="delete(session.id)">Supprimer</button>
+          <button class="btn btn-danger btn-sm"
+            (click)="delete(session.id); $event.stopPropagation()">Supprimer</button>
         </div>
       </div>
     </div>

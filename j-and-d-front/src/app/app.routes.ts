@@ -14,6 +14,7 @@ import { ItemPage } from './page/tools/item/item-page';
 import { SpellPage } from './page/tools/spell-page/spell-page';
 import { CharacterDetail } from './page/player/character-detail/character-detail';
 import { NpcPage } from './page/tools/npc-page/npc-page';
+import { GestionSession } from './page/gestion-session/gestion-session';
 
 export const routes: Routes = [
   // HOME
@@ -26,9 +27,10 @@ export const routes: Routes = [
   { path: 'mycharacters/:id', component: CharacterDetail },
 
   // GM
+  { path: 'home/:sessionId', title: 'Gestion de session', component: GestionSession },
   { path: 'createsession', title: 'Création de session', component: CreateSession },
   { path: 'tools', title: 'Outils', component: ToolsPage },
-  
+
 
   // TOOLS
   { path: 'item', title: 'Item', component: ItemPage },

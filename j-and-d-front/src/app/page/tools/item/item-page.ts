@@ -28,7 +28,8 @@ export class ItemPage implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       basedOnStrength: [false],
-      baseDamage: [[]], // tableau de nombres
+      baseDamage: [[]],
+      armorValue: [0, Validators.required],
     });
   }
 
@@ -36,11 +37,12 @@ export class ItemPage implements OnInit {
     const formValue = this.itemForm.value;
 
     const newItem = new ItemDto(
-      0,
+      this.editingItem ? this.editingItem.id : 0,
       formValue.name,
       formValue.description,
       formValue.basedOnStrength,
-      Array.isArray(formValue.baseDamage) ? formValue.baseDamage : []
+      Array.isArray(formValue.baseDamage) ? formValue.baseDamage : [],
+      formValue.armorValue
     );
 
     this.itemService.save(newItem);
@@ -59,6 +61,7 @@ export class ItemPage implements OnInit {
       description: item.description,
       basedOnStrength: item.basedOnStrength,
       baseDamage: item.baseDamage,
+      armorValue: item.armorValue,
     });
   }
 
@@ -80,5 +83,10 @@ export class ItemPage implements OnInit {
     const input = event.target as HTMLInputElement;
     const values = input.value.split(',').map((x) => Number(x.trim()));
     this.itemForm.patchValue({ baseDamage: values });
+  }
+  public updateArmorValue(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = Number(input.value.trim());
+    this.itemForm.patchValue({ armorValue: value });
   }
 }

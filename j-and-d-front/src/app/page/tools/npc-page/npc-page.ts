@@ -26,7 +26,6 @@ export class NpcPage implements OnInit {
 
   ngOnInit(): void {
 
-    // Charger tous les NPC (monstres)
     this.npcs$ = this.npcService.findAll();
 
     this.npcForm = this.formBuilder.group({
@@ -38,11 +37,44 @@ export class NpcPage implements OnInit {
       armorClass: [0],
       initiative: [0],
       alive: [true],
+
+      armor: [''],       // string → envoyé tel quel
+      weapon: [''],      // string
+      itemWorn: [''],    // liste séparée par virgules
+      inventory: [''],   // liste séparée par virgules
+
+      statsStr: ['', Validators.required],  // ex: "10,10,10,10,10,10"
+
+      roleName: ['', Validators.required],
+
+      state: [''],        // ex: "poison,slow"
+
+      xp: [0],
     });
   }
 
   public creer(): void {
     const f = this.npcForm.value;
+
+    const statsArray = f.statsStr.split(',').map((x: string) => Number(x.trim()));
+
+    const stats = {
+      strength: statsArray[0] ?? 0,
+      dexterity: statsArray[1] ?? 0,
+      constitution: statsArray[2] ?? 0,
+      intelligence: statsArray[3] ?? 0,
+      wisdom: statsArray[4] ?? 0,
+      charisma: statsArray[5] ?? 0,
+    };
+
+    const itemWorn = f.itemWorn ? f.itemWorn.split(',').map((x: string) => x.trim()) : [];
+    const inventory = f.inventory ? f.inventory.split(',').map((x: string) => x.trim()) : [];
+    const state = f.state ? f.state.split(',').map((x: string) => x.trim()) : [];
+
+    const role = {
+      id: 0,
+      name: f.roleName
+    };
 
     const npc = new NPCDto(
       0,
@@ -55,16 +87,16 @@ export class NpcPage implements OnInit {
       f.armorClass,
       f.initiative,
 
-      null,     // armor
-      null,     // weapon
-      [],       // itemWorn
-      [],       // inventory
-      null,     // stats
-      null,     // role
-      [],       // state
-      null,     // tauntedBy
-      0,        // XP
-      null      // session -> toujours null maintenant
+      f.armor || null,
+      f.weapon || null,
+      itemWorn,
+      inventory,
+      stats,
+      role,
+      state,
+      null,
+      f.xp,
+      null
     );
 
     this.npcService.save(npc);
@@ -87,6 +119,15 @@ export class NpcPage implements OnInit {
       armorClass: npc.armorClass,
       initiative: npc.initiative,
       alive: npc.alive,
+
+      armor: npc.armor || "",
+      weapon: npc.weapon || "",
+      itemWorn: npc.itemWorn?.join(', ') ?? "",
+      inventory: npc.inventory?.join(', ') ?? "",
+      statsStr: Object.values(npc.stats).join(','),
+      roleName: npc.role?.name ?? "",
+      state: npc.state?.join(',') ?? "",
+      xp: npc.xP,
     });
   }
 
