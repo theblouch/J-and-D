@@ -4,28 +4,43 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Observable } from 'rxjs';
 import { SpellDto } from '../../../dto/spell-dto';
 import { SpellService } from '../../../service/spell-service';
+import { RoleService } from '../../../service/role-service';
+
 @Component({
   selector: 'app-spell-page',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './spell-page.html',
-  styleUrl: './spell-page.css',
+  styleUrls: ['./spell-page.css'],
 })
 export class SpellPage implements OnInit {
   spells$!: Observable<SpellDto[]>;
+  roles$!: Observable<any[]>;
+  roles: any[] = []; // ✅ tableau local pour find()
   spellForm!: FormGroup;
   editingSpell: SpellDto | null = null;
   showForm: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private spellService: SpellService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private spellService: SpellService,
+    private roleService: RoleService
+  ) {}
 
   ngOnInit(): void {
     this.spells$ = this.spellService.findAll();
+    this.roles$ = this.roleService.getAll();
+    this.roles$.subscribe((r) => (this.roles = r));
+    this.roleService.getAll().subscribe((r) => {
+      console.log('Réponse backend /role:', r);
+      this.roles = r;
+    });
 
     this.spellForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       spellLevel: [1, Validators.required],
-      role: [''],
+      role: [null, Validators.required],
       baseDamage: [[]],
     });
   }
@@ -34,7 +49,7 @@ export class SpellPage implements OnInit {
     const formValue = this.spellForm.value;
 
     const newSpell = new SpellDto(
-      0,
+      this.editingSpell ? this.editingSpell.id : 0,
       formValue.name,
       formValue.description,
       formValue.spellLevel,
@@ -43,7 +58,6 @@ export class SpellPage implements OnInit {
     );
 
     this.spellService.save(newSpell);
-
     this.showForm = false;
     this.editingSpell = null;
     this.spellForm.reset();
@@ -80,5 +94,10 @@ export class SpellPage implements OnInit {
 
   public displayDamage(damage: number[]): string {
     return damage.length > 0 ? damage.join(', ') : 'vide :(';
+  }
+
+  public getRoleName(roleId: number): string {
+    const found = this.roles.find((r) => r.id === roleId);
+    return found ? found.name : 'Inconnu';
   }
 }

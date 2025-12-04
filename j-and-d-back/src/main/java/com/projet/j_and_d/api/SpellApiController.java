@@ -63,6 +63,7 @@ public class SpellApiController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable int id) {
+        System.out.println("Suppression du sort id=" + id);
         this.service.deleteById(id);
     }
 }

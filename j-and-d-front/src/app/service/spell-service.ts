@@ -31,12 +31,15 @@ export class SpellService {
     const payload = spellDto.toJson();
 
     if (!spellDto.id || spellDto.id === 0) {
+      // Création
       this.http.post<SpellDto>(this.apiUrl, payload).subscribe(() => this.refresh());
-    } else {
-      this.http
-        .put<SpellDto>(`${this.apiUrl}/${spellDto.id}`, payload)
-        .subscribe(() => this.refresh());
+      return;
     }
+
+    // Mise à jour
+    this.http
+      .put<SpellDto>(`${this.apiUrl}/${spellDto.id}`, payload)
+      .subscribe(() => this.refresh());
   }
 
   public deleteById(id: number): void {

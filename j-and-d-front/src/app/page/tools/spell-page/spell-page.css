@@ -1,7 +1,6 @@
 .spell-container {
   min-height: 100vh;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #fdf6e3, #f5deb3);
 }
 
 .spell-container h1 {

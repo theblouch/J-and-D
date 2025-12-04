@@ -24,7 +24,11 @@
 
     <div class="mb-3">
       <label class="form-label">Rôle</label>
-      <input type="text" class="form-control" formControlName="role" />
+      <select class="form-select" formControlName="role">
+        <option *ngFor="let r of roles$ | async" [value]="r.id">
+          {{ r.name }}
+        </option>
+      </select>
     </div>
 
     <div class="mb-3">
@@ -51,7 +55,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ spell.name }} (Niveau {{ spell.spellLevel }})</h5>
         <p><strong>Description :</strong> {{ spell.description }}</p>
-        <p><strong>Rôle :</strong> {{ spell.role }}</p>
+        <p><strong>Rôle:</strong> {{ spell.role?.name }}</p>
         <p><strong>Dégâts :</strong> {{ displayDamage(spell.baseDamage) }}</p>
         <div class="btn-group">
           <button class="btn btn-warning btn-sm" (click)="editer(spell)">Modifier</button>
