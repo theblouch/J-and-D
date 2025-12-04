@@ -1,6 +1,7 @@
 <div class="modif-perso-container" *ngIf="characterForm">
     <button (click)="goBack()" class="btn-back">← Retour</button>
-    <h2>Modifier {{ characterForm.get('name')?.value }}</h2>
+    <h2>Fiche personnage</h2>
+    <h1>{{ characterForm.get('name')?.value }}</h1>
 
     <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
@@ -15,7 +16,15 @@
         </label>
 
         <label>Race :
-            <input type="text" formControlName="race">
+            <select formControlName="race">
+                <option [value]="null" disabled>-- Choisissez une race --</option>
+                <option [value]="'HUMAN'">Humain</option>
+                <option [value]="'ELF'">Elfe</option>
+                <option [value]="'GNOME'">Gnome</option>
+                <option [value]="'ORC'">Orc</option>
+                <option [value]="'HALFLING'">Halfelin</option>
+                <option [value]="'DROW'">Drow</option>
+            </select>
         </label>
 
         <label>Rôle :
