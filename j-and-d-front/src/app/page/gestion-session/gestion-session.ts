@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 import { SessionDto } from '../../dto/session-dto';
 import { SessionService } from '../../service/session-service';
@@ -17,7 +17,8 @@ export class GestionSession implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +30,10 @@ export class GestionSession implements OnInit {
       .pipe(
         switchMap(session => of(session)) // convertit en Observable si nécessaire
       );
+  }
+
+  goHome() {
+    this.router.navigate(['/home']);
   }
 
   // Méthodes pour les boutons

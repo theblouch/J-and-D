@@ -1,4 +1,8 @@
 <div class="gestion-session-container" *ngIf="session$ | async as session">
+    <div class="mb-3">
+        <button class="btn btn-light" (click)="goHome()">← Retour à la liste des sessions</button>
+    </div>
+
     <h1>Session : {{ session.name }}</h1>
 
     <div class="btn-group mt-3">
