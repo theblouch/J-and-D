@@ -47,7 +47,7 @@ export class NPCPage implements OnInit {
     private npcService: NPCService,
     private itemService: ItemService,
     private sessionService: SessionService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.npcs$ = this.npcService.findAll();
@@ -80,7 +80,7 @@ export class NPCPage implements OnInit {
   public creer(): void {
     const f = this.npcForm.value;
 
- const npc = new NPCDto(
+    const npc = new NPCDto(
       this.editingNpc ? this.editingNpc.id : 0,
       f.name,
       f.level,
@@ -106,7 +106,7 @@ export class NPCPage implements OnInit {
       f.xP,
       f.sessionId ? { id: f.sessionId } : null
     );
-
+  }
   /* -------------------- EDITER -------------------- */
   public editer(npc: NPCDto): void {
     this.editingNpc = npc;
