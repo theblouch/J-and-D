@@ -8,6 +8,7 @@
   <div class="sessions-grid">
     <div class="card session-card" *ngFor="let session of sessions$ | async; trackBy: trackSession">
       <div class="card-body">
+        <h3 class="card-title">📌 {{ session.name }}</h3>
         <h5 class="card-title">🎲 Session de {{ session.gmLogin }}</h5>
         <p><strong>Personnages :</strong> {{ displayList(session.inscriptionCharacters) }}</p>
         <p><strong>Monstres :</strong> {{ displayList(session.npcNames) }}</p>

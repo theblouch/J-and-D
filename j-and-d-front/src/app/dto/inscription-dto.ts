@@ -3,7 +3,7 @@ export class InscriptionDto {
     constructor(
         private _id: number,
         private _character: any,
-        private _characterName: String,
+        private _characterName: string,
         private _session: any
     ) { }
 
@@ -23,10 +23,10 @@ export class InscriptionDto {
         this._character = value;
     }
 
-    public get characterName(): String {
+    public get characterName(): string {
         return this._characterName;
     }
-    public set characterName(value: String) {
+    public set characterName(value: string) {
         this._characterName = value;
     }
 

@@ -28,13 +28,16 @@ public class Session {
     @OneToMany(mappedBy = "session")
     private List<NPC> npcs;
 
+    private String name;
+
     public Session() {
     }
 
-    public Session(List<Inscription> inscriptions, GM gm, List<NPC> npcs) {
+    public Session(List<Inscription> inscriptions, GM gm, List<NPC> npcs, String name) {
         this.inscriptions = inscriptions;
         this.gm = gm;
         this.npcs = npcs;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -97,6 +100,14 @@ public class Session {
                 ", gm='" + getGm() + "'" +
                 ", npcs='" + getNpcs() + "'" +
                 "}";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

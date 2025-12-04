@@ -36,6 +36,7 @@ export class HomePage implements OnInit {
 
   protected inscriptionsCtrl!: FormControl;
   protected npcsCtrl!: FormControl;
+  protected nameCtrl!: FormControl;
 
   constructor(
     private sessionService: SessionService,
@@ -43,7 +44,7 @@ export class HomePage implements OnInit {
     private npcService: NPCService,
     private formBuilder: FormBuilder,
     public authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const gmLogin = this.authService.getUserLogin();
@@ -64,8 +65,10 @@ export class HomePage implements OnInit {
     // Form controls
     this.inscriptionsCtrl = this.formBuilder.control('', Validators.required);
     this.npcsCtrl = this.formBuilder.control('', Validators.required);
+    this.nameCtrl = this.formBuilder.control('', Validators.required);
 
     this.sessionForm = this.formBuilder.group({
+      name: this.nameCtrl,
       inscriptions: this.inscriptionsCtrl,
       npcs: this.npcsCtrl,
     });
@@ -85,6 +88,7 @@ export class HomePage implements OnInit {
     const newSession = new SessionDto(
       0,
       gmLogin,
+      this.sessionForm.value.name,
       Array.isArray(this.npcsCtrl.value) ? this.npcsCtrl.value : [],
       Array.isArray(this.inscriptionsCtrl.value) ? this.inscriptionsCtrl.value : []
     );
