@@ -50,7 +50,7 @@ public class PlayerTest {
     @Test
     public void testJoinSession() {
         GM gm = new GM("gm", "pw");
-        Session session = new Session(new ArrayList<>(), gm, new ArrayList<>());
+        Session session = new Session(new ArrayList<>(), gm, new ArrayList<>(), "nom_session");
 
         Character c = new Character();
         c.setName("TestChar");

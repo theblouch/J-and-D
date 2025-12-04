@@ -19,7 +19,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,9 +78,10 @@ class SessionServiceTest {
     @Test
     void testSave_NewSession_WithNPCsAndInscriptions() {
         CreateOrUpdateSessionRequest request = new CreateOrUpdateSessionRequest();
-        request.setGmId(1);
-        request.setNpcIds(Arrays.asList(100, 101));
-        request.setInscriptionIds(Arrays.asList(200, 201));
+        request.setGmLogin("null");
+        request.setInscriptionCharacters(Arrays.asList("200", "201"));
+        request.setName("null");
+        request.setNpcNames(Arrays.asList("100", "101"));
 
         GM gm = new GM();
         NPC npc1 = new NPC();
@@ -105,9 +105,10 @@ class SessionServiceTest {
     @Test
     void testSave_NewSession_WhenGmNotFound_ThrowsException() {
         CreateOrUpdateSessionRequest request = new CreateOrUpdateSessionRequest();
-        request.setGmId(1);
-        request.setNpcIds(Collections.emptyList());
-        request.setInscriptionIds(Collections.emptyList());
+        request.setGmLogin("null");
+        request.setInscriptionCharacters(Arrays.asList("200", "201"));
+        request.setName("null");
+        request.setNpcNames(Arrays.asList("100", "101"));
 
         when(gmRepo.findById(1)).thenReturn(Optional.empty());
 
@@ -118,9 +119,10 @@ class SessionServiceTest {
     @Test
     void testSave_UpdateExistingSession() {
         CreateOrUpdateSessionRequest request = new CreateOrUpdateSessionRequest();
-        request.setGmId(1);
-        request.setNpcIds(Arrays.asList(100));
-        request.setInscriptionIds(Arrays.asList(200));
+        request.setGmLogin("null");
+        request.setInscriptionCharacters(Arrays.asList("200", "201"));
+        request.setName("null");
+        request.setNpcNames(Arrays.asList("100", "101"));
 
         Session existingSession = new Session();
         GM gm = new GM();
