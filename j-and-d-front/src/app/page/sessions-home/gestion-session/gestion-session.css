@@ -20,3 +20,46 @@
 .character-item strong {
     font-size: 1.2em;
 }
+
+/* Aligner les boutons horizontalement et les espacer */
+.custom-btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Style des boutons jaunes */
+.btn-primary {
+    background-color: #ffe5c3;
+    /* jaune */
+    border-color: #d1af85;
+    /* texte noir pour contraste */
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #e4c59e;
+    /* couleur plus foncée au hover */
+}
+
+.dice-result {
+    margin: 15px auto 0 auto;
+    /* marge en haut et centré horizontalement */
+    padding: 10px 20px;
+    /* espace à l'intérieur du rectangle */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
+    /* texte noir */
+    background-color: #fff4e6;
+    /* fond blanc */
+    border-radius: 10px;
+    /* bords arrondis */
+    width: fit-content;
+    /* largeur qui s'adapte au contenu */
+    text-align: center;
+    /* texte centré */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    /* optionnel : petite ombre pour l'effet relief */
+}

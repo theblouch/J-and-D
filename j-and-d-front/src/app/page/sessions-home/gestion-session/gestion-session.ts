@@ -23,6 +23,8 @@ export class GestionSession implements OnInit {
 
   allCharacters: CharacterDto[] = [];
 
+  diceResult: number | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private sessionService: SessionService,
@@ -73,7 +75,9 @@ export class GestionSession implements OnInit {
   }
 
   rollDice() {
-    const result = Math.floor(Math.random() * 20) + 1; // D20
-    alert('Résultat du dé : ' + result);
+    this.diceResult = Math.floor(Math.random() * 20) + 1; // D20
+    setTimeout(() => {
+      this.diceResult = null;
+    }, 3000);
   }
 }

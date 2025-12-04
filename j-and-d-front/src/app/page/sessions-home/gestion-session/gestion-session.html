@@ -5,12 +5,16 @@
 
     <h1>🎲 {{ session.name }}</h1>
 
-    <div class="btn-group mt-3">
+    <div class="btn-group mt-3 custom-btn-group">
         <button class="btn btn-primary" (click)="showNPCs(session)">Monstres</button>
-        <button class="btn btn-secondary" (click)="showCharacters(session)">Personnages</button>
-        <button class="btn btn-success" (click)="rollDice()">Lancer les dés</button>
+        <button class="btn btn-primary" (click)="showCharacters(session)">Personnages</button>
+        <button class="btn btn-success" (click)="rollDice()">Lancer un dé 20</button>
     </div>
 </div>
+<!-- Résultat du dé -->
+<p *ngIf="diceResult !== null" class="dice-result">
+    🎲 Résultat du dé : {{ diceResult }}
+</p>
 <!-- Section NPCs -->
 <div *ngIf="showNPCsSection" class="character-list">
     <h3>Monstres</h3>
