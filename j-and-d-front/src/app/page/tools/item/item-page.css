@@ -115,3 +115,21 @@
 .item-container form .btn-danger:hover {
   background-color: #c82333;
 }
+
+.item-card .btn-group {
+  display: flex;
+  justify-content: center;
+  /* centre les boutons horizontalement */
+  gap: 15px;
+  /* espace entre les boutons */
+  margin-top: 15px;
+}
+
+.item-card .btn-warning {
+  background-color: #ffe5c3;
+}
+
+.item-card .btn-warning:hover {
+  background-color: #e4c59e;
+  /* couleur plus foncée au survol */
+}

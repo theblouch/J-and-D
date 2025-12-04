@@ -48,7 +48,7 @@
   <div class="items-grid">
     <div class="card item-card" *ngFor="let item of items$ | async">
       <div class="card-body">
-        <h5 class="card-title">{{ item.name }}</h5>
+        <h3 class="card-title">{{ item.name }}</h3>
         <p><strong>Description :</strong> {{ item.description }}</p>
         <p><strong>Basé sur la force :</strong> {{ item.basedOnStrength ? 'Oui' : 'Non' }}</p>
         <p><strong>Dégâts :</strong> {{ displayDamage(item.baseDamage) }}</p>

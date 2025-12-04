@@ -39,6 +39,24 @@
   margin-bottom: 15px;
 }
 
+.spell-card .btn-group {
+  display: flex;
+  justify-content: center;
+  /* centre les boutons horizontalement */
+  gap: 15px;
+  /* espace entre les boutons */
+  margin-top: 15px;
+}
+
+.spell-card .btn-warning {
+  background-color: #ffe5c3;
+}
+
+.spell-card .btn-warning:hover {
+  background-color: #e4c59e;
+  /* couleur plus foncée au survol */
+}
+
 /* FORMULAIRE DE CREATION DE SORT */
 .spell-container form.card {
   max-width: 600px;

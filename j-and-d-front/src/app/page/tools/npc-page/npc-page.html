@@ -122,7 +122,7 @@
   <div class="items-grid">
     <div class="card item-card" *ngFor="let npc of npcs$ | async">
       <div class="card-body">
-        <h5 class="card-title">{{ npc.name }} (lvl {{ npc.level }})</h5>
+        <h3 class="card-title">{{ npc.name }} (lvl {{ npc.level }})</h3>
 
         <p><strong>HP :</strong> {{ npc.hp }}</p>
         <p><strong>MP :</strong> {{ npc.mp }}</p>
