@@ -14,7 +14,7 @@ import { CharacterDto } from '../../dto/character-dto';
 import { CharacterService } from '../../service/character-service';
 
 @Component({
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './create-session.html',
   styleUrls: ['./create-session.css'],
 })
