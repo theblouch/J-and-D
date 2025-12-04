@@ -1,109 +1,141 @@
-/* --- Conteneur global --- */
-.register-container {
+/* --- Fond pleine page et centrage --- */
+.login-container {
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 40px;
-  background: linear-gradient(135deg, #fdf6e3, #f5deb3);
-}
-
-/* --- Carte du formulaire --- */
-form {
-  padding: 30px 40px;
-  border-radius: 12px;
-
   width: 100%;
-  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+  color: #4a2e1b;
+  background: #fff7f0;
 }
 
 /* --- Titre --- */
 h1 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #333;
+  font-size: 2.4rem;
   font-weight: bold;
-}
-
-.mb-3.row {
   margin-bottom: 10px;
+  text-align: center;
 }
 
-/* --- Messages d'erreur --- */
+/* --- Message d'erreur --- */
 .alert-danger {
   background: #f8d7da;
   border-left: 4px solid #c43b47;
   padding: 10px 14px;
+  width: 340px;
   margin-bottom: 15px;
   border-radius: 8px;
   color: #7a1a20;
-  font-weight: bold;
+  text-align: center;
 }
 
-/* --- Champs Bootstrap personnalisés --- */
-.form-control {
-  font-size: 1.1rem; /* ✅ texte plus grand */
-  padding: 6px 10px; /* ✅ plus d'espace interne */
-  border-radius: 8px;
+/* --- Carte d'inscription --- */
+form {
+  background: rgba(255, 245, 230, 0.94);
+  padding: 30px 40px;
+  width: 340px;
+  border-radius: 18px;
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0 auto;
+}
+
+/* --- Champs --- */
+label {
+  font-weight: 600;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+input.form-control {
+  padding: 10px;
+  border-radius: 10px;
   border: 1px solid #d8a67b;
   background: #fffdfb;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.form-control:focus {
-  border-color: #e68a3f;
-  box-shadow: 0 0 8px rgba(230, 138, 63, 0.5);
-}
-
-.is-invalid {
+input.is-invalid {
   border: 2px solid #e04646;
 }
 
 .invalid-feedback {
   color: #b13636;
   font-size: 0.85rem;
+  margin-top: 4px;
 }
 
-/* --- Checkbox GM --- */
-label.checkbox-gm {
-  display: flex;
-  align-items: left; /* ✅ aligne la case et le texte sur la même ligne */
-  gap: 8px; /* ✅ espace entre la case et le texte */
-  margin-top: 12px; /* ✅ espace au-dessus pour respirer */
+/* --- Checkbox Game Master --- */
+.checkbox-gm {
+  margin-top: 12px;
+  margin-bottom: 12px;
   font-weight: 600;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
+
+.checkbox-gm input {
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+}
+
 /* --- Boutons --- */
-.btn-success {
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+input[type="submit"].btn-success {
   background-color: #e68a3f;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
   border: none;
+  font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 8px;
-  padding: 10px 20px;
   cursor: pointer;
-  border: 2px solid #c96c23;
+  flex: 1;
 }
 
-.btn-success:hover {
+input[type="submit"].btn-success:disabled {
+  background: #b9a08a;
+  cursor: not-allowed;
+}
+
+input[type="submit"].btn-success:hover:not(:disabled) {
   background-color: #c96c23;
-  border: 2px solid #a64b1f;
 }
 
-.btn-danger {
-  background-color: #c43b47;
-  border: none;
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 10px 20px;
-  margin-left: 6px;
+a.btn.btn-danger {
+  background-color: #d9534f;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  flex: 1;
 }
 
-.btn-danger:hover {
-  background-color: #a12d35;
+a.btn.btn-danger:hover {
+  background-color: #b52b27;
 }
 
-/* --- Espacement des lignes --- */
-.mb-3.row {
-  margin-left: 5px;
-  margin-right: 5px;
+/* --- Supprimer les marges Bootstrap row/col --- */
+.row {
+  margin: 0;
+}
+
+.col-sm-2,
+.col-sm-10 {
+  padding: 0;
 }
