@@ -12,7 +12,7 @@ import { CreateCharacterPage } from './page/player/create-character-page/create-
 import { MyCharactersPage } from './page/player/my-characters-page/my-characters-page';
 import { InProgress } from './page/in-progress/in-progress';
 import { ItemPage } from './page/tools/item/item-page';
-import { SpellPage } from './page/spell-page/spell-page';
+import { SpellPage } from './page/tools/spell-page/spell-page';
 
 export const routes: Routes = [
   // HOME
