@@ -84,6 +84,23 @@ export class CreateSession implements OnInit {
       this.sessionForm.reset();
     });
   }
+  public modifier() {
+    if (!this.editingSession) return;
+
+    const updatedSession = new SessionDto(
+      this.editingSession.id, // on GARDER l’ID pour une mise à jour
+      this.editingSession.gmLogin, // idem
+      this.sessionForm.get('name')?.value,
+      Array.isArray(this.npcsCtrl.value) ? this.npcsCtrl.value : [],
+      Array.isArray(this.inscriptionsCtrl.value) ? this.inscriptionsCtrl.value : []
+    );
+
+    this.sessionService.save(updatedSession).subscribe(() => {
+      this.showForm = false;
+      this.editingSession = null;
+      this.sessionForm.reset();
+    });
+  }
 
 
   public editer(session: SessionDto) {

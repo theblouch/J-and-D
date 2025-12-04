@@ -2,7 +2,7 @@
     Créer une session
 </button>
 
-<form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="sessionForm">
+<form *ngIf="showForm" (ngSubmit)="editingSession ? modifier() : creer()" [formGroup]="sessionForm">
     <!-- NOM DE LA SESSION -->
     <div class="mb-3 row">
         <label for="name" class="col-sm-2 col-form-label">Nom de la session</label>
