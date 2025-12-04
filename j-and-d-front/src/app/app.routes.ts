@@ -14,6 +14,7 @@ import { InProgress } from './page/in-progress/in-progress';
 import { ItemPage } from './page/tools/item/item-page';
 import { SpellPage } from './page/tools/spell-page/spell-page';
 import { CharacterDetail } from './page/player/character-detail/character-detail';
+import { GestionSession } from './page/gestion-session/gestion-session';
 
 export const routes: Routes = [
   // HOME
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'mycharacters', title: 'Mes personnages', component: MyCharactersPage },
 
   // PAGES GM
+  { path: 'home/:sessionId', title: 'Gestion de session', component: GestionSession },
   { path: 'createsession', title: 'Création de session', component: CreateSession },
   { path: 'tools', title: 'Outils', component: ToolsPage },
   { path: 'item', title: 'Item', component: ItemPage },
