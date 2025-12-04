@@ -1,0 +1,88 @@
+<div class="modif-perso-container" *ngIf="characterForm">
+    <button (click)="goBack()" class="btn-back">← Retour</button>
+    <h2>Modifier {{ characterForm.get('name')?.value }}</h2>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <form [formGroup]="characterForm" (ngSubmit)="saveCharacter()">
+
+        <label>Nom :
+            <input type="text" formControlName="name">
+        </label>
+
+        <label>Niveau :
+            <input type="number" formControlName="level">
+        </label>
+
+        <label>Race :
+            <input type="text" formControlName="race">
+        </label>
+
+        <label>Rôle :
+            <select formControlName="roleId">
+                <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+            </select>
+        </label>
+
+        <label>État :
+            <select formControlName="alive">
+                <option [value]="true">En vie</option>
+                <option [value]="false">Mort</option>
+            </select>
+        </label>
+
+        <h3>Caractéristiques principales</h3>
+        <label>PV (HP) : <input type="number" formControlName="hp"></label>
+        <label>MP : <input type="number" formControlName="mp"></label>
+        <label>Vitesse : <input type="number" formControlName="speed"></label>
+        <label>Classe d'armure : <input type="number" formControlName="armorClass"></label>
+        <label>Initiative : <input type="number" formControlName="initiative"></label>
+
+        <h3>Stats détaillées</h3>
+        <div formGroupName="stats">
+            <div *ngFor="let key of statsControls | keyvalue">
+                <label>{{ key.key }} :
+                    <input type="number" [formControlName]="key.key">
+                </label>
+            </div>
+        </div>
+
+
+        <h3>Équipement</h3>
+        <label>Armure :
+            <select formControlName="armorId">
+                <option *ngFor="let item of allItems" [value]="item.id">{{ item.name }}</option>
+            </select>
+        </label>
+
+        <label>Arme :
+            <select formControlName="weaponId">
+                <option *ngFor="let item of allItems" [value]="item.id">{{ item.name }}</option>
+            </select>
+        </label>
+
+        <h3>Objets équipés</h3>
+        <div formArrayName="itemWornIds">
+            <div *ngFor="let ctrl of itemWornArray.controls; let i = index">
+                <select [formControlName]="i">
+                    <option *ngFor="let item of allItems" [value]="item.id">{{ item.name }}</option>
+                </select>
+                <button type="button" (click)="removeItemWorn(i)">Supprimer</button>
+            </div>
+            <button type="button" (click)="addItemWorn()">Ajouter objet équipé</button>
+        </div>
+
+        <h3>Inventaire</h3>
+        <div formArrayName="inventoryIds">
+            <div *ngFor="let ctrl of inventoryArray.controls; let i = index">
+                <select [formControlName]="i">
+                    <option *ngFor="let item of allItems" [value]="item.id">{{ item.name }}</option>
+                </select>
+                <button type="button" (click)="removeInventoryItem(i)">Supprimer</button>
+            </div>
+            <button type="button" (click)="addInventoryItem()">Ajouter objet</button>
+        </div>
+
+        <button type="submit" [disabled]="characterForm.invalid" class="btn-save">Enregistrer</button>
+    </form>
+</div>
