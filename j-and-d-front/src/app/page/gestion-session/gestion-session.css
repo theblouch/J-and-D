@@ -1,0 +1,22 @@
+.character-list {
+    list-style: none;
+    padding: 0;
+}
+
+.character-item {
+    background: #f0f8ff;
+    border: 1px solid #b0c4de;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.character-item:hover {
+    background-color: #d0e7ff;
+}
+
+.character-item strong {
+    font-size: 1.2em;
+}

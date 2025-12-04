@@ -14,6 +14,12 @@ import { CommonModule } from '@angular/common';
 export class GestionSession implements OnInit {
   sessionId!: string;
   session$!: Observable<SessionDto | null>;
+  showCharactersSection: boolean = false;
+  charactersList: string[] = [];
+  selectedCharacter: string | null = null;
+  showNPCsSection: boolean = false;
+  npcList: string[] = [];
+  selectedNPC: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,13 +42,23 @@ export class GestionSession implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  // Méthodes pour les boutons
-  showNPCs(session: SessionDto) {
-    alert('Monstres : ' + (session.npcNames?.join(', ') || 'Aucun Monstre'));
+
+  selectCharacter(character: string) {
+    this.selectedCharacter = character;
   }
 
   showCharacters(session: SessionDto) {
-    alert('Characters : ' + (session.inscriptionCharacters?.join(', ') || 'Aucun personnage'));
+    this.charactersList = session.inscriptionCharacters || [];
+    this.showCharactersSection = !this.showCharactersSection;
+  }
+
+  showNPCs(session: SessionDto) {
+    this.npcList = session.npcNames || [];
+    this.showNPCsSection = !this.showNPCsSection;
+  }
+
+  selectNPC(npc: string) {
+    this.selectedNPC = npc;
   }
 
   rollDice() {
