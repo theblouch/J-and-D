@@ -15,9 +15,25 @@
         <p><strong>Monstres :</strong> {{ displayList(session.npcNames) }}</p>
         <div class="btn-group">
           <button class="btn btn-danger btn-sm"
-            (click)="delete(session.id); $event.stopPropagation()">Supprimer</button>
+            (click)="askDelete(session.id); $event.stopPropagation(); $event.preventDefault();">Supprimer</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showDeleteModal" class="custom-modal-overlay">
+  <div class="custom-modal">
+    <h3>Confirmer la suppression</h3>
+    <p>Voulez-vous vraiment supprimer cette session ?</p>
+
+    <div class="modal-buttons">
+      <button class="btn btn-secondary" (click)="cancelDelete()">
+        Annuler
+      </button>
+      <button class="btn btn-danger" (click)="confirmDelete()">
+        Supprimer
+      </button>
     </div>
   </div>
 </div>

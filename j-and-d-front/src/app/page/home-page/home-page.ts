@@ -38,6 +38,9 @@ export class HomePage implements OnInit {
   protected npcsCtrl!: FormControl;
   protected nameCtrl!: FormControl;
 
+  protected sessionToDelete: number | null = null;
+  protected showDeleteModal = false;
+
   constructor(
     private sessionService: SessionService,
     private inscriptionService: InscriptionService,
@@ -112,6 +115,24 @@ export class HomePage implements OnInit {
     this.showForm = false;
     this.editingSession = null;
     this.sessionForm.reset();
+  }
+  public askDelete(id: number) {
+    this.sessionToDelete = id;
+    this.showDeleteModal = true;
+  }
+  public confirmDelete() {
+    if (!this.sessionToDelete) return;
+
+    this.sessionService.deleteById(this.sessionToDelete).subscribe(() => {
+      console.log(`Session ${this.sessionToDelete} supprimée`);
+      this.showDeleteModal = false;
+      this.sessionToDelete = null;
+    });
+  }
+
+  public cancelDelete() {
+    this.showDeleteModal = false;
+    this.sessionToDelete = null;
   }
 
   public delete(id: number): void {
