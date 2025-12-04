@@ -1,1 +1,23 @@
-<p>my-characters-page works!</p>
+<div class="container">
+    <h2>Liste des Personnages</h2>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <ul *ngIf="characters.length > 0" class="character-list">
+        <li *ngFor="let c of characters" class="character-item">
+            <strong>{{ c.name }}</strong><br>
+            Race: {{ c.race }} <br>
+            Rôle: {{ getRoleName(c.roleId) }}
+            <div class="stats">
+                <small>Stats:</small>
+                <ul>
+                    <li *ngFor="let stat of getStatsKeys(c.stats)">
+                        {{ stat }}: {{ c.stats[stat] }}
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p *ngIf="characters.length === 0 && !errorMessage">Aucun personnage trouvé.</p>
+</div>
