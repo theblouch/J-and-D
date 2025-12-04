@@ -84,7 +84,7 @@
                     <button class="btn btn-warning" (click)="editer(session)">
                         Éditer
                     </button>
-                    <button class="btn btn-danger" (click)="delete(session.id)">
+                    <button class="btn btn-danger" (click)="askDelete(session.id)">
                         Supprimer
                     </button>
                 </div>
@@ -92,3 +92,19 @@
         </tr>
     </tbody>
 </table>
+
+<div *ngIf="showDeleteModal" class="custom-modal-overlay">
+    <div class="custom-modal">
+        <h3>Confirmer la suppression</h3>
+        <p>Voulez-vous vraiment supprimer cette session ?</p>
+
+        <div class="modal-buttons">
+            <button class="btn btn-secondary" (click)="cancelDelete()">
+                Annuler
+            </button>
+            <button class="btn btn-danger" (click)="confirmDelete()">
+                Supprimer
+            </button>
+        </div>
+    </div>
+</div>
