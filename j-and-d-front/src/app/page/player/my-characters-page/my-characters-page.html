@@ -8,14 +8,6 @@
             <strong>{{ c.name }}</strong><br>
             Race: {{ c.race }} <br>
             Rôle: {{ getRoleName(c.roleId) }}
-            <div class="stats">
-                <small>Stats:</small>
-                <ul>
-                    <li *ngFor="let stat of getStatsKeys(c.stats)">
-                        {{ stat }}: {{ c.stats[stat] }}
-                    </li>
-                </ul>
-            </div>
         </li>
     </ul>
 

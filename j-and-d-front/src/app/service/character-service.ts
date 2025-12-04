@@ -15,4 +15,8 @@ export class CharacterService {
     getAll(): Observable<any[]> {
         return this.http.get<any[]>(this.api);
     }
+
+    get(value: number) {
+        return this.http.get<any[]>(`${this.api}/${value}`);
+    }
 }

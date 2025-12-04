@@ -1,1 +1,72 @@
-<p>character-detail works!</p>
+<div class="character-detail-container">
+    <button (click)="goBack()" class="btn-back">← Retour</button>
+    <h2>{{ character.name }} (Niveau {{ character.level }})</h2>
+    <p><strong>Race :</strong> {{ character.race }}</p>
+    <p><strong>Rôle :</strong> {{ getRoleName(character.roleId) }}</p>
+    <p>
+        <strong>État :</strong>
+        <span [class.alive]="character.alive" [class.dead]="!character.alive">
+            {{ character.alive ? 'En vie' : 'Mort' }}
+        </span>
+    </p>
+
+    <h3>Caractéristiques principales</h3>
+    <ul>
+        <li><strong>PV (HP) :</strong> {{ character.hp }}</li>
+        <li><strong>Points de Magie (MP) :</strong> {{ character.mp }}</li>
+        <li><strong>Vitesse :</strong> {{ character.speed }} m/s</li>
+        <li><strong>Classe d'armure :</strong> {{ character.armorClass }}</li>
+        <li><strong>Initiative :</strong> {{ character.initiative }}</li>
+    </ul>
+
+    <h3>Stats détaillées</h3>
+    <ul>
+        <li *ngFor="let stat of getStatsKeys(character.stats)">
+
+            <strong>{{ stat }} :</strong> {{ character?.stats[stat] }}
+        </li>
+    </ul>
+
+    <ng-template #noSpells>
+        <p>Aucun sort disponible</p>
+    </ng-template>
+
+    <h3>États actifs</h3>
+    <div *ngIf="character.states?.length > 0; else noStates">
+        <ul>
+            <li *ngFor="let state of character.states">
+                {{ state }}
+            </li>
+        </ul>
+    </div>
+    <ng-template #noStates>
+        <p>Aucun état actif</p>
+    </ng-template>
+
+    <h3>Équipement</h3>
+    <ul>
+        <li><strong>Armure :</strong> {{ getArmorName(character.armorId) }}</li>
+        <li><strong>Arme :</strong> {{ getWeaponName(character.weaponId) }}</li>
+        <li *ngIf="character.itemWornIds && character.itemWornIds.length > 0">
+            <strong>Objets équipés :</strong>
+            <ul>
+                <li *ngFor="let itemId of character.itemWornIds">
+                    {{ getItemName(itemId) }}
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Inventaire</h3>
+    <div *ngIf="character.inventoryIds && character.inventoryIds.length > 0; else emptyInventory">
+        <ul>
+            <li *ngFor="let itemId of character.inventoryIds">
+                {{ getItemName(itemId) }}
+            </li>
+        </ul>
+    </div>
+    <ng-template #emptyInventory>
+        <p><em>Inventaire vide</em></p>
+    </ng-template>
+
+</div>

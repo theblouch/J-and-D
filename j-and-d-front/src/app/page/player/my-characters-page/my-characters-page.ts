@@ -43,9 +43,7 @@ export class MyCharactersPage {
     });
   }
 
-  getStatsKeys(stats: any): string[] {
-    return stats ? Object.keys(stats) : [];
-  }
+
 
   getRoleName(roleId: number): string {
     const role = this.roles.find(r => r.id === roleId);

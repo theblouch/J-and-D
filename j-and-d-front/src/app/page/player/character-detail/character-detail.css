@@ -1,0 +1,39 @@
+.character-detail-container {
+    max-width: 600px;
+    margin: 30px auto;
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    padding: 5px 0;
+}
+
+.alive {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.dead {
+    color: #c0392b;
+    font-weight: bold;
+}
