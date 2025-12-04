@@ -8,27 +8,23 @@
 
   <!-- Zone centre -->
   <ul class="nav-menu">
-    <li><a routerLink="/marketplace">Marketplace</a></li>
-    <li><a routerLink="/community">Communauté</a></li>
     <li><a routerLink="/createsession">Créer Session</a></li>
+    <li><a routerLink="/createcharacter">Créer perso</a></li>
+    <li><a routerLink="/mycharacters">Mes persos</a></li>
     <li>
       <a routerLink="/home">
         <img src="/assets/masc.png" alt="Accueil" class="home-icon" />
       </a>
     </li>
     <li><a routerLink="/tools">Outils</a></li>
-    <li><a routerLink="/createcharacter">Créer perso</a></li>
-    <li><a routerLink="/mycharacters">Mes persos</a></li>
+    <li><a routerLink="/marketplace">Marketplace</a></li>
+    <li><a routerLink="/community">Communauté</a></li>
+
   </ul>
 
   <!-- Zone droite : icône de déconnexion -->
   <div class="header-right">
-    <img 
-      src="/assets/deco2.png"
-      alt="Déconnexion"
-      class="logout-icon"
-      (click)="logout()"
-    />
+    <img src="/assets/deco2.png" alt="Déconnexion" class="logout-icon" (click)="logout()" />
   </div>
 
 </div>
