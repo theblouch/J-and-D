@@ -1,4 +1,7 @@
 <div class="spell-container">
+  <div class="mb-3">
+    <button class="btn btn-light" (click)="goHome()">← Retour aux outils</button>
+  </div>
   <h1>Liste des sorts</h1>
 
   <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light mb-3">
@@ -37,14 +40,8 @@
     </div>
 
     <div class="btn-group">
-      <input
-        type="submit"
-        [disabled]="spellForm.invalid"
-        [value]="editingSpell ? 'Modifier' : 'Créer'"
-        [class.btn-warning]="editingSpell"
-        [class.btn-success]="!editingSpell"
-        class="btn"
-      />
+      <input type="submit" [disabled]="spellForm.invalid" [value]="editingSpell ? 'Modifier' : 'Créer'"
+        [class.btn-warning]="editingSpell" [class.btn-success]="!editingSpell" class="btn" />
       <button type="button" class="btn btn-danger" (click)="annulerEditer()">Annuler</button>
     </div>
   </form>

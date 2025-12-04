@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 import { SpellDto } from '../../../dto/spell-dto';
 import { SpellService } from '../../../service/spell-service';
 import { RoleService } from '../../../service/role-service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-spell-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './spell-page.html',
   styleUrls: ['./spell-page.css'],
 })
@@ -24,8 +25,9 @@ export class SpellPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private spellService: SpellService,
-    private roleService: RoleService
-  ) {}
+    private roleService: RoleService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.spells$ = this.spellService.findAll();
@@ -43,6 +45,10 @@ export class SpellPage implements OnInit {
       role: [null, Validators.required],
       baseDamage: [[]],
     });
+  }
+
+  goHome() {
+    this.router.navigate(['/tools']);
   }
 
   public creer(): void {

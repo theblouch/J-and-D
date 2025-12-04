@@ -4,10 +4,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Observable, of } from 'rxjs';
 import { ItemDto } from '../../../dto/item-dto';
 import { ItemService } from '../../../service/item-service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-item',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './item-page.html',
   styleUrl: './item-page.css',
 })
@@ -17,7 +18,9 @@ export class ItemPage implements OnInit {
   editingItem: ItemDto | null = null;
   showForm: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private itemService: ItemService) {}
+  constructor(private formBuilder: FormBuilder, private itemService: ItemService, private router: Router
+
+  ) { }
 
   ngOnInit(): void {
     // Charger les items existants
@@ -63,6 +66,10 @@ export class ItemPage implements OnInit {
       baseDamage: item.baseDamage,
       armorValue: item.armorValue,
     });
+  }
+
+  goHome() {
+    this.router.navigate(['/tools']);
   }
 
   public annulerEditer(): void {

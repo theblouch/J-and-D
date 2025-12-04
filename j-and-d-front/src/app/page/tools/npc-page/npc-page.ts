@@ -9,11 +9,12 @@ import { ItemService } from '../../../service/item-service';
 import { SessionService } from '../../../service/session-service';
 import { ItemDto } from '../../../dto/item-dto';
 import { SessionDto } from '../../../dto/session-dto';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-npc',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './npc-page.html',
   styleUrl: './npc-page.css'
 })
@@ -46,7 +47,8 @@ export class NPCPage implements OnInit {
     private fb: FormBuilder,
     private npcService: NPCService,
     private itemService: ItemService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -75,7 +77,9 @@ export class NPCPage implements OnInit {
       sessionId: [null]
     });
   }
-
+  goHome() {
+    this.router.navigate(['/tools']);
+  }
   /* -------------------- CRÉER / MODIFIER -------------------- */
   public creer(): void {
     const f = this.npcForm.value;
