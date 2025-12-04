@@ -10,7 +10,8 @@ import { ToolsPage } from './page/gm/tools-page/tools-page';
 
 import { CreateCharacterPage } from './page/player/create-character-page/create-character-page';
 import { MyCharactersPage } from './page/player/my-characters-page/my-characters-page';
-import { InProgress } from './page/in-progress/in-progress'
+import { InProgress } from './page/in-progress/in-progress';
+import { ItemPage } from './page/item/item-page';
 
 export const routes: Routes = [
   // HOME
@@ -24,6 +25,7 @@ export const routes: Routes = [
   // PAGES GM
   { path: 'createsession', title: 'Création de session', component: CreateSession },
   { path: 'tools', title: 'Outils', component: ToolsPage },
+  { path: 'item', title: 'Item', component: ItemPage },
 
   // COMMON
   { path: 'login', title: 'Se Connecter', component: LoginPage },
