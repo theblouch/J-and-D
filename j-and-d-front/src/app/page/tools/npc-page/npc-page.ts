@@ -7,6 +7,7 @@ import { NPCService } from '../../../service/npc-service';
 
 @Component({
   selector: 'app-npc',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './npc-page.html',
   styleUrls: ['./npc-page.css'],
@@ -15,12 +16,8 @@ export class NpcPage implements OnInit {
 
   npcForm!: FormGroup;
   npcs$!: Observable<NPCDto[]>;
-
   showForm = false;
   editingNpc: NPCDto | null = null;
-
-  // session ID stockée
-  sessionId: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,12 +26,8 @@ export class NpcPage implements OnInit {
 
   ngOnInit(): void {
 
-    // Récupère la session active (déjà stockée ailleurs)
-    this.sessionId = sessionStorage.getItem("sessionId");
-
-    if (this.sessionId) {
-      this.npcs$ = this.npcService.findAll();
-    }
+    // Charger tous les NPC (monstres)
+    this.npcs$ = this.npcService.findAll();
 
     this.npcForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -49,8 +42,6 @@ export class NpcPage implements OnInit {
   }
 
   public creer(): void {
-    if (!this.sessionId) return;
-
     const f = this.npcForm.value;
 
     const npc = new NPCDto(
@@ -72,9 +63,8 @@ export class NpcPage implements OnInit {
       null,     // role
       [],       // state
       null,     // tauntedBy
-      0,        // xp
-
-      { id: Number(this.sessionId) } // session minimale
+      0,        // XP
+      null      // session -> toujours null maintenant
     );
 
     this.npcService.save(npc);
@@ -110,7 +100,7 @@ export class NpcPage implements OnInit {
     this.npcService.deleteById(id);
   }
 
-  public displayBoolean(val: boolean): string {
-    return val ? "Oui" : "Non";
+  public displayBoolean(v: boolean): string {
+    return v ? "Oui" : "Non";
   }
 }
