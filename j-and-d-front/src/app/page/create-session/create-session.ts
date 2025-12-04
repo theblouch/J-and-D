@@ -11,6 +11,8 @@ import { SessionService } from '../../service/session-service';
 import { InscriptionService } from '../../service/inscription-service';
 import { NPCService } from '../../service/npc-service';
 import { AuthService } from '../../service/auth-service';
+import { CharacterDto } from '../../dto/character-dto';
+import { CharacterService } from '../../service/character-service';
 
 @Component({
   imports: [CommonModule, RouterLink, ReactiveFormsModule],
@@ -29,10 +31,12 @@ export class CreateSession implements OnInit {
   protected inscriptionsCtrl!: FormControl;
   protected npcsCtrl!: FormControl;
   protected nameCtrl!: FormControl;
+  protected characters$!: Observable<CharacterDto[]>;
 
   constructor(
     private sessionService: SessionService,
     private inscriptionService: InscriptionService,
+    private characterService: CharacterService,
     private npcService: NPCService,
     private formBuilder: FormBuilder,
     public authService: AuthService
@@ -48,13 +52,13 @@ export class CreateSession implements OnInit {
       this.inscriptions$ = of(data);
     });
     this.npcs$ = this.npcService.findAll();
-
-    this.inscriptionsCtrl = this.formBuilder.control('');
-    this.npcsCtrl = this.formBuilder.control('');
+    this.characters$ = this.characterService.getAll();
+    this.inscriptionsCtrl = this.formBuilder.control([]);
+    this.npcsCtrl = this.formBuilder.control([]);
     this.nameCtrl = this.formBuilder.control('', Validators.required);
 
     this.sessionForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: this.nameCtrl,
       inscriptions: this.inscriptionsCtrl,
       npcs: this.npcsCtrl,
     });
@@ -70,13 +74,14 @@ export class CreateSession implements OnInit {
       console.error("Utilisateur non connecté !");
       return;
     }
+    console.log("Nom envoyé :", this.nameCtrl.value);
     console.log('Inscriptions sélectionnées :', this.inscriptionsCtrl.value);
     console.log('NPCs sélectionnés :', this.npcsCtrl.value);
 
     const newSession = new SessionDto(
       0,
       gmLogin,
-      this.sessionForm.value.name,
+      this.sessionForm.get('name')?.value,
       Array.isArray(this.npcsCtrl.value) ? this.npcsCtrl.value : [],       // assure tableau
       Array.isArray(this.inscriptionsCtrl.value) ? this.inscriptionsCtrl.value : [] // assure tableau
     );

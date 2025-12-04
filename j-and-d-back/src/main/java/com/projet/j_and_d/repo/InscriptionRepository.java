@@ -1,6 +1,7 @@
 package com.projet.j_and_d.repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -8,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.projet.j_and_d.model.Inscription;
+
+import com.projet.j_and_d.model.Character;
 
 import jakarta.transaction.Transactional;
 
@@ -25,4 +28,6 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Intege
 
     @Query("SELECT i FROM Inscription i WHERE i.character.name IN :names")
     List<Inscription> findAllByCharacterNameIn(@Param("names") List<String> names);
+
+    Optional<Inscription> findByCharacter(Character character);
 }
