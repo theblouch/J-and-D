@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.projet.j_and_d.model.Druid;
 import com.projet.j_and_d.model.Item;
 import com.projet.j_and_d.model.Mage;
+import com.projet.j_and_d.model.Monster;
 import com.projet.j_and_d.model.Rogue;
 import com.projet.j_and_d.model.Warrior;
 import com.projet.j_and_d.repo.ItemRepository;
@@ -64,6 +65,13 @@ public class DataInitializer implements CommandLineRunner {
         itemRepository.save(hache);
         itemRepository.save(mailles);
 
+        // Items Monstre
+        Item gourdin = new Item("Gourdin", "Un Gourdin de monstre", true, new int[] { 2 }, 0);
+        Item tunique = new Item("Tunique", "Une Tunique de monstre", false, new int[] {}, 1);
+
+        itemRepository.save(gourdin);
+        itemRepository.save(tunique);
+
     }
 
     private void createRoles() {
@@ -86,5 +94,10 @@ public class DataInitializer implements CommandLineRunner {
         rogue.setWeapon(itemRepository.findByName("Dagues").get());
         rogue.setArmor(itemRepository.findByName("Chemise").get());
         roleRepository.save(rogue);
+
+        Monster monstre = new Monster();
+        monstre.setWeapon(itemRepository.findByName("Gourdin").get());
+        monstre.setArmor(itemRepository.findByName("Tunique").get());
+        roleRepository.save(monstre);
     }
 }
