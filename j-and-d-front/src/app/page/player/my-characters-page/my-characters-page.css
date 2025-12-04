@@ -1,46 +1,76 @@
-/* src/app/pages/character-list/character-list.component.css */
-
+/* Container général */
 .container {
-    max-width: 600px;
+    max-width: 700px;
     margin: 40px auto;
+    padding: 20px;
+    background-color: #ffe5c3;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     font-family: Arial, sans-serif;
 }
 
+/* Titre principal */
 h2 {
-    color: #4a90e2;
+    color: #d6822b;
     text-align: center;
-}
-
-.error {
-    color: red;
-    font-weight: bold;
+    font-size: 1.8em;
     margin-bottom: 20px;
 }
 
+/* Message d’erreur */
+.error {
+    color: #c0392b;
+    font-weight: bold;
+    text-align: center;
+    background: #ffd2d2;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Liste des personnages */
 .character-list {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
+/* Carte personnage */
 .character-item {
-    background: #f0f8ff;
-    border: 1px solid #b0c4de;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    padding: 12px 20px;
+    background: rgba(255, 184, 108, 0.25);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.10);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.character-item:hover {
+    background: rgba(255, 184, 108, 0.4);
+    transform: scale(1.02);
+}
+
+/* Nom du personnage */
 .character-item strong {
-    font-size: 1.2em;
+    font-size: 1.3em;
+    color: #2c3e50;
 }
 
+/* Bloc stats */
 .stats {
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
+/* Liste des statistiques */
 .stats ul {
     margin: 0;
-    padding-left: 15px;
-    font-size: 0.9em;
+    padding-left: 18px;
+    font-size: 0.95em;
     color: #333;
+}
+
+.stats li {
+    margin-bottom: 4px;
 }

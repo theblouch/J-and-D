@@ -1,71 +1,99 @@
 @import url('https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap');
 
-
+/* Conteneur principal */
 .container {
-    max-width: 600px;
+    max-width: 650px;
     margin: 40px auto;
-    padding: 24px;
-    background-color: #fefefe;
+    padding: 26px;
+    background-color: #ffe5c3;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     font-family: "Caudex", serif;
+    transition: transform 0.2s ease;
 }
 
+.container:hover {
+    transform: scale(1.01);
+}
+
+/* Titres */
 h2,
 h3 {
     text-align: center;
-    color: #333;
+    color: #b15c1c;
+    margin-bottom: 12px;
 }
 
+/* Formulaire */
 .form-group {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 label {
-    font-weight: 600;
+    font-weight: 700;
     display: block;
     margin-bottom: 6px;
+    color: #2c3e50;
 }
 
+/* Inputs & Select */
 input[type="text"],
 select {
     width: 100%;
-    padding: 8px 12px;
+    padding: 10px 14px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 184, 108, 0.15);
+    border-radius: 8px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    background-color: rgba(255, 184, 108, 0.25);
+    box-shadow: 0 0 6px rgba(255, 184, 108, 0.6);
+}
+
+/* Bloc de statistiques */
 .stats-container {
-    background-color: #f8f9fa;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    background-color: rgba(255, 184, 108, 0.25);
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .stats div {
-    margin-bottom: 6px;
-    font-size: 0.95rem;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #333;
 }
 
+/* Bouton */
 button.btn {
     width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    background-color: #007bff;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background-color: #ffb86c;
     border: none;
-    border-radius: 6px;
-    color: white;
+    border-radius: 8px;
+    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.25s ease, transform 0.15s ease;
 }
 
 button.btn:hover {
-    background-color: #0056b3;
+    background-color: #e89a47;
+    transform: scale(1.03);
 }
 
+/* Message de succès */
 .text-success {
     text-align: center;
-    font-weight: 600;
-    color: #28a745;
+    font-weight: 700;
+    color: #27ae60;
+    margin-top: 12px;
 }
