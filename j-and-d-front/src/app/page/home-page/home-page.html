@@ -1,1 +1,20 @@
-<p>home-page works! pour de vrai</p>
+<div class="home-container">
+  <h1>Liste des sessions</h1>
+
+  <!-- Bouton pour aller vers la page CreateSession -->
+  <button [routerLink]="'/createsession'" class="btn btn-light mb-3">Créer une session</button>
+
+  <!-- LISTE DES SESSIONS EN ENCARTS -->
+  <div class="sessions-grid">
+    <div class="card session-card" *ngFor="let session of sessions$ | async; trackBy: trackSession">
+      <div class="card-body">
+        <h5 class="card-title">🎲 Session de {{ session.gmLogin }}</h5>
+        <p><strong>Personnages :</strong> {{ displayList(session.inscriptionCharacters) }}</p>
+        <p><strong>Monstres :</strong> {{ displayList(session.npcNames) }}</p>
+        <div class="btn-group">
+          <button class="btn btn-danger btn-sm" (click)="delete(session.id)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
