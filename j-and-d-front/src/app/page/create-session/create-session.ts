@@ -28,6 +28,7 @@ export class CreateSession implements OnInit {
 
   protected inscriptionsCtrl!: FormControl;
   protected npcsCtrl!: FormControl;
+  protected nameCtrl!: FormControl;
 
   constructor(
     private sessionService: SessionService,
@@ -50,8 +51,10 @@ export class CreateSession implements OnInit {
 
     this.inscriptionsCtrl = this.formBuilder.control('');
     this.npcsCtrl = this.formBuilder.control('');
+    this.nameCtrl = this.formBuilder.control('', Validators.required);
 
     this.sessionForm = this.formBuilder.group({
+      name: ['', Validators.required],
       inscriptions: this.inscriptionsCtrl,
       npcs: this.npcsCtrl,
     });
@@ -73,6 +76,7 @@ export class CreateSession implements OnInit {
     const newSession = new SessionDto(
       0,
       gmLogin,
+      this.sessionForm.value.name,
       Array.isArray(this.npcsCtrl.value) ? this.npcsCtrl.value : [],       // assure tableau
       Array.isArray(this.inscriptionsCtrl.value) ? this.inscriptionsCtrl.value : [] // assure tableau
     );
@@ -87,7 +91,9 @@ export class CreateSession implements OnInit {
   public editer(session: SessionDto) {
     this.editingSession = session;
     this.showForm = true;
-
+    this.sessionForm.patchValue({
+      name: session.name,
+    });
     this.inscriptionsCtrl.setValue(session.inscriptionCharacters);
     this.npcsCtrl.setValue(session.npcNames);
   }
@@ -102,7 +108,7 @@ export class CreateSession implements OnInit {
     this.sessionService.deleteById(id);
   }
 
-  public displayList(list?: String[]): String {
+  public displayList(list?: string[]): string {
     if (!list || list.length === 0) {
       return 'vide :(';
     }

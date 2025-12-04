@@ -14,6 +14,16 @@ public class SessionResponse {
 
     private List<String> npcNames;
 
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getId() {
         return this.id;
     }
@@ -61,6 +71,7 @@ public class SessionResponse {
                         .stream()
                         .map(NPC::getName)
                         .toList());
+        response.setName(session.getName());
 
         return response;
     }

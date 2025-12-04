@@ -60,7 +60,7 @@ export class AuthService {
     }
   }
 
-  public getUserLogin(): String | null {
+  public getUserLogin(): string | null {
     const payload = this.parseJwt(this._token);
     if (!payload) return null;
 

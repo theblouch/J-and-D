@@ -5,6 +5,13 @@
 </button>
 
 <form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="sessionForm">
+    <!-- NOM DE LA SESSION -->
+    <div class="mb-3 row">
+        <label for="name" class="col-sm-2 col-form-label">Nom de la session</label>
+        <div class="col-sm-10">
+            <input id="name" type="text" class="form-control" formControlName="name" placeholder="Nom de la session">
+        </div>
+    </div>
     <!-- GM connecté (lecture seule) -->
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Maître du jeu</label>
@@ -55,6 +62,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>Nom de la session</th>
             <th>Maître du jeu</th>
             <th>Personnages</th>
             <th>Monstres</th>
@@ -64,6 +72,7 @@
 
     <tbody>
         <tr *ngFor="let session of sessions$ | async; trackBy: trackSession">
+            <td>{{ session.name }}</td>
             <td>{{ session.gmLogin }}</td>
             <td>{{ displayList(session.inscriptionCharacters) }}</td>
             <td>{{ displayList(session.npcNames) }}</td>

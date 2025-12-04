@@ -37,7 +37,7 @@ public class GM extends User {
     }
 
     public void createSession() {
-        Session session = new Session(new ArrayList<>(), this, new ArrayList<>());
+        Session session = new Session(new ArrayList<>(), this, new ArrayList<>(), new String());
         System.out.println("Nouvelle session créée par le GM : " + this.login);
         this.sessions.add(session);
     }
