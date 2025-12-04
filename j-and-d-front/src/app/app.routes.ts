@@ -11,7 +11,7 @@ import { ToolsPage } from './page/gm/tools-page/tools-page';
 import { CreateCharacterPage } from './page/player/create-character-page/create-character-page';
 import { MyCharactersPage } from './page/player/my-characters-page/my-characters-page';
 import { InProgress } from './page/in-progress/in-progress';
-import { ItemPage } from './page/item/item-page';
+import { ItemPage } from './page/tools/item/item-page';
 import { SpellPage } from './page/spell-page/spell-page';
 
 export const routes: Routes = [

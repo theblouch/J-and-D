@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { SpellDto } from '../../dto/spell-dto';
-import { SpellService } from '../../service/spell-service';
+import { SpellDto } from '../../../dto/spell-dto';
+import { SpellService } from '../../../service/spell-service';
 @Component({
   selector: 'app-spell-page',
   imports: [CommonModule, ReactiveFormsModule],
