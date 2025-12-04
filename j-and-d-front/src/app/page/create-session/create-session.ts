@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { RouterLink } from '@angular/router';
 import { map, Observable, of } from 'rxjs';
 import { SessionDto } from '../../dto/session-dto';
-import { GMDto } from '../../dto/gm-dto';
 import { InscriptionDto } from '../../dto/inscription-dto';
 import { NPCDto } from '../../dto/npc-dto';
 import { SessionService } from '../../service/session-service';
@@ -74,9 +73,6 @@ export class CreateSession implements OnInit {
       console.error("Utilisateur non connecté !");
       return;
     }
-    console.log("Nom envoyé :", this.nameCtrl.value);
-    console.log('Inscriptions sélectionnées :', this.inscriptionsCtrl.value);
-    console.log('NPCs sélectionnés :', this.npcsCtrl.value);
 
     const newSession = new SessionDto(
       0,
