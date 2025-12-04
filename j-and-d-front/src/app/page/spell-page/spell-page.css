@@ -1,0 +1,41 @@
+.spell-container {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fdf6e3, #f5deb3);
+}
+
+.spell-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+}
+
+.spells-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.spell-card {
+  border-radius: 12px;
+  background: #fffdfb;
+  border: 1px solid #d8a67b;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.spell-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.spell-card .card-body {
+  padding: 20px;
+}
+
+.spell-card h5 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}

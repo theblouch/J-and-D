@@ -1,0 +1,63 @@
+<div class="spell-container">
+  <h1>Liste des sorts</h1>
+
+  <button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light mb-3">
+    Créer un sort
+  </button>
+
+  <!-- FORMULAIRE -->
+  <form *ngIf="showForm" (ngSubmit)="creer()" [formGroup]="spellForm" class="card p-3 mb-4">
+    <div class="mb-3">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Niveau du sort</label>
+      <input type="number" class="form-control" formControlName="spellLevel" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Rôle</label>
+      <input type="text" class="form-control" formControlName="role" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Dégâts de base (séparés par des virgules)</label>
+      <input type="text" class="form-control" (change)="updateBaseDamage($event)" />
+    </div>
+
+    <div class="btn-group">
+      <input
+        type="submit"
+        [disabled]="spellForm.invalid"
+        [value]="editingSpell ? 'Modifier' : 'Créer'"
+        [class.btn-warning]="editingSpell"
+        [class.btn-success]="!editingSpell"
+        class="btn"
+      />
+      <button type="button" class="btn btn-danger" (click)="annulerEditer()">Annuler</button>
+    </div>
+  </form>
+
+  <!-- LISTE DES SORTS -->
+  <div class="spells-grid">
+    <div class="card spell-card" *ngFor="let spell of spells$ | async">
+      <div class="card-body">
+        <h5 class="card-title">{{ spell.name }} (Niveau {{ spell.spellLevel }})</h5>
+        <p><strong>Description :</strong> {{ spell.description }}</p>
+        <p><strong>Rôle :</strong> {{ spell.role }}</p>
+        <p><strong>Dégâts :</strong> {{ displayDamage(spell.baseDamage) }}</p>
+        <div class="btn-group">
+          <button class="btn btn-warning btn-sm" (click)="editer(spell)">Modifier</button>
+          <button class="btn btn-danger btn-sm" (click)="delete(spell.id)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
