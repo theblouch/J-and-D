@@ -40,8 +40,14 @@
     </div>
 
     <div class="btn-group">
-      <input type="submit" [disabled]="spellForm.invalid" [value]="editingSpell ? 'Modifier' : 'Créer'"
-        [class.btn-warning]="editingSpell" [class.btn-success]="!editingSpell" class="btn" />
+      <input
+        type="submit"
+        [disabled]="spellForm.invalid"
+        [value]="editingSpell ? 'Modifier' : 'Créer'"
+        [class.btn-warning]="editingSpell"
+        [class.btn-success]="!editingSpell"
+        class="btn"
+      />
       <button type="button" class="btn btn-danger" (click)="annulerEditer()">Annuler</button>
     </div>
   </form>
@@ -52,7 +58,7 @@
       <div class="card-body">
         <h3 class="card-title">{{ spell.name }} (Niveau {{ spell.spellLevel }})</h3>
         <p><strong>Description :</strong> {{ spell.description }}</p>
-        <p><strong>Rôle:</strong> {{ spell.role?.name }}</p>
+        <p><strong>Rôle:</strong> {{ getRoleName(spell.role) }}</p>
         <p><strong>Dégâts :</strong> {{ displayDamage(spell.baseDamage) }}</p>
         <div class="btn-group">
           <button class="btn btn-warning btn-sm" (click)="editer(spell)">Modifier</button>
